@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sort Kind &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Operators" href="operator.html" />
+    <link rel="prev" title="Solver Profiles" href="solver_profile.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="solver_wrapper.html">Solver Wrappers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver_profile.html">Solver Profiles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sort Kind</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operator.html">Operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Sort Kind</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sort-kind">
+<h1>Sort Kind<a class="headerlink" href="#sort-kind" title="Permalink to this headline"></a></h1>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKindE">
+<span id="_CPPv3N6murxla8SortKindE"></span><span id="_CPPv2N6murxla8SortKindE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SortKind</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a sort. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind10SORT_ARRAYE">
+<span id="_CPPv3N6murxla8SortKind10SORT_ARRAYE"></span><span id="_CPPv2N6murxla8SortKind10SORT_ARRAYE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a2b3bdd067aa456a6537d11586f4226f9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_ARRAY</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind10SORT_ARRAYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array sort, parameterized over index and element sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_BAGE">
+<span id="_CPPv3N6murxla8SortKind8SORT_BAGE"></span><span id="_CPPv2N6murxla8SortKind8SORT_BAGE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a3e84909a8148c101c3028d98a3e2444f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_BAG</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_BAGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bag sort, parameterized over element sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind9SORT_BOOLE">
+<span id="_CPPv3N6murxla8SortKind9SORT_BOOLE"></span><span id="_CPPv2N6murxla8SortKind9SORT_BOOLE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a629ca23fb0790fcdb3f200ae3581c858"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_BOOL</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind9SORT_BOOLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Boolean sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind7SORT_BVE">
+<span id="_CPPv3N6murxla8SortKind7SORT_BVE"></span><span id="_CPPv2N6murxla8SortKind7SORT_BVE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a480be2b5e91509ff798c846ebf1254e4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_BV</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind7SORT_BVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bit-vector sort, parameterized over bit-width. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind7SORT_DTE">
+<span id="_CPPv3N6murxla8SortKind7SORT_DTE"></span><span id="_CPPv2N6murxla8SortKind7SORT_DTE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a315ced6295ef3fafde55b4d40d3a4ff5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_DT</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind7SORT_DTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Datatype sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind7SORT_FPE">
+<span id="_CPPv3N6murxla8SortKind7SORT_FPE"></span><span id="_CPPv2N6murxla8SortKind7SORT_FPE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a2ef20b1935b083a2b3b6e841f71b0c8b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_FP</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind7SORT_FPE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Floating-point sort, parameterized over exponent and signifcand size. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_FUNE">
+<span id="_CPPv3N6murxla8SortKind8SORT_FUNE"></span><span id="_CPPv2N6murxla8SortKind8SORT_FUNE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a0c8e9f2acd119d058e79c7ccdf403d26"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_FUN</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_FUNE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function sort, parameterized over domain sorts. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_INTE">
+<span id="_CPPv3N6murxla8SortKind8SORT_INTE"></span><span id="_CPPv2N6murxla8SortKind8SORT_INTE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a8d9907528384fde8f96a4d64a9f413d2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_INT</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_INTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Integer sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind9SORT_REALE">
+<span id="_CPPv3N6murxla8SortKind9SORT_REALE"></span><span id="_CPPv2N6murxla8SortKind9SORT_REALE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493adbfb49d75f4f2fe82aeac9de7a71b2a9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_REAL</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind9SORT_REALE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Real sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind7SORT_RME">
+<span id="_CPPv3N6murxla8SortKind7SORT_RME"></span><span id="_CPPv2N6murxla8SortKind7SORT_RME"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a9fa0b1dcfa06a9899775f72ff3a2b3cf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_RM</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind7SORT_RME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RoundingMode sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind11SORT_REGLANE">
+<span id="_CPPv3N6murxla8SortKind11SORT_REGLANE"></span><span id="_CPPv2N6murxla8SortKind11SORT_REGLANE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493aef602fbefe1e7b451c48720b135905fa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_REGLAN</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind11SORT_REGLANE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Regular language sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_SEQE">
+<span id="_CPPv3N6murxla8SortKind8SORT_SEQE"></span><span id="_CPPv2N6murxla8SortKind8SORT_SEQE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a3e8007c84fe7477d3d7289ef4a47b533"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_SEQ</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_SEQE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sequence sort, parameterized over element sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_SETE">
+<span id="_CPPv3N6murxla8SortKind8SORT_SETE"></span><span id="_CPPv2N6murxla8SortKind8SORT_SETE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a52b126eee470bb95bc3a17125feede9c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_SET</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_SETE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set sort, parameterized over element sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind11SORT_STRINGE">
+<span id="_CPPv3N6murxla8SortKind11SORT_STRINGE"></span><span id="_CPPv2N6murxla8SortKind11SORT_STRINGE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493ab2fcc567f2237f36b48361fa84133149"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_STRING</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind11SORT_STRINGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>String sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind18SORT_UNINTERPRETEDE">
+<span id="_CPPv3N6murxla8SortKind18SORT_UNINTERPRETEDE"></span><span id="_CPPv2N6murxla8SortKind18SORT_UNINTERPRETEDE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a572e30df2242b8dffdce52a9828b0bbf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_UNINTERPRETED</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind18SORT_UNINTERPRETEDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Uninterpreted sort. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla8SortKind8SORT_ANYE">
+<span id="_CPPv3N6murxla8SortKind8SORT_ANYE"></span><span id="_CPPv2N6murxla8SortKind8SORT_ANYE"></span><span class="target" id="namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493ae13f1ac7632a956f25a3d463facd12cd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SORT_ANY</span></span></span><a class="headerlink" href="#_CPPv4N6murxla8SortKind8SORT_ANYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind representing any sort kind. Used to indicate, for example, that the operands of an operator can be of any sort kind. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4IENSt4hashIN6murxla8SortKindEEE">
+<span id="_CPPv3IENSt4hashIN6murxla8SortKindEEE"></span><span id="_CPPv2IENSt4hashIN6murxla8SortKindEEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structstd_1_1hash_3_01murxla_1_1SortKind_01_4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4IENSt4hashIN6murxla8SortKindEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Specialization of <code class="docutils literal notranslate"><span class="pre">std::hash</span></code> for SortKind. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NKSt4hashIN6murxla8SortKindEEclERKN6murxla8SortKindE">
+<span id="_CPPv3NKSt4hashIN6murxla8SortKindEEclERKN6murxla8SortKindE"></span><span id="_CPPv2NKSt4hashIN6murxla8SortKindEEclERKN6murxla8SortKindE"></span><span id="std::hash:murxla::SortKind:::call-operator__murxla::SortKindCRC"></span><span class="target" id="structstd_1_1hash_3_01murxla_1_1SortKind_01_4_1a1a4afafe5bfa8e981e95445a19186f21"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NKSt4hashIN6murxla8SortKindEEclERKN6murxla8SortKindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Operator overload to get the hash value of a sort kind. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>k</strong> – The sort kind to compute the hash value for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The hash value of a sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla14SortKindVectorE">
+<span id="_CPPv3N6murxla14SortKindVectorE"></span><span id="_CPPv2N6murxla14SortKindVectorE"></span><span class="target" id="namespacemurxla_1a532764d9bb26705acdaac8de28850a3c"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SortKindVector</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla14SortKindVectorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> of sort kinds. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla11SortKindSetE">
+<span id="_CPPv3N6murxla11SortKindSetE"></span><span id="_CPPv2N6murxla11SortKindSetE"></span><span class="target" id="namespacemurxla_1a30fe5201547f5771e35088128b812b07"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SortKindSet</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_set</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla11SortKindSetE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">std::unordered_set</span></code> of sort kinds. </p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="solver_profile.html" class="btn btn-neutral float-left" title="Solver Profiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="operator.html" class="btn btn-neutral float-right" title="Operators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
