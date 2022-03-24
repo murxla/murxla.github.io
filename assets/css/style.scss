@@ -3,6 +3,24 @@
 
 @import "{{ site.theme }}";
 
+body {
+  background: #001f33;
+  color: #eee;
+}
+
+h1,h2,h3,h4 {
+  color: #888;
+}
+
+a {
+  font-weight: inherit;
+  color: #80ccff;
+}
+
+a:hover {
+  color: #005c99;
+}
+
 h1, h2 {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -19,12 +37,18 @@ h4 {
 }
 
 #header {
+  background: #005c99;
   nav {
     background: none;
     li.badge a {
       border: 0;
       box-shadow: none;
       background: none;
+      &:hover {
+        border: 0;
+        box-shadow: none;
+        background: none;
+      }
     }
   }
 }
@@ -45,6 +69,7 @@ section {
       color: inherit;
       &.desc {
         font-size: 16px;
+        font-weight: bold;
       }
     }
   }
