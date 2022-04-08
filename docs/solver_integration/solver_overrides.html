@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solver Wrapper Implementation for Solver &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solver Wrappers" href="solver_wrapper/solver_wrapper.html" />
+    <link rel="prev" title="Solver Wrapper Implementation for Terms" href="absterm_overrides.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="solver_integration.html">How to Integrate a Solver</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="solver_integration.html#overrides-for-solver-wrapper-implementation">Overrides for Solver Wrapper Implementation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="abssort_overrides.html">Solver Wrapper Implementation for Sorts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="absterm_overrides.html">Solver Wrapper Implementation for Terms</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Solver Wrapper Implementation for Solver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#solver-functions-required-to-be-overriden">Solver: Functions Required to be Overriden</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solver-functions-to-be-overriden-optionally">Solver: Functions to be Overriden Optionally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="solver_integration.html#solver-wrapper-full-interface-documentation">Solver Wrapper: Full Interface Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_integration.html#solver-profiles">Solver Profiles</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Advanced Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
+      <li>Solver Wrapper Implementation for Solver</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solver-wrapper-implementation-for-solver">
+<h1>Solver Wrapper Implementation for Solver<a class="headerlink" href="#solver-wrapper-implementation-for-solver" title="Permalink to this headline"></a></h1>
+<p>Solver wrappers derive a solver class from <a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a>, which
+manages construction and destruction of an instance of the solver under test.
+It further implements required and optional member function overrides.</p>
+<p>Murxla uses naming convention <code class="docutils literal notranslate"><span class="pre">&lt;solver</span> <span class="pre">name</span> <span class="pre">(short)&gt;Solver</span></code> for solver
+wrapper solver implementations, e.g., the cvc5 implementation is called
+<code class="docutils literal notranslate"><span class="pre">Cvc5Solver</span></code> and the Bitwuzla implementation is called <code class="docutils literal notranslate"><span class="pre">BzlaSolver</span></code>.</p>
+<p>Note that the constructor of <a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a> is not to be overriden.
+A solver instance is created and deleted via the required member function
+overrides of functions
+<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6Solver10new_solverEv" title="murxla::Solver::new_solver"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::new_solver()</span></code></a> and
+<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6Solver13delete_solverEv" title="murxla::Solver::delete_solver"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::delete_solver()</span></code></a>.
+For example, in the solver wrapper for <strong>cvc5</strong> (using its C++ API) these are
+implemented as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"></span>
+<span class="nf">Cvc5Solver::new_solver</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">d_solver</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">d_solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="o">::</span><span class="n">cvc5</span><span class="o">::</span><span class="n">Solver</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">d_tracer</span><span class="p">.</span><span class="n">init</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"></span>
+<span class="nf">Cvc5Solver::delete_solver</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">d_solver</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="n">d_solver</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">d_solver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Another example for a <strong>required</strong> override is member function
+<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4NK6murxla6Solver8get_nameEv" title="murxla::Solver::get_name"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::get_name()</span></code></a>, which returns the name of the
+solver under test.
+It is implemented for <strong>cvc5</strong> as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"></span>
+<span class="nf">Cvc5Solver::get_name</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;cvc5&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>An example for an <strong>optional</strong> override is member function
+<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6Solver14get_unsat_coreEv" title="murxla::Solver::get_unsat_core"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::get_unsat_core()</span></code></a>, which returns a vector of
+terms representing the unsat core of the currently asserted formula.
+It is implemented in the solver wrapper for <strong>Bitwuzla</strong>
+(using its C API) as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">BzlaSolver</span><span class="o">::</span><span class="n">get_unsat_core</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">BitwuzlaTerm</span><span class="o">**</span><span class="w"> </span><span class="n">bzla_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitwuzla_get_unsat_core</span><span class="p">(</span><span class="n">d_solver</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">BzlaTerm</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BzlaTerm</span><span class="p">((</span><span class="n">BitwuzlaTerm</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">bzla_res</span><span class="p">[</span><span class="n">i</span><span class="p">])));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The following list provides all the member functions of class
+<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a> that are required or optional to be
+overriden by a solver wrapper.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Optional overrides have default implementations, but should be overriden
+if supported by the solver.</p>
+</div>
+<section id="solver-functions-required-to-be-overriden">
+<h2>Solver: Functions Required to be Overriden<a class="headerlink" href="#solver-functions-required-to-be-overriden" title="Permalink to this headline"></a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv410new_solverv">
+<span id="_CPPv310new_solverv"></span><span id="_CPPv210new_solverv"></span><span id="new_solver"></span><span class="target" id="group__solver-must-override_1ga2afad6c9a26bc681674aaa8c6c185b62"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">new_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv410new_solverv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create and initialize wrapped solver. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413delete_solverv">
+<span id="_CPPv313delete_solverv"></span><span id="_CPPv213delete_solverv"></span><span id="delete_solver"></span><span class="target" id="group__solver-must-override_1ga21f66442100ab704aaf89b5fe67584da"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">delete_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv413delete_solverv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete wrapped solver. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK14is_initializedEv">
+<span id="_CPPv3NK14is_initializedEv"></span><span id="_CPPv2NK14is_initializedEv"></span><span id="is_initializedC"></span><span class="target" id="group__solver-must-override_1ga2a6ed63ab7e0e2f4203a991d91d756f6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_initialized</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK14is_initializedEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if the wrapped solver is initialized. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if wrapped solver is initialized. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8get_nameEv">
+<span id="_CPPv3NK8get_nameEv"></span><span id="_CPPv2NK8get_nameEv"></span><span id="get_nameC"></span><span class="target" id="group__solver-must-override_1ga7921f8cba71079ae5cd8de3ec9bf563f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK8get_nameEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the name of the wrapped solver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The solver name. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv46mk_var4SortRKNSt6stringE">
+<span id="_CPPv36mk_var4SortRKNSt6stringE"></span><span id="_CPPv26mk_var4SortRKNSt6stringE"></span><span id="mk_var__Sort.ssCR"></span><span class="target" id="group__solver-must-override_1gaf019f8c10b66abb812d9fa6bb2f8799f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_var</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv46mk_var4SortRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the variable. </p></li>
+<li><p><strong>name</strong> – The name of the variable. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The variable. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48mk_const4SortRKNSt6stringE">
+<span id="_CPPv38mk_const4SortRKNSt6stringE"></span><span id="_CPPv28mk_const4SortRKNSt6stringE"></span><span id="mk_const__Sort.ssCR"></span><span class="target" id="group__solver-must-override_1ga5bf759a9cd2729a74f53a88e41ed9a39"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_const</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv48mk_const4SortRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create first order constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the constant. </p></li>
+<li><p><strong>name</strong> – The name of the constant. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The constant. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv46mk_funRKNSt6stringERKNSt6vectorI4TermEE4Term">
+<span id="_CPPv36mk_funRKNSt6stringERKNSt6vectorI4TermEE4Term"></span><span id="_CPPv26mk_funRKNSt6stringERKNSt6vectorI4TermEE4Term"></span><span id="mk_fun__ssCR.std::vector:Term:CR.Term"></span><span class="target" id="group__solver-must-override_1gab64a575a91b8604d269c7059d01e3dbd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_fun</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span>, <span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">body</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv46mk_funRKNSt6stringERKNSt6vectorI4TermEE4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the function. </p></li>
+<li><p><strong>args</strong> – The function arguments. </p></li>
+<li><p><strong>body</strong> – The function body. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48mk_value4Sortb">
+<span id="_CPPv38mk_value4Sortb"></span><span id="_CPPv28mk_value4Sortb"></span><span id="mk_value__Sort.b"></span><span class="target" id="group__solver-must-override_1gac4bafc706ed808182c3478928c0a7854"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv48mk_value4Sortb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create value from Boolean value.</p>
+<p>This is mainly used for creating Boolean values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the value. </p></li>
+<li><p><strong>value</strong> – The value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing the value of given sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sort8SortKind">
+<span id="_CPPv37mk_sort8SortKind"></span><span id="_CPPv27mk_sort8SortKind"></span><span id="mk_sort__SortKind"></span><span class="target" id="group__solver-must-override_1ga97ec228bcfcc75b2bb2f8f08b750ab0e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv47mk_sort8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create sort with no additional arguments.</p>
+<p>Examples are sorts of kind <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a629ca23fb0790fcdb3f200ae3581c858"><span class="std std-ref">SORT_BOOL</span></a>, <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a8d9907528384fde8f96a4d64a9f413d2"><span class="std std-ref">SORT_INT</span></a>, <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493adbfb49d75f4f2fe82aeac9de7a71b2a9"><span class="std std-ref">SORT_REAL</span></a>, <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a9fa0b1dcfa06a9899775f72ff3a2b3cf"><span class="std std-ref">SORT_RM</span></a>, <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493aef602fbefe1e7b451c48720b135905fa"><span class="std std-ref">SORT_REGLAN</span></a>, and <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493ab2fcc567f2237f36b48361fa84133149"><span class="std std-ref">SORT_STRING</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kind</strong> – The kind of the sort. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sort8SortKindRKNSt6vectorI4SortEE">
+<span id="_CPPv37mk_sort8SortKindRKNSt6vectorI4SortEE"></span><span id="_CPPv27mk_sort8SortKindRKNSt6vectorI4SortEE"></span><span id="mk_sort__SortKind.std::vector:Sort:CR"></span><span class="target" id="group__solver-must-override_1gae3baf076dea4b6f9a7c959608557ef41"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sorts</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv47mk_sort8SortKindRKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create sort with given sort arguments.</p>
+<p>The sort arguments are given as:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a2b3bdd067aa456a6537d11586f4226f9"><span class="std std-ref">SORT_ARRAY</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;index</span> <span class="pre">sort&gt;,</span> <span class="pre">&lt;element</span> <span class="pre">sort&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a3e84909a8148c101c3028d98a3e2444f"><span class="std std-ref">SORT_BAG</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;element</span> <span class="pre">sort&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a0c8e9f2acd119d058e79c7ccdf403d26"><span class="std std-ref">SORT_FUN</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;domain</span> <span class="pre">sort_1&gt;,</span> <span class="pre">...,</span> <span class="pre">&lt;domain</span> <span class="pre">sort_n&gt;,</span> <span class="pre">&lt;codomain</span> <span class="pre">sort&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a52b126eee470bb95bc3a17125feede9c"><span class="std std-ref">SORT_SET</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;element</span> <span class="pre">sort&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493a3e8007c84fe7477d3d7289ef4a47b533"><span class="std std-ref">SORT_SEQ</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;element</span> <span class="pre">sort&gt;}</span></code></p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the sort. </p></li>
+<li><p><strong>sorts</strong> – The sort arguments. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_termRKN2Op4KindERKNSt6vectorI4TermEERKNSt6vectorI8uint32_tEE">
+<span id="_CPPv37mk_termRKN2Op4KindERKNSt6vectorI4TermEERKNSt6vectorI8uint32_tEE"></span><span id="_CPPv27mk_termRKN2Op4KindERKNSt6vectorI4TermEERKNSt6vectorI8uint32_tEE"></span><span id="mk_term__Op::KindCR.std::vector:Term:CR.std::vector:uint32_t:CR"></span><span class="target" id="group__solver-must-override_1ga75e342e1585abc792e5e1471f37b8172"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_term</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Op</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Kind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint32_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">indices</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv47mk_termRKN2Op4KindERKNSt6vectorI4TermEERKNSt6vectorI8uint32_tEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create term with given term arguments and indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the term (<a class="reference internal" href="../operator.html#structmurxla_1_1Op_1af37c379bb863cb15345215c8847bbb92"><span class="std std-ref">Op::Kind</span></a>). </p></li>
+<li><p><strong>args</strong> – The argument terms. </p></li>
+<li><p><strong>indices</strong> – The index arguments. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48get_sort4Term8SortKind">
+<span id="_CPPv38get_sort4Term8SortKind"></span><span id="_CPPv28get_sort4Term8SortKind"></span><span id="get_sort__Term.SortKind"></span><span class="target" id="group__solver-must-override_1gaad25aa2ba03a372c244577e11ed1104e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">term</span></span>, <span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv48get_sort4Term8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a freshly wrapped solver sort of the given term.</p>
+<p>This is used for querying the sort of a freshly created term while delegating sort inference to the solver. The returned sort will have sort kind <a class="reference internal" href="../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493ae13f1ac7632a956f25a3d463facd12cd"><span class="std std-ref">SORT_ANY</span></a> and id 0 (will be assigned in the <a class="reference internal" href="../fsm/fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a>, before adding the sort to the sort database). Given sort kind is typically unused, but needed by the Smt2Solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – The term to query for its sort. </p></li>
+<li><p><strong>sort_kind</strong> – The kind of the term’s sort. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort of the given term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK27get_option_name_incrementalEv">
+<span id="_CPPv3NK27get_option_name_incrementalEv"></span><span id="_CPPv2NK27get_option_name_incrementalEv"></span><span id="get_option_name_incrementalC"></span><span class="target" id="group__solver-must-override_1ga3dd642a4f8cfab7f5cb5069e981adba7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_option_name_incremental</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK27get_option_name_incrementalEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the string representation that identifies the solver configuration option for enabling/disabling incremental solving.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Return the string representation of the solver option for enabling/disabling incremental solving. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK25get_option_name_model_genEv">
+<span id="_CPPv3NK25get_option_name_model_genEv"></span><span id="_CPPv2NK25get_option_name_model_genEv"></span><span id="get_option_name_model_genC"></span><span class="target" id="group__solver-must-override_1ga873d44ed453340998fe43f584b05d75e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_option_name_model_gen</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK25get_option_name_model_genEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the string representation that identifies the solver configuration option for enabling/disabling model production.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Return the string representation of the solver option for enabling/disabling model production. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK33get_option_name_unsat_assumptionsEv">
+<span id="_CPPv3NK33get_option_name_unsat_assumptionsEv"></span><span id="_CPPv2NK33get_option_name_unsat_assumptionsEv"></span><span id="get_option_name_unsat_assumptionsC"></span><span class="target" id="group__solver-must-override_1ga1dbd3f7b8390e819903cc926dc615253"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_option_name_unsat_assumptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK33get_option_name_unsat_assumptionsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the string representation that identifies the solver configuration option for enabling/disabling unsat assumptions production.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Return the string representation of the solver option for enabling/disabling unsat assumption production. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK27get_option_name_unsat_coresEv">
+<span id="_CPPv3NK27get_option_name_unsat_coresEv"></span><span id="_CPPv2NK27get_option_name_unsat_coresEv"></span><span id="get_option_name_unsat_coresC"></span><span class="target" id="group__solver-must-override_1gad65ee51287320d3dc8d231e6d03d2ade"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_option_name_unsat_cores</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK27get_option_name_unsat_coresEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the string representation that identifies the solver configuration option for enabling/disabling unsat cores production.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Return the string representation of the solver option for enabling/disabling unsat core production. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK26option_incremental_enabledEv">
+<span id="_CPPv3NK26option_incremental_enabledEv"></span><span id="_CPPv2NK26option_incremental_enabledEv"></span><span id="option_incremental_enabledC"></span><span class="target" id="group__solver-must-override_1ga1d1f32153e76c43860820a9cc4750f79"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">option_incremental_enabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK26option_incremental_enabledEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if incremental solving is currently enabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if incremental solving is currently enabled. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK24option_model_gen_enabledEv">
+<span id="_CPPv3NK24option_model_gen_enabledEv"></span><span id="_CPPv2NK24option_model_gen_enabledEv"></span><span id="option_model_gen_enabledC"></span><span class="target" id="group__solver-must-override_1gaa8e15f2760281dea536e0bfe5e1fe88b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">option_model_gen_enabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK24option_model_gen_enabledEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if model production is currently enabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if model production is currently enabled. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK32option_unsat_assumptions_enabledEv">
+<span id="_CPPv3NK32option_unsat_assumptions_enabledEv"></span><span id="_CPPv2NK32option_unsat_assumptions_enabledEv"></span><span id="option_unsat_assumptions_enabledC"></span><span class="target" id="group__solver-must-override_1gacb961099f932d01dec8a3b27709e3f63"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">option_unsat_assumptions_enabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK32option_unsat_assumptions_enabledEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if unsat assumptions production is currently enabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if unsat assumptions production is currently enabled. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK26option_unsat_cores_enabledEv">
+<span id="_CPPv3NK26option_unsat_cores_enabledEv"></span><span id="_CPPv2NK26option_unsat_cores_enabledEv"></span><span id="option_unsat_cores_enabledC"></span><span class="target" id="group__solver-must-override_1ga451679f07043f62669c2fb47afac5260"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">option_unsat_cores_enabled</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK26option_unsat_cores_enabledEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if unsat cores production is currently enabled. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if unsat cores production is currently enabled. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK19is_unsat_assumptionERK4Term">
+<span id="_CPPv3NK19is_unsat_assumptionERK4Term"></span><span id="_CPPv2NK19is_unsat_assumptionERK4Term"></span><span id="is_unsat_assumption__TermCRC"></span><span class="target" id="group__solver-must-override_1ga7fef54cd4f1858a35cb7bddb75118d3b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_unsat_assumption</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK19is_unsat_assumptionERK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if given term is an unsat assumption. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if given term is an unsat assumption. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414assert_formulaRK4Term">
+<span id="_CPPv314assert_formulaRK4Term"></span><span id="_CPPv214assert_formulaRK4Term"></span><span id="assert_formula__TermCR"></span><span class="target" id="group__solver-must-override_1ga24b259960c0f2ff70450ea5a24318256"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assert_formula</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv414assert_formulaRK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Assert given formula.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">assert</span> <span class="n">&lt;term&gt;</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The formula to assert. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv49check_satv">
+<span id="_CPPv39check_satv"></span><span id="_CPPv29check_satv"></span><span id="check_sat"></span><span class="target" id="group__solver-must-override_1ga8173546724faef7fe2c2ddadaae74ae3"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Result</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_sat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv49check_satv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check satisfiability of currently asserted formulas.</p>
+<p>SMT-LIB:</p>
+<p><p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">check-sat</span>)
+</pre></div>
+</div>
+</p>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The satisfiability Result. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418check_sat_assumingRKNSt6vectorI4TermEE">
+<span id="_CPPv318check_sat_assumingRKNSt6vectorI4TermEE"></span><span id="_CPPv218check_sat_assumingRKNSt6vectorI4TermEE"></span><span id="check_sat_assuming__std::vector:Term:CR"></span><span class="target" id="group__solver-must-override_1gaa9aff3b04244dc3fa8ad6c7a71705991"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Result</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_sat_assuming</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">assumptions</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv418check_sat_assumingRKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check satisfiability of currently asserted formulas under the given set of assumptions.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">check-sat-assuming</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>assumptions</strong> – The set of assumptions. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The satisfiability Result. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421get_unsat_assumptionsv">
+<span id="_CPPv321get_unsat_assumptionsv"></span><span id="_CPPv221get_unsat_assumptionsv"></span><span id="get_unsat_assumptions"></span><span class="target" id="group__solver-must-override_1ga0e6199b9903673515582648c42bb44fb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_unsat_assumptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv421get_unsat_assumptionsv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current set of unsat assumptions.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">get-unsat-assumptions</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The current set of unsat assumptions. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv44push8uint32_t">
+<span id="_CPPv34push8uint32_t"></span><span id="_CPPv24push8uint32_t"></span><span id="push__uint32_t"></span><span class="target" id="group__solver-must-override_1gae27eea52bfd2330ca46b74d14ef367dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">push</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_levels</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv44push8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Push the given number of assertion levels.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">push</span> <span class="n">&lt;n&gt;</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n_levels</strong> – The number of assertion levels to push. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv43pop8uint32_t">
+<span id="_CPPv33pop8uint32_t"></span><span id="_CPPv23pop8uint32_t"></span><span id="pop__uint32_t"></span><span class="target" id="group__solver-must-override_1ga52c51d3e7db94258917ed8e1415b156d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pop</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_levels</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv43pop8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pop the given number of assertion levels.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">pop</span> <span class="n">&lt;n&gt;</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n_levels</strong> – The number of assertion levels to pop. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv411print_modelv">
+<span id="_CPPv311print_modelv"></span><span id="_CPPv211print_modelv"></span><span id="print_model"></span><span class="target" id="group__solver-must-override_1ga4339b8ef295876e159b522c1535a7842"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_model</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv411print_modelv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Print model after a sat check-sat call.</p>
+<p>SMT-LIB:</p>
+<p><p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">get-unsat-core</span>)
+</pre></div>
+</div>
+</p>
+ </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv45resetv">
+<span id="_CPPv35resetv"></span><span id="_CPPv25resetv"></span><span id="reset"></span><span class="target" id="group__solver-must-override_1ga785aee49e0b5a2c9025fcfb7e9e6bc9c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv45resetv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset solver.</p>
+<p>SMT-LIB:</p>
+<p><p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">reset</span>)
+</pre></div>
+</div>
+</p>
+ </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416reset_assertionsv">
+<span id="_CPPv316reset_assertionsv"></span><span id="_CPPv216reset_assertionsv"></span><span id="reset_assertions"></span><span class="target" id="group__solver-must-override_1ga518d7773a9abce1a35723ae01d640147"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_assertions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv416reset_assertionsv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset assertion stack.</p>
+<p>SMT-LIB:</p>
+<p><p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">reset-assertions</span>)
+</pre></div>
+</div>
+</p>
+ </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47set_optRKNSt6stringERKNSt6stringE">
+<span id="_CPPv37set_optRKNSt6stringERKNSt6stringE"></span><span id="_CPPv27set_optRKNSt6stringERKNSt6stringE"></span><span id="set_opt__ssCR.ssCR"></span><span class="target" id="group__solver-must-override_1gadc18ff14f01c83453fce491916697882"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_opt</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">opt</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv47set_optRKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure solver option.</p>
+<p>Should throw a MurxlaSolverOptionException if opt=value is not valid with the currently configured options.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">set-option</span> <span class="na">:&lt;option&gt;</span> <span class="n">&lt;value&gt;</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>opt</strong> – A string identifying the solver configuration option. </p></li>
+<li><p><strong>value</strong> – A string representation of the option value to configure. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv49get_valueRKNSt6vectorI4TermEE">
+<span id="_CPPv39get_valueRKNSt6vectorI4TermEE"></span><span id="_CPPv29get_valueRKNSt6vectorI4TermEE"></span><span id="get_value__std::vector:Term:CR"></span><span class="target" id="group__solver-must-override_1ga522b0fc464cbf5f213f834528f06ea5c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_value</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">terms</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv49get_valueRKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a term representation of the values of the given terms after a sat check-sat query.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">get-value</span> (<span class="n">&lt;term_1&gt;...</span> <span class="n">&lt;term_n&gt;</span>)
+</pre></div>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>terms</strong> – The terms to query the value for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A set of terms representing the values of the given terms. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="solver-functions-to-be-overriden-optionally">
+<h2>Solver: Functions to be Overriden Optionally<a class="headerlink" href="#solver-functions-to-be-overriden-optionally" title="Permalink to this headline"></a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11get_profileEv">
+<span id="_CPPv3NK11get_profileEv"></span><span id="_CPPv2NK11get_profileEv"></span><span id="get_profileC"></span><span class="target" id="group__solver-may-override_1ga6e3419d36f9108c542ad71b699218e4c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_profile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11get_profileEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Return solver profile JSON string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13configure_fsmEP3FSM">
+<span id="_CPPv3NK13configure_fsmEP3FSM"></span><span id="_CPPv2NK13configure_fsmEP3FSM"></span><span id="configure_fsm__FSMPC"></span><span class="target" id="group__solver-may-override_1ga1d286830a5c3e846027ea973542fbdb5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configure_fsm</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FSM</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fsm</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK13configure_fsmEP3FSM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure the <a class="reference internal" href="../fsm/fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a> with solver-specific extensions.</p>
+<p>This is for adding solver-specific actions, states and transitions. Override for solver-specific configuration of the <a class="reference internal" href="../fsm/fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a>.</p>
+<p>Does nothing by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fsm</strong> – The fsm to configure with extensions. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK27disable_unsupported_actionsEP3FSM">
+<span id="_CPPv3NK27disable_unsupported_actionsEP3FSM"></span><span id="_CPPv2NK27disable_unsupported_actionsEP3FSM"></span><span id="disable_unsupported_actions__FSMPC"></span><span class="target" id="group__solver-may-override_1ga9350c18ae6777be86434860dd27826b8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_unsupported_actions</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FSM</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fsm</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK27disable_unsupported_actionsEP3FSM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable unsupported actions of the base <a class="reference internal" href="../fsm/fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a> configuration.</p>
+<p>Does nothing by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fsm</strong> – The fsm to disable actions in. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK15configure_opmgrEP13OpKindManager">
+<span id="_CPPv3NK15configure_opmgrEP13OpKindManager"></span><span id="_CPPv2NK15configure_opmgrEP13OpKindManager"></span><span id="configure_opmgr__OpKindManagerPC"></span><span class="target" id="group__solver-may-override_1ga89fc545409a44c1d4b04e28ea8ab6d29"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configure_opmgr</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">OpKindManager</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">opmgr</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15configure_opmgrEP13OpKindManager" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure the operator kind manager with solver-specific extensions.</p>
+<p>This is for adding and configuring solver-specific operator kinds.</p>
+<p>Does nothing by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>opmgr</strong> – The operator kind manager to configure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17configure_optionsEP13SolverManager">
+<span id="_CPPv3NK17configure_optionsEP13SolverManager"></span><span id="_CPPv2NK17configure_optionsEP13SolverManager"></span><span id="configure_options__SolverManagerPC"></span><span class="target" id="group__solver-may-override_1ga3bd56511feddedd710add1c5e30cbc3e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configure_options</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SolverManager</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">smgr</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17configure_optionsEP13SolverManager" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure solver configuration options.</p>
+<p>This is for adding and configuring solver options (see SolverManager::add_option()).</p>
+<p>Does nothing by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>smgr</strong> – The solver manager maintaining the solver options to configure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv49reset_satv">
+<span id="_CPPv39reset_satv"></span><span id="_CPPv29reset_satv"></span><span id="reset_sat"></span><span class="target" id="group__solver-may-override_1ga7faf7374b0e6b52d0e19c43bfce674f9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_sat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49reset_satv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset solver state into assert mode.</p>
+<p>After this call, calling<ul class="simple">
+<li><p>get_model()</p></li>
+<li><p><a class="reference internal" href="solver_wrapper/solver.html#group__solver-must-override_1ga0e6199b9903673515582648c42bb44fb"><span class="std std-ref">get_unsat_assumptions()</span></a></p></li>
+<li><p><a class="reference internal" href="solver_wrapper/solver.html#group__solver-may-override_1ga56f98729e3dbca36ff7277f32cb520ea"><span class="std std-ref">get_unsat_core()</span></a> and</p></li>
+<li><p>get_proof() is not possible until after the next SAT call. </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48mk_value4SortRKNSt6stringE">
+<span id="_CPPv38mk_value4SortRKNSt6stringE"></span><span id="_CPPv28mk_value4SortRKNSt6stringE"></span><span id="mk_value__Sort.ssCR"></span><span class="target" id="group__solver-may-override_1ga9ed02be195de23e2cf91f5876f2e39ad"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48mk_value4SortRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create value from string.</p>
+<p>This is mainly used for floating-point, integer, real, regular language and string values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the value. </p></li>
+<li><p><strong>value</strong> – The string representation of the value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing the value of given sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48mk_value4SortRKNSt6stringERKNSt6stringE">
+<span id="_CPPv38mk_value4SortRKNSt6stringERKNSt6stringE"></span><span id="_CPPv28mk_value4SortRKNSt6stringERKNSt6stringE"></span><span id="mk_value__Sort.ssCR.ssCR"></span><span class="target" id="group__solver-may-override_1gacebc3db3254fa30443b410c3b425fb79"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">den</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48mk_value4SortRKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create rational value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the value. </p></li>
+<li><p><strong>num</strong> – A decimal string representing the numerator. </p></li>
+<li><p><strong>den</strong> – A decimal string representing the denominator. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing the rational value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48mk_value4SortRKNSt6stringE4Base">
+<span id="_CPPv38mk_value4SortRKNSt6stringE4Base"></span><span id="_CPPv28mk_value4SortRKNSt6stringE4Base"></span><span id="mk_value__Sort.ssCR.Base"></span><span class="target" id="group__solver-may-override_1ga218a45985b293a43be7901c0740694e0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">Base</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">base</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48mk_value4SortRKNSt6stringE4Base" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create value from string given in a specific base.</p>
+<p>This is mainly used for creating bit-vector values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the value. </p></li>
+<li><p><strong>value</strong> – The string representation of the value. </p></li>
+<li><p><strong>base</strong> – The numerical base the <code class="docutils literal notranslate"><span class="pre">value</span></code> string is given in. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing the value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416mk_special_value4SortRKN7AbsTerm16SpecialValueKindE">
+<span id="_CPPv316mk_special_value4SortRKN7AbsTerm16SpecialValueKindE"></span><span id="_CPPv216mk_special_value4SortRKN7AbsTerm16SpecialValueKindE"></span><span id="mk_special_value__Sort.AbsTerm::SpecialValueKindCR"></span><span class="target" id="group__solver-may-override_1ga7ba29323ee157a47a81876af816f2b8c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_special_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">AbsTerm</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mk_special_value4SortRKN7AbsTerm16SpecialValueKindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create a special value (as defined in SMT-LIB, or as added as solver-specific special values).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort of the special value. </p></li>
+<li><p><strong>value</strong> – The kind of the special value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing the special value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sortRKNSt6stringE">
+<span id="_CPPv37mk_sortRKNSt6stringE"></span><span id="_CPPv27mk_sortRKNSt6stringE"></span><span id="mk_sort__ssCR"></span><span class="target" id="group__solver-may-override_1ga8a510f0dbec5f53a95f92aaeffe1919c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_sortRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create uninterpreted sort.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the uninterpreted sort. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An uninterpreted sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sort8SortKind8uint32_t">
+<span id="_CPPv37mk_sort8SortKind8uint32_t"></span><span id="_CPPv27mk_sort8SortKind8uint32_t"></span><span id="mk_sort__SortKind.uint32_t"></span><span class="target" id="group__solver-may-override_1gadc1fcc565b2283be49652dfc24434096"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_sort8SortKind8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create sort with one unsigned integer argument.</p>
+<p>This is mainly for creating bit-vector sorts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the sort. </p></li>
+<li><p><strong>size</strong> – The size of the bit-vector sort. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sort8SortKind8uint32_t8uint32_t">
+<span id="_CPPv37mk_sort8SortKind8uint32_t8uint32_t"></span><span id="_CPPv27mk_sort8SortKind8uint32_t8uint32_t"></span><span id="mk_sort__SortKind.uint32_t.uint32_t"></span><span class="target" id="group__solver-may-override_1ga9ece18a7f3313b093bd4ef6152c1e146"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">esize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ssize</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_sort8SortKind8uint32_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create sort with two unsigned integer arguments.</p>
+<p>This is mainly for creating floating-point sorts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the sort. </p></li>
+<li><p><strong>esize</strong> – The size of the exponent. </p></li>
+<li><p><strong>ssize</strong> – The size of the significand. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_sort8SortKindRKNSt6vectorINSt6stringEEERKNSt6vectorINSt6vectorI4SortEEEERKNSt6vectorIN7AbsSort22DatatypeConstructorMapEEE">
+<span id="_CPPv37mk_sort8SortKindRKNSt6vectorINSt6stringEEERKNSt6vectorINSt6vectorI4SortEEEERKNSt6vectorIN7AbsSort22DatatypeConstructorMapEEE"></span><span id="_CPPv27mk_sort8SortKindRKNSt6vectorINSt6stringEEERKNSt6vectorINSt6vectorI4SortEEEERKNSt6vectorIN7AbsSort22DatatypeConstructorMapEEE"></span><span id="mk_sort__SortKind.std::vector:ss:CR.std::vector:std::vector:Sort::CR.std::vector:AbsSort::DatatypeConstructorMap:CR"></span><span class="target" id="group__solver-may-override_1gab4d7631c2d2635e2a16c82bb0dcb7034"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SortKind</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dt_names</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">param_sorts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsSort</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DatatypeConstructorMap</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">constructors</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_sort8SortKindRKNSt6vectorINSt6stringEEERKNSt6vectorINSt6vectorI4SortEEEERKNSt6vectorIN7AbsSort22DatatypeConstructorMapEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create one or more datatype sorts.</p>
+<p>Selectors may return a term of<ol class="loweralpha simple">
+<li><p>a regular Sort</p></li>
+<li><p>a parameter sort (<a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1ParamSort"><span class="std std-ref">ParamSort</span></a>)</p></li>
+<li><p>a yet unresolved dataype sort (<a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1UnresolvedSort"><span class="std std-ref">UnresolvedSort</span></a>)</p></li>
+<li><p>the sort that is currently being created, indicated by passing a <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> for the selector codomain sort</p></li>
+</ol>
+</p>
+<p><a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1ParamSort"><span class="std std-ref">ParamSort</span></a> and <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1UnresolvedSort"><span class="std std-ref">UnresolvedSort</span></a> do not wrap actual sorts but are sort placeholders. Thus, solvers must special case cases 1-3 accordingly.</p>
+<p><a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1ParamSort"><span class="std std-ref">ParamSort</span></a> keeps a back reference to the associated datatype sort in <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort_1a8106d7178c9b38d08e7ccdfe478e2f3b"><span class="std std-ref">ParamSort::d_sorts</span></a> (inherited from <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort"><span class="std std-ref">AbsSort</span></a>, see <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort_1a28c157473a9bcd69cd88cf67a59d4ff1"><span class="std std-ref">AbsSort::get_sorts()</span></a>).</p>
+<p>For mutually recursive datatypes, we use instances of <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1UnresolvedSort"><span class="std std-ref">UnresolvedSort</span></a> as place holders. These instances are not unique, we create a new instance of <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1UnresolvedSort"><span class="std std-ref">UnresolvedSort</span></a> for every occurence of an unresolved sort. Solvers must distinguish these sorts via their names (see <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1UnresolvedSort_1ac3c19972679cfccfdee6adf5788debf0"><span class="std std-ref">UnresolvedSort::get_symbol()</span></a>).</p>
+<p>If the mutually recursive datatypes are parametric, then we specify sorts for instantiating these parameters, and store them in <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort_1a8106d7178c9b38d08e7ccdfe478e2f3b"><span class="std std-ref">UnresolvedSort::d_sorts</span></a> (inherited from <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort"><span class="std std-ref">AbsSort</span></a>). These sorts can be retrieved via <a class="reference internal" href="solver_wrapper/abssort.html#classmurxla_1_1AbsSort_1a28c157473a9bcd69cd88cf67a59d4ff1"><span class="std std-ref">UnresolvedSort::get_sorts()</span></a> (inherited).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the sort. </p></li>
+<li><p><strong>dt_names</strong> – A vector with the names of the datatypes. </p></li>
+<li><p><strong>param_sorts</strong> – A vector with the lists of parameter sorts in case of parametric datatype sorts. The list of parameter sorts for a datatype may be empty. </p></li>
+<li><p><strong>constructors</strong> – A vector with the lists of datatype constructors, wich are given as maps of constructor name to vector of selectors (which are given as a pair of name and sort). </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416instantiate_sort4SortRKNSt6vectorI4SortEE">
+<span id="_CPPv316instantiate_sort4SortRKNSt6vectorI4SortEE"></span><span id="_CPPv216instantiate_sort4SortRKNSt6vectorI4SortEE"></span><span id="instantiate_sort__Sort.std::vector:Sort:CR"></span><span class="target" id="group__solver-may-override_1gae8a0ddfe64f58f013512dd37e6364241"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">instantiate_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">param_sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416instantiate_sort4SortRKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate parametric sort <code class="docutils literal notranslate"><span class="pre">param_sort</span></code> with given sorts </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param_sort</strong> – The parametric sort to be instantiated. </p></li>
+<li><p><strong>sorts</strong> – The sorts to instantiate the sort parameters of <code class="docutils literal notranslate"><span class="pre">param_sort</span></code> with. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The instantiated sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_termRKN2Op4KindERKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE">
+<span id="_CPPv37mk_termRKN2Op4KindERKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE"></span><span id="_CPPv27mk_termRKN2Op4KindERKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE"></span><span id="mk_term__Op::KindCR.std::vector:ss:CR.std::vector:Term:CR"></span><span class="target" id="group__solver-may-override_1ga5a666975ad25c0f651d063ed507a7837"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_term</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Op</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Kind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str_args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_termRKN2Op4KindERKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create term with given string and term arguments.</p>
+<p>This is mainly intended for <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a4c7aa2fe3fc2c7fb1076c097d6859fdd"><span class="std std-ref">Op::DT_APPLY_SEL</span></a>, <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1abe1dd48384f03e9024c0e14deefcf4a7"><span class="std std-ref">Op::DT_APPLY_TESTER</span></a> and <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1ae572917ca3ed01f626bd22d72ae0b6fb"><span class="std std-ref">Op::DT_APPLY_UPDATER</span></a>.</p>
+<p>The string arguments identify constructors and selectors by name and are given for the following kinds as follows:<ul class="simple">
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a4c7aa2fe3fc2c7fb1076c097d6859fdd"><span class="std std-ref">Op::DT_APPLY_SEL</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;,</span> <span class="pre">&lt;selector</span> <span class="pre">name&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1abe1dd48384f03e9024c0e14deefcf4a7"><span class="std std-ref">Op::DT_APPLY_TESTER</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1ae572917ca3ed01f626bd22d72ae0b6fb"><span class="std std-ref">Op::DT_APPLY_UPDATER</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;,</span> <span class="pre">&lt;selector</span> <span class="pre">name&gt;}</span></code></p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the term (<a class="reference internal" href="../operator.html#structmurxla_1_1Op_1af37c379bb863cb15345215c8847bbb92"><span class="std std-ref">Op::Kind</span></a>). </p></li>
+<li><p><strong>str_args</strong> – The names of constructors/selectors as indicated above. </p></li>
+<li><p><strong>args</strong> – The argument terms. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47mk_termRKN2Op4KindE4SortRKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE">
+<span id="_CPPv37mk_termRKN2Op4KindE4SortRKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE"></span><span id="_CPPv27mk_termRKN2Op4KindE4SortRKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE"></span><span id="mk_term__Op::KindCR.Sort.std::vector:ss:CR.std::vector:Term:CR"></span><span class="target" id="group__solver-may-override_1ga7a8bdc22822486f88890010d0e034bf1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mk_term</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Op</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Kind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str_args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mk_termRKN2Op4KindE4SortRKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create term with given Sort, string and term arguments.</p>
+<p>This is mainly intended for <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1aa12e927fde01e8e5e805cd29cce4f50c"><span class="std std-ref">Op::DT_APPLY_CONS</span></a>, <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a8b441526af694aa896c66f3270f19e86"><span class="std std-ref">Op::DT_MATCH_BIND_CASE</span></a> and <a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a8e9366cdd466f4e06c6e38400aed5e44"><span class="std std-ref">Op::DT_MATCH_CASE</span></a>.</p>
+<p>The string arguments identify constructors and selectors by name and are given for the following kinds as follows:<ul class="simple">
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1aa12e927fde01e8e5e805cd29cce4f50c"><span class="std std-ref">Op::DT_APPLY_CONS</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a8b441526af694aa896c66f3270f19e86"><span class="std std-ref">Op::DT_MATCH_BIND_CASE</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;}</span></code></p></li>
+<li><p><a class="reference internal" href="../operator.html#structmurxla_1_1Op_1a8e9366cdd466f4e06c6e38400aed5e44"><span class="std std-ref">Op::DT_MATCH_CASE</span></a>: <code class="docutils literal notranslate"><span class="pre">{&lt;constructor</span> <span class="pre">name&gt;}</span></code></p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the term (<a class="reference internal" href="../operator.html#structmurxla_1_1Op_1af37c379bb863cb15345215c8847bbb92"><span class="std std-ref">Op::Kind</span></a>). </p></li>
+<li><p><strong>sort</strong> – The datatype sort to apply the given kind on. </p></li>
+<li><p><strong>str_args</strong> – The names of constructors/selectors as indicated above. </p></li>
+<li><p><strong>args</strong> – The argument terms. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv49set_logicRKNSt6stringE">
+<span id="_CPPv39set_logicRKNSt6stringE"></span><span id="_CPPv29set_logicRKNSt6stringE"></span><span id="set_logic__ssCR"></span><span class="target" id="group__solver-may-override_1gaed467971c7f9f927d1e14a9115a46098"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_logic</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">logic</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49set_logicRKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the logic.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">set-logic</span> <span class="n">&lt;logic&gt;</span>)
+</pre></div>
+</div>
+</p>
+<p>Does nothing by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>logic</strong> – A string representing the logic to configure, as defined in the SMT-LIB standard. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414get_unsat_corev">
+<span id="_CPPv314get_unsat_corev"></span><span id="_CPPv214get_unsat_corev"></span><span id="get_unsat_core"></span><span class="target" id="group__solver-may-override_1ga56f98729e3dbca36ff7277f32cb520ea"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Term</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_unsat_core</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414get_unsat_corev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve the unsat core after an unsat check-sat call.</p>
+<p>SMT-LIB:</p>
+<p><div class="highlight-smtlib notranslate"><div class="highlight"><pre><span></span>(<span class="k">get-unsat-core</span>)
+</pre></div>
+</div>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not override if solver does not support unsat cores. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A set of terms represnting the unsat core. Returns an empty vector by default.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv410check_term4Term">
+<span id="_CPPv310check_term4Term"></span><span id="_CPPv210check_term4Term"></span><span id="check_term__Term"></span><span class="target" id="group__solver-may-override_1gaf98bd2a91410be5d5bc176112521cd1d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">term</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410check_term4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Solver-specific term checks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>term</strong> – The term to perform solver-specific checks for. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv410check_term4TermRKNSt6vectorINSt6stringEEE">
+<span id="_CPPv310check_term4TermRKNSt6vectorINSt6stringEEE"></span><span id="_CPPv210check_term4TermRKNSt6vectorINSt6stringEEE"></span><span id="check_term__Term.std::vector:ss:CR"></span><span class="target" id="group__solver-may-override_1ga879a411a3918d9f8eaa70b82470ca98b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">term</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">str_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410check_term4TermRKNSt6vectorINSt6stringEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Solver-specific term checks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – The term to perform solver-specific checks for. </p></li>
+<li><p><strong>str_args</strong> – The string arguments used to create <code class="docutils literal notranslate"><span class="pre">term</span></code> (see <a class="reference internal" href="solver_wrapper/solver.html#group__solver-may-override_1ga7a8bdc22822486f88890010d0e034bf1"><span class="std std-ref">Solver::mk_term(const Op::Kind&amp;,Sort,const std::vector&lt;std::string&gt;&amp;,const std::vector&lt;Term&gt;&amp;)</span></a> and <a class="reference internal" href="solver_wrapper/solver.html#group__solver-may-override_1ga5a666975ad25c0f651d063ed507a7837"><span class="std std-ref">Solver::mk_term(const Op::Kind&amp; kind,const std::vector&lt;std::string&gt;&amp; str_args,const std::vector&lt;Term&gt;&amp; args)</span></a>. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv411check_value4Term">
+<span id="_CPPv311check_value4Term"></span><span id="_CPPv211check_value4Term"></span><span id="check_value__Term"></span><span class="target" id="group__solver-may-override_1ga56121a856b80bdf2e6247a1a024605dc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Term</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">term</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411check_value4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Solver-specific value checks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>term</strong> – The value term to perform solver-specific checks for. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv410check_sort4Sort">
+<span id="_CPPv310check_sort4Sort"></span><span id="_CPPv210check_sort4Sort"></span><span id="check_sort__Sort"></span><span class="target" id="group__solver-may-override_1gabff40a02ac598d1cd02f08603d76c546"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410check_sort4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Solver-specific sort checks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort</strong> – The sort to perform solver-specific checks for. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_required_optionsE6Theory">
+<span id="_CPPv3NK20get_required_optionsE6Theory"></span><span id="_CPPv2NK20get_required_optionsE6Theory"></span><span id="get_required_options__TheoryC"></span><span class="target" id="group__solver-may-override_1gad5a42b0d5076ad4e82c332e8ac192b81"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_required_options</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Theory</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">theory</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_required_optionsE6Theory" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Query solver options that need to be enabled for a given theory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>theory</strong> – The theory for which to query solver options for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A map from option string to option value string of enabled options for a given theory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="absterm_overrides.html" class="btn btn-neutral float-left" title="Solver Wrapper Implementation for Terms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solver_wrapper/solver_wrapper.html" class="btn btn-neutral float-right" title="Solver Wrappers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

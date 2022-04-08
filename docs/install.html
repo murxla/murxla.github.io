@@ -39,9 +39,12 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-solver">Supported Solver</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Documentation</a></li>
 </ul>
 
@@ -70,6 +73,33 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/murxla/murxla.git
+<span class="nb">cd</span> murxla
+mkdir build
+cmake ..
+make
+</pre></div>
+</div>
+<p>During the configuration phase (<code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code>) the build system checks whether any
+of the supported solvers are installed. If a solver was installed to a custom
+path <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> you can tell the build system by specifying the path as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. -DCMAKE_PREFIX_PATH<span class="o">=</span>&lt;path&gt;
+</pre></div>
+</div>
+<p>After successful compilation you can find the Murxla binary in <code class="docutils literal notranslate"><span class="pre">build/bin/</span></code>.
+Please refer to the <a class="reference internal" href="usage.html#user-guide"><span class="std std-ref">User Guide</span></a> for how to use Murxla.</p>
+<section id="supported-solver">
+<h2>Supported Solver<a class="headerlink" href="#supported-solver" title="Permalink to this headline"></a></h2>
+<p>Murxla currently has native integration for the following solvers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/bitwuzla/bitwuzla">Bitwuzla</a></p></li>
+<li><p><a class="reference external" href="https://github.com/boolector/boolector">Boolector</a></p></li>
+<li><p><a class="reference external" href="https://github.com/cvc5/cvc5">cvc5</a></p></li>
+<li><p><a class="reference external" href="https://github.com/SRI-CSL/yices2">Yices</a></p></li>
+</ul>
+<p>Solvers without native integration can still be tested via the SMT-LIBv2
+interface (option <code class="docutils literal notranslate"><span class="pre">--smt2</span> <span class="pre">&lt;solver-binary&gt;</span></code>).</p>
+</section>
 </section>
 
 
