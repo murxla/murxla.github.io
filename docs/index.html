@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Murxla &mdash; Murxla  documentation</title>
+  <title>Murxla Documentation &mdash; Murxla  documentation</title>
       <link rel="stylesheet" href="static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="static/js/html5shiv.min.js"></script>
@@ -41,7 +42,7 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
 
         </div>
@@ -58,7 +59,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Murxla</li>
+      <li>Murxla Documentation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -67,30 +68,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="murxla">
-<h1>Murxla<a class="headerlink" href="#murxla" title="Permalink to this headline"></a></h1>
+  <section id="murxla-documentation">
+<h1>Murxla Documentation<a class="headerlink" href="#murxla-documentation" title="Permalink to this headline"></a></h1>
+<p><strong>Murxla</strong> is a modular and highly-extensible model-based API fuzzer for
+Satisfiability Modulo Theories (SMT) solvers.</p>
+<p>Its name is derived from the German (rather informal) word <em>Murks</em>, which can
+be translated as “screw-up”. Murxla is a tool to find <em>Murkses</em> (bugs) in SMT
+solvers via API fuzzing.</p>
+<p>Murxla is written in C++ and aims at being a comprehensive fuzzing tool that</p>
+<ul class="simple">
+<li><p>generates <strong>valid sequences</strong> of solver API calls</p></li>
+<li><p><strong>records</strong> these sequences in a simple text-based trace format
+(see <a class="reference internal" href="advanced/fsm/action.html#tracing"><span class="std std-ref">Tracing</span></a>)</p></li>
+<li><p>provides support for <strong>minimizing</strong> and <strong>replaying</strong> these traces while
+preserving the original behavior of the solver (delta-debugging)</p></li>
+</ul>
+<figure class="align-default" id="id1">
+<a class="reference external image-reference" href="images/murxla.png"><img alt="images/murxla.png" src="images/murxla.png" /></a>
+<figcaption>
+<p><span class="caption-text">The architecture of Murxla.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Murxla builds on top of a generic solver interface (see <a class="reference internal" href="solver_integration/solver_wrapper/solver_wrapper.html#solver-wrappers"><span class="std std-ref">Solver Wrappers</span></a>)
+and provides full <a class="reference external" href="http://smt-lib.org">SMT-LIB</a> support in terms of
+semantics, features, standard theories. It further provides experimental
+support for some non-standard theories (sequences, sets, bags).</p>
+<p>Murxla is fully compatible with and configurable for <strong>solver-specific</strong>
+features, extensions, and restrictions. It provides support for</p>
+<ul class="simple">
+<li><p><strong>option fuzzing</strong> (randomly configuring solver options based on the options
+model of the solver)</p></li>
+<li><p><strong>cross-checking mode</strong>, where the answers of two different solvers are
+compared with each other</p></li>
+<li><p><strong>correctness checks</strong> for retrieved model values, unsat assumptions, and
+unsat cores</p></li>
+<li><p>translating generated API traces to <strong>SMT-LIBv2</strong> (if they don’t use solver-specific extensions)</p></li>
+<li><p>SMT-LIBv2 <strong>input fuzzing</strong></p></li>
+</ul>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#supported-solver">Supported Solver</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="solver_integration/solver_integration.html#overrides-for-solver-wrapper-implementation">Overrides for Solver Wrapper Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_integration/solver_integration.html#solver-wrapper-full-interface-documentation">Solver Wrapper: Full Interface Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_integration/solver_integration.html#solver-profiles">Solver Profiles</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sort_kind.html">Sort Kind</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operator.html">Operators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="theory.html">Theories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
 </div>
 </section>

@@ -7,6 +7,7 @@
   <title>Solver Wrappers &mdash; Murxla  documentation</title>
       <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="../../static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../static/js/html5shiv.min.js"></script>
@@ -19,8 +20,8 @@
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Solver Wrapper Interface: AbsSort" href="abssort.html" />
-    <link rel="prev" title="Solver Wrapper Implementation for Solver" href="../solver_overrides.html" /> 
+    <link rel="next" title="Solver Wrapper Interface: AbsSort" href="../../advanced/solver_wrapper_interface/abssort.html" />
+    <link rel="prev" title="Solver Profiles" href="../solver_profile.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,25 +43,37 @@
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../solver_integration.html">How to Integrate a Solver</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../solver_integration.html#overrides-for-solver-wrapper-implementation">Overrides for Solver Wrapper Implementation</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../solver_integration.html#solver-wrapper-full-interface-documentation">Solver Wrapper: Full Interface Documentation</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Solver Wrappers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sort">Sort</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#term">Term</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#solver-wrapper-interface">Solver Wrapper Interface</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="abssort.html">Solver Wrapper Interface: AbsSort</a></li>
-<li class="toctree-l5"><a class="reference internal" href="absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
-<li class="toctree-l5"><a class="reference internal" href="solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solver_profile.html">Solver Profiles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Wrappers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html">Solver Wrapper Interface: AbsSort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solver-wrapper-implementation">Solver Wrapper Implementation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overrides.html">Overrides for Solver Wrapper Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#random-number-generator-rng">Random Number Generator (RNG)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#global-sort-and-term-handling">Global Sort and Term Handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../advanced/sort.html">Sort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../advanced/term.html">Term</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#solver-specific-extensions">Solver-Specific Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operator-kinds">Operator Kinds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#special-value-kinds">Special Value Kinds</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../advanced/special_value_kinds.html">Pre-Defined Special Value Kinds</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#actions">Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#features-unsupported-by-the-solver-under-test">Features Unsupported By The Solver Under Test</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#solver-options">Solver Options</a></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../solver_integration.html#solver-profiles">Solver Profiles</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../advanced.html">Advanced Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
 
         </div>
@@ -89,191 +102,212 @@
              
   <section id="solver-wrappers">
 <span id="id1"></span><h1>Solver Wrappers<a class="headerlink" href="#solver-wrappers" title="Permalink to this headline"></a></h1>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><p><a class="reference internal" href="#sort" id="id3">Sort</a></p></li>
-<li><p><a class="reference internal" href="#term" id="id4">Term</a></p></li>
-<li><p><a class="reference internal" href="#solver-wrapper-interface" id="id5">Solver Wrapper Interface</a></p></li>
-</ul>
-</div>
-<p>Murxla defines types for sort and term representations
-(<a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Sort</span></code></a> and <a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a>),
-which are shared pointers
-(<a class="reference external" href="https://en.cppreference.com/w/cpp/memory/shared_ptr">std::shared_ptr</a>)
-to <a class="reference internal" href="abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">AbsSort</span></code></a>
-and <a class="reference internal" href="absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">AbsTerm</span></code></a>.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>more on what to implement in solver wrapper</p>
-</div>
-<hr class="docutils" />
-<section id="sort">
-<h2><a class="toc-backref" href="#id3">Sort</a><a class="headerlink" href="#sort" title="Permalink to this headline"></a></h2>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla4SortE">
-<span id="_CPPv3N6murxla4SortE"></span><span id="_CPPv2N6murxla4SortE"></span><span class="target" id="namespacemurxla_1a078a3484766b1ad8bfdd9d13242fd84c"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Sort</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><span class="n"><span class="pre">AbsSort</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla4SortE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The Murxla-internal representation of a sort. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlaeqERK4SortRK4Sort">
-<span id="_CPPv3N6murxlaeqERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaeqERK4SortRK4Sort"></span><span id="murxla::eq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1aa3cf3c6146d6d1cd35a5df3eb1ab5c55"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaeqERK4SortRK4Sort" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Operator overload for equality over Sorts.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> – The sort to be compared with the other sort. </p></li>
-<li><p><strong>b</strong> – The other sort. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="abssort.html#group__sort-must-override_1gad68f74bdfc8cdba4a7508b450bb82695"><span class="std std-ref">AbsSort::equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="../../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are equal. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlaneERK4SortRK4Sort">
-<span id="_CPPv3N6murxlaneERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaneERK4SortRK4Sort"></span><span id="murxla::neq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1a557568dc32bc73ed737c4af981a6b19f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaneERK4SortRK4Sort" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Operator overload for disequality over Sorts.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> – The sort to be compared with the other sort. </p></li>
-<li><p><strong>b</strong> – The other sort. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="abssort.html#group__sort-may-override_1gaf4cbe64f9b25eb051ffeaf79af3d0c9f"><span class="std std-ref">AbsSort::not_equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="../../sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are not equal. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamEK4Sort">
-<span id="_CPPv3N6murxlalsERNSt7ostreamEK4Sort"></span><span id="_CPPv2N6murxlalsERNSt7ostreamEK4Sort"></span><span id="murxla::lshift-operator__osR.SortC"></span><span class="target" id="namespacemurxla_1a76022576b6756e916f0bdfe10f595b28"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Sort" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Serialize a Sort to given stream.</p>
-<p>This represents a sort as ‘s’ + its id and is mainly intended for tracing purposes. For a representation of a term as provided by the corresponding solver, user <a class="reference internal" href="abssort.html#group__sort-must-override_1ga871f43b89514a455e1ce6e7f123ce39e"><span class="std std-ref">AbsSort::to_string()</span></a> insted.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>out</strong> – The output stream. </p></li>
-<li><p><strong>s</strong> – The sort to be serialized. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output stream. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE">
-<span id="_CPPv3N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="_CPPv2N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="murxla::lshift-operator__osR.std::vector:Sort:CR"></span><span class="target" id="namespacemurxla_1a8f745d7af5883f857fcc35f48df86afd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Serialize a vector of Sorts to given stream.</p>
-<p>As above, a sort is represented as <code class="docutils literal notranslate"><span class="pre">s</span></code> + its id, so this will yield a list of space separated <code class="docutils literal notranslate"><span class="pre">s&lt;id&gt;</span></code>s.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>out</strong> – The output stream. </p></li>
-<li><p><strong>vector</strong> – The vector of sorts to be serialized. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output stream. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<hr class="docutils" />
-<section id="term">
-<h2><a class="toc-backref" href="#id4">Term</a><a class="headerlink" href="#term" title="Permalink to this headline"></a></h2>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla4TermE">
-<span id="_CPPv3N6murxla4TermE"></span><span id="_CPPv2N6murxla4TermE"></span><span class="target" id="namespacemurxla_1a43fafd2d9464385d6a34cf7b6aa86ee6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Term</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla4TermE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The Murxla-internal representation of a term. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlaeqERK4TermRK4Term">
-<span id="_CPPv3N6murxlaeqERK4TermRK4Term"></span><span id="_CPPv2N6murxlaeqERK4TermRK4Term"></span><span id="murxla::eq-operator__TermCR.TermCR"></span><span class="target" id="namespacemurxla_1afb6bfed7608528fdc7bbf4902365e7c0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaeqERK4TermRK4Term" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Operator overload for equality over Terms.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> – The term to be compared with the other term. </p></li>
-<li><p><strong>b</strong> – The other term. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="absterm.html#group__term-must-override_1ga54054beac1e679a2abea40d647714fd6"><span class="std std-ref">AbsTerm::equals()</span></a> (which queries the solver) is true and the sorts of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are equal. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlaneERK4TermRK4Term">
-<span id="_CPPv3N6murxlaneERK4TermRK4Term"></span><span id="_CPPv2N6murxlaneERK4TermRK4Term"></span><span id="murxla::neq-operator__TermCR.TermCR"></span><span class="target" id="namespacemurxla_1acb1a38a375e5a287a319de5c1436267a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaneERK4TermRK4Term" title="Permalink to this definition"></a><br /></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> – The term to be compared with the other term. </p></li>
-<li><p><strong>b</strong> – The other term. Operator overload for disequality over Terms.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="absterm.html#group__term-may-override_1ga1d409f27c83e2d01f9a717b085dc4726"><span class="std std-ref">AbsTerm::not_equals()</span></a> (which queries the solver) is true and the sorts of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are not equal. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamEK4Term">
-<span id="_CPPv3N6murxlalsERNSt7ostreamEK4Term"></span><span id="_CPPv2N6murxlalsERNSt7ostreamEK4Term"></span><span id="murxla::lshift-operator__osR.TermC"></span><span class="target" id="namespacemurxla_1ab4782dbe5242ec91f544e1ca5284e2c2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Term" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Serialize a Term to given stream.</p>
-<p>This represents a term as ‘t’ + its id and is mainly intended for tracing purposes. For a representation of a term as provided by the corresponding solver, use <a class="reference internal" href="absterm.html#group__term-must-override_1ga3d5af2ac7f5d4692c41cc3262053ff7b"><span class="std std-ref">AbsTerm::to_string()</span></a> instead.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>out</strong> – The output stream. </p></li>
-<li><p><strong>t</strong> – The term to be serialized. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output stream. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE">
-<span id="_CPPv3N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE"></span><span id="_CPPv2N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE"></span><span id="murxla::lshift-operator__osR.std::vector:Term:CR"></span><span class="target" id="namespacemurxla_1a999cd4cff0a745a7b598cc1325470a36"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Serialize a vector of Terms to given stream.</p>
-<p>As above, a term is represented as <code class="docutils literal notranslate"><span class="pre">t</span></code> + its id, so this will yield a list of space separated <code class="docutils literal notranslate"><span class="pre">t&lt;id&gt;</span></code>s.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>out</strong> – The output stream. </p></li>
-<li><p><strong>vector</strong> – The vector of terms to be serialized. </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output stream. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<hr class="docutils" />
-<section id="solver-wrapper-interface">
-<h2><a class="toc-backref" href="#id5">Solver Wrapper Interface</a><a class="headerlink" href="#solver-wrapper-interface" title="Permalink to this headline"></a></h2>
+<p>A solver wrapper provides the glue code between the core components of Murxla
+and the solver under test.
+The <strong>interface</strong> for solver wrappers is defined at
+<a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/solver.hpp">src/solver/solver.hpp</a>.</p>
+<p>The wrapper’s interface defines <strong>abstract classes</strong> for sorts
+(<a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsSort</span></code></a>), terms (<a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>) and the
+solver itself (<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a>).</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="abssort.html">Solver Wrapper Interface: AbsSort</a></li>
-<li class="toctree-l1"><a class="reference internal" href="absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html">Solver Wrapper Interface: AbsSort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
 </ul>
+</div>
+<section id="solver-wrapper-implementation">
+<h2>Solver Wrapper Implementation<a class="headerlink" href="#solver-wrapper-implementation" title="Permalink to this headline"></a></h2>
+<p>A solver wrapper <strong>derives</strong> solver-specific classes from the three abstract
+classes of the interface and must <strong>at least</strong> override the member functions
+required to be overriden.
+Additionally, for each class, there exists a set of member functions with
+default implementations that <strong>should</strong> be overriden (if supported) to test the
+solver (see <a class="reference internal" href="overrides.html#wrapper-overrides"><span class="std std-ref">the list of required and optional overrides</span></a> below).</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overrides.html">Overrides for Solver Wrapper Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="abssort_overrides.html">Solver Wrapper Implementation for Sorts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="absterm_overrides.html">Solver Wrapper Implementation for Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_overrides.html">Solver Wrapper Implementation for Solver</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="random-number-generator-rng">
+<h3>Random Number Generator (RNG)<a class="headerlink" href="#random-number-generator-rng" title="Permalink to this headline"></a></h3>
+<p>Murxla’s generic solver API as implemented in the solver wrapper interface
+aims at providing an interface for the solver under test that allows to plug
+in any variants of API functions for specific SMT-LIB features.
+For example, <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver8mk_valueE4Sortb" title="murxla::Solver::mk_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_value()</span></code></a> provides one interface
+for creating bit-vector values
+(<code class="docutils literal notranslate"><span class="pre">murxla::Solver::mk_value(Sort</span> <span class="pre">sort,</span> <span class="pre">const</span> <span class="pre">std::string&amp;</span> <span class="pre">value,</span> <span class="pre">Base</span> <span class="pre">base)</span></code>),
+but most solvers provide API functions that take either a string or integer
+representation for the value as argument.
+For cases like this, it is useful to be able to randomly decide, for each call,
+which API function of the solver under test to use.</p>
+<p>In order to be able to deterministically replay a given trace, even when
+minimized, it is necessary to decouple non-deterministic choices
+in the solver wrapper from Murxla’s main RNG. Thus, the solver wrapper base
+class maintains an independent RNG, which is seeded with a random seed at the
+beginning of each call to the execution function of an action (naming
+convention: <code class="docutils literal notranslate"><span class="pre">&lt;Action&gt;::run(&lt;args&gt;)</span></code>). This seed is traced, and since each
+call to <code class="docutils literal notranslate"><span class="pre">run()</span></code> must first trace the Action’s execution via macro
+<a class="reference internal" href="../../advanced/fsm/action.html#c.MURXLA_TRACE" title="MURXLA_TRACE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE</span></code></a>, we automatically seed the solver wrapper’s RNG
+there and prepend the seed to the trace line:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define MURXLA_TRACE                                                 \</span>
+<span class="cp">  d_solver.get_rng().reseed(d_sng.seed()),                           \</span>
+<span class="cp">      OstreamVoider()                                                \</span>
+<span class="cp">          &amp; Action::TraceStream(d_smgr).stream()                     \</span>
+<span class="cp">                &lt;&lt; (d_smgr.d_trace_seeds ? d_smgr.trace_seed() : &quot;&quot;) \</span>
+<span class="cp">                &lt;&lt; std::setw(5) &lt;&lt; d_sng.seed() &lt;&lt; &quot; &quot;</span>
+</pre></div>
+</div>
+<p>The solver wrapper’s RNG can be directly accessed as the protected member
+<code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Solver::d_rng</span></code>, or via
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver7get_rngEv" title="murxla::Solver::get_rng"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::get_rng()</span></code></a>.</p>
+</section>
+</section>
+<section id="global-sort-and-term-handling">
+<h2>Global Sort and Term Handling<a class="headerlink" href="#global-sort-and-term-handling" title="Permalink to this headline"></a></h2>
+<p>Murxla defines types
+<a class="reference internal" href="../../advanced/sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Sort</span></code></a> and <a class="reference internal" href="../../advanced/term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a>
+for sort and term representations
+which are shared pointers
+(<a class="reference external" href="https://en.cppreference.com/w/cpp/memory/shared_ptr">std::shared_ptr</a>)
+to <a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">AbsSort</span></code></a>
+and <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">AbsTerm</span></code></a>.
+We only deal with <a class="reference internal" href="../../advanced/sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Sort</span></code></a> and
+<a class="reference internal" href="../../advanced/term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a> objects in Murxla core components
+and at the interface between Murxla and the solver wrapper.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/sort.html">Sort</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/term.html">Term</a></li>
+</ul>
+</div>
+</section>
+<section id="solver-specific-extensions">
+<h2>Solver-Specific Extensions<a class="headerlink" href="#solver-specific-extensions" title="Permalink to this headline"></a></h2>
+<p>Murxla supports various extensions with <strong>solver-specific features</strong>,
+i.e., features that cannot be plugged in via the generic solver wrapper API.</p>
+<section id="operator-kinds">
+<h3>Operator Kinds<a class="headerlink" href="#operator-kinds" title="Permalink to this headline"></a></h3>
+<p>Murxla defines a <a class="reference internal" href="../../advanced/operator_kinds.html#operator-kinds"><span class="std std-ref">base set of operator kinds</span></a> as static const members of type <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>
+of class <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Op</span></code></a>.
+Solver-specific operator kinds are (by convention) defined as members of the
+solver wrapper implementation of <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.
+By convention, we prefix solver-specific operator kinds with the solver’s
+(short) name.
+For example, the solver wrapper for Bitwuzla defines a bit-vector decrement
+operator as member of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::BzlaTerm</span></code> as</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">Kind</span><span class="w"> </span><span class="n">OP_BV_DEC</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bzla-OP_BV_DEC&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Solver-specific operator kinds are added to the
+<a class="reference internal" href="../../advanced/operator.html#opmgr"><span class="std std-ref">operator kind manager</span></a> via overriding
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">opmgr</span><span class="o">-&gt;</span><span class="n">add_op_kind</span><span class="p">(</span><span class="n">BzlaTerm</span><span class="o">::</span><span class="n">OP_BV_DEC</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">SORT_BV</span><span class="p">},</span><span class="w"> </span><span class="n">THEORY_BV</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="special-value-kinds">
+<h3>Special Value Kinds<a class="headerlink" href="#special-value-kinds" title="Permalink to this headline"></a></h3>
+<p>Murxla introduces the notion of <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::AbsTerm::SpecialValueKind</span></code></a>
+for values that can be considered a special value in a theory, e.g.,
+floating-point NaN (of a given floating-point format), or the minimum signed
+bit-vector value (of a given bit-width).</p>
+<p>Terms representing special values are created via
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver16mk_special_valueE4SortRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::mk_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_special_value()</span></code></a>. A list of all special value
+kinds defined in <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a> is provided below:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/special_value_kinds.html">Pre-Defined Special Value Kinds</a></li>
+</ul>
+</div>
+<p>As with solver-specific operator kinds, solver-specific special value kinds are
+(by convention) defined as a static const member of type
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::AbsTerm::SpecialValueKind</span></code></a> of the solver wrapper
+implementation of <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.
+And again, by convention, we prefix solver-specific special value kinds with
+the solver’s (short) name.</p>
+<p>Solver wrappers can extend the pre-defined list of special value kinds with
+solver-specific kinds via
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver17add_special_valueE8SortKindRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::add_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::add_special_value()</span></code></a>.</p>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline"></a></h3>
+<p>Murxla defines a base API model implementing SMT-LIB semantics
+(as a finite state machine, see <a class="reference internal" href="../../advanced/fsm/fsm.html"><span class="doc">FSM</span></a>) with a
+<a class="reference internal" href="../../advanced/fsm/action.html#base-actions"><span class="std std-ref">base set of actions</span></a>.
+This base API model can be extended with solver-specific features that cannot
+be immediately plugged into the base API Model by adding transitions with
+associated solver-specific actions to the FSM via overriding
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver13configure_fsmEP3FSM" title="murxla::Solver::configure_fsm"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_fsm()</span></code></a>.</p>
+<p>Solver-specific actions directly interact with the API of the solver under test
+(see <a class="reference internal" href="../../advanced/fsm/action.html#actions"><span class="std std-ref">FSM: Actions</span></a>).
+They are added to an existing (or new, solver-specific)
+state while defining its priority and (optionally) a next state via
+<a class="reference internal" href="../../advanced/fsm/state.html#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a>
+(see <a class="reference internal" href="../../advanced/fsm/action.html#fsm-configuration"><span class="std std-ref">FSM Configuration</span></a>).</p>
+</section>
+<section id="features-unsupported-by-the-solver-under-test">
+<h3>Features Unsupported By The Solver Under Test<a class="headerlink" href="#features-unsupported-by-the-solver-under-test" title="Permalink to this headline"></a></h3>
+<p>Murxla requires to define a solver profile (see <a class="reference internal" href="../solver_profile.html#solver-profiles"><span class="std std-ref">Solver Profiles</span></a>) to
+define the solver test configuration. The solver profile allows to define
+which theories to consider and to disable unsupported sort and operator kinds.
+Unsupported actions can be disabled via overriding
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver27disable_unsupported_actionsEP3FSM" title="murxla::Solver::disable_unsupported_actions"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::disable_unsupported_actions()</span></code></a>.</p>
+</section>
+</section>
+<section id="solver-options">
+<h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
+<p>To enable option fuzzing, a solver wrapper can advertise a set of options
+to Murxla by overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.
+Options can be added via the <a class="reference internal" href="../../advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption" title="murxla::SolverManager::add_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::SolverManager::add_option()</span></code></a>
+of the solver manager object passed to
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.</p>
+<p>Murxla distinguishes three different
+<a class="reference internal" href="../../advanced/solver_option.html#solver-options"><span class="std std-ref">option types</span></a>:</p>
+<ul class="simple">
+<li><p>Boolean options (<a class="reference internal" href="../../advanced/solver_option.html#_CPPv4N6murxla16SolverOptionBoolE" title="murxla::SolverOptionBool"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionBool</span></code></a>)</p></li>
+<li><p>Numeric options (<a class="reference internal" href="../../advanced/solver_option.html#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionNum</span></code></a>)</p></li>
+<li><p>Options with multiple string values (<a class="reference internal" href="../../advanced/solver_option.html#_CPPv4N6murxla16SolverOptionListE" title="murxla::SolverOptionList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionList</span></code></a>)</p></li>
+</ul>
+<p>For example, Bitwuzla supports querying all available options via its API.
+This makes adding options via overriding
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>
+very easy since it allows to add options in an automated way:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"></span>
+<span class="nf">BzlaSolver::configure_options</span><span class="p">(</span><span class="n">SolverManager</span><span class="o">*</span><span class="w"> </span><span class="n">smgr</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Bitwuzla</span><span class="o">*</span><span class="w"> </span><span class="n">bzla</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitwuzla_new</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">BitwuzlaOptionInfo</span><span class="w"> </span><span class="n">info</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">BITWUZLA_OPT_NUM_OPTS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">BitwuzlaOption</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">BitwuzlaOption</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">bitwuzla_get_option_info</span><span class="p">(</span><span class="n">bzla</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionNum</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">min_val</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">max_val</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">def_val</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">num_values</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">values</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionList</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">def_val</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">bitwuzla_delete</span><span class="p">(</span><span class="n">bzla</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
 </div>
 </section>
 </section>
@@ -282,8 +316,8 @@ and <a class="reference internal" href="absterm.html#_CPPv4N6murxla7AbsTermE" ti
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../solver_overrides.html" class="btn btn-neutral float-left" title="Solver Wrapper Implementation for Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="abssort.html" class="btn btn-neutral float-right" title="Solver Wrapper Interface: AbsSort" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../solver_profile.html" class="btn btn-neutral float-left" title="Solver Profiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../advanced/solver_wrapper_interface/abssort.html" class="btn btn-neutral float-right" title="Solver Wrapper Interface: AbsSort" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

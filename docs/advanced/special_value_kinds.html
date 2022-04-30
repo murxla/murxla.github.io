@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-Defined Special Value Kinds &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Advanced Documentation" href="advanced.html" />
+    <link rel="prev" title="Term" href="term.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort.html">Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="term.html">Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort_kind.html">Sort Kind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator_kinds.html">Pre-Defined Operator Kinds</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pre-Defined Special Value Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html">Theories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_option.html">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../solver_integration/solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
+          <li><a href="../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
+      <li>Pre-Defined Special Value Kinds</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pre-defined-special-value-kinds">
+<span id="special-value-kinds"></span><h1>Pre-Defined Special Value Kinds<a class="headerlink" href="#pre-defined-special-value-kinds" title="Permalink to this headline"></a></h1>
+<p>The list of special value kinds globally defined in
+<a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.</p>
+<p>Special values are created via <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver16mk_special_valueE4SortRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::mk_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_special_value()</span></code></a>.
+The set of special value kinds can be extended with solver-specific special
+value kinds via overriding <a href="#id1"><span class="problematic" id="id2">:cpp:fun:`murxla::Solver::add_special_value()`</span></a>.</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv418SPECIAL_VALUE_NONE">
+<span id="_CPPv318SPECIAL_VALUE_NONE"></span><span id="_CPPv218SPECIAL_VALUE_NONE"></span><span id="SPECIAL_VALUE_NONE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaab7128d0e871d22c7e59439ff61e77f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_NONE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;not-a-special-value&quot;</span></span><a class="headerlink" href="#_CPPv418SPECIAL_VALUE_NONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term that is not a special value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv423SPECIAL_VALUE_BAG_EMPTY">
+<span id="_CPPv323SPECIAL_VALUE_BAG_EMPTY"></span><span id="_CPPv223SPECIAL_VALUE_BAG_EMPTY"></span><span id="SPECIAL_VALUE_BAG_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga9d2815c68c1adee1e01a0645ffbc8ac3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BAG_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bag.empty&quot;</span></span><a class="headerlink" href="#_CPPv423SPECIAL_VALUE_BAG_EMPTY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing the empty bag. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv421SPECIAL_VALUE_BV_ZERO">
+<span id="_CPPv321SPECIAL_VALUE_BV_ZERO"></span><span id="_CPPv221SPECIAL_VALUE_BV_ZERO"></span><span id="SPECIAL_VALUE_BV_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga3567bcde6473bff8c5c724d853825d68"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.zero&quot;</span></span><a class="headerlink" href="#_CPPv421SPECIAL_VALUE_BV_ZERO" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a bit-vector zero value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_BV_ONE">
+<span id="_CPPv320SPECIAL_VALUE_BV_ONE"></span><span id="_CPPv220SPECIAL_VALUE_BV_ONE"></span><span id="SPECIAL_VALUE_BV_ONE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga31c1e8b32ac888b2e456d628a1955515"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ONE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.one&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_BV_ONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a bit-vector one value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv421SPECIAL_VALUE_BV_ONES">
+<span id="_CPPv321SPECIAL_VALUE_BV_ONES"></span><span id="_CPPv221SPECIAL_VALUE_BV_ONES"></span><span id="SPECIAL_VALUE_BV_ONES__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gabb8ab1f120764a139cbe441b93fe78c5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ONES</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.ones&quot;</span></span><a class="headerlink" href="#_CPPv421SPECIAL_VALUE_BV_ONES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a bit-vector ones value (all bits 1). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv427SPECIAL_VALUE_BV_MIN_SIGNED">
+<span id="_CPPv327SPECIAL_VALUE_BV_MIN_SIGNED"></span><span id="_CPPv227SPECIAL_VALUE_BV_MIN_SIGNED"></span><span id="SPECIAL_VALUE_BV_MIN_SIGNED__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga333e465b51113eb7956955d794784ebb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_MIN_SIGNED</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv-min-signed&quot;</span></span><a class="headerlink" href="#_CPPv427SPECIAL_VALUE_BV_MIN_SIGNED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a bit-vector minimum signed value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv427SPECIAL_VALUE_BV_MAX_SIGNED">
+<span id="_CPPv327SPECIAL_VALUE_BV_MAX_SIGNED"></span><span id="_CPPv227SPECIAL_VALUE_BV_MAX_SIGNED"></span><span id="SPECIAL_VALUE_BV_MAX_SIGNED__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga0b1ad03885d02852fbc678ec40e51750"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_MAX_SIGNED</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv-max-signed&quot;</span></span><a class="headerlink" href="#_CPPv427SPECIAL_VALUE_BV_MAX_SIGNED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a bit-vector maximum signed value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_FP_NAN">
+<span id="_CPPv320SPECIAL_VALUE_FP_NAN"></span><span id="_CPPv220SPECIAL_VALUE_FP_NAN"></span><span id="SPECIAL_VALUE_FP_NAN__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga0d8425b4fe70cbffa7eda484fdf0b71a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NAN</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;nan&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_FP_NAN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a floating-point not a number value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv424SPECIAL_VALUE_FP_POS_INF">
+<span id="_CPPv324SPECIAL_VALUE_FP_POS_INF"></span><span id="_CPPv224SPECIAL_VALUE_FP_POS_INF"></span><span id="SPECIAL_VALUE_FP_POS_INF__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gac3fdeda344b67a2b4ee5c24c741ad614"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_POS_INF</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;+oo&quot;</span></span><a class="headerlink" href="#_CPPv424SPECIAL_VALUE_FP_POS_INF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a floating-point positive infinity value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv424SPECIAL_VALUE_FP_NEG_INF">
+<span id="_CPPv324SPECIAL_VALUE_FP_NEG_INF"></span><span id="_CPPv224SPECIAL_VALUE_FP_NEG_INF"></span><span id="SPECIAL_VALUE_FP_NEG_INF__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gabfae4d02ff1a18b32e47bc0dc026aeff"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NEG_INF</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;-oo&quot;</span></span><a class="headerlink" href="#_CPPv424SPECIAL_VALUE_FP_NEG_INF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a floating-point negative infinity value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv425SPECIAL_VALUE_FP_POS_ZERO">
+<span id="_CPPv325SPECIAL_VALUE_FP_POS_ZERO"></span><span id="_CPPv225SPECIAL_VALUE_FP_POS_ZERO"></span><span id="SPECIAL_VALUE_FP_POS_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga692e4312a6705149803eb9eff8ae1791"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_POS_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;+zero&quot;</span></span><a class="headerlink" href="#_CPPv425SPECIAL_VALUE_FP_POS_ZERO" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a floating-point positive zero value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv425SPECIAL_VALUE_FP_NEG_ZERO">
+<span id="_CPPv325SPECIAL_VALUE_FP_NEG_ZERO"></span><span id="_CPPv225SPECIAL_VALUE_FP_NEG_ZERO"></span><span id="SPECIAL_VALUE_FP_NEG_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga2b3ba9f2849c71fa9d21e60771a2c833"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NEG_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;-zero&quot;</span></span><a class="headerlink" href="#_CPPv425SPECIAL_VALUE_FP_NEG_ZERO" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a floating-point negative zero value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_RM_RNA">
+<span id="_CPPv320SPECIAL_VALUE_RM_RNA"></span><span id="_CPPv220SPECIAL_VALUE_RM_RNA"></span><span id="SPECIAL_VALUE_RM_RNA__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga401088ffc53133db754da66ab2ea2b3e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RNA</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rna&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_RM_RNA" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a rounding mode round nearest ties to away value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_RM_RNE">
+<span id="_CPPv320SPECIAL_VALUE_RM_RNE"></span><span id="_CPPv220SPECIAL_VALUE_RM_RNE"></span><span id="SPECIAL_VALUE_RM_RNE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga04150fb6b45b02ec6d318c52a152e59f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RNE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rne&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_RM_RNE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a rounding mode round nearest ties to even value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_RM_RTN">
+<span id="_CPPv320SPECIAL_VALUE_RM_RTN"></span><span id="_CPPv220SPECIAL_VALUE_RM_RTN"></span><span id="SPECIAL_VALUE_RM_RTN__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga4f40b1c39188712aab9b7b04de9a266c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTN</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtn&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_RM_RTN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a rounding mode round toward negative value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_RM_RTP">
+<span id="_CPPv320SPECIAL_VALUE_RM_RTP"></span><span id="_CPPv220SPECIAL_VALUE_RM_RTP"></span><span id="SPECIAL_VALUE_RM_RTP__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gab5681ec28d04273d90fb541a7efc2f3c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTP</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtp&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_RM_RTP" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a rounding mode round toward positive value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv420SPECIAL_VALUE_RM_RTZ">
+<span id="_CPPv320SPECIAL_VALUE_RM_RTZ"></span><span id="_CPPv220SPECIAL_VALUE_RM_RTZ"></span><span id="SPECIAL_VALUE_RM_RTZ__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga023787b0ec6ed90492cf310e724b2826"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTZ</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtz&quot;</span></span><a class="headerlink" href="#_CPPv420SPECIAL_VALUE_RM_RTZ" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing a rounding mode round toward zero value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv423SPECIAL_VALUE_SEQ_EMPTY">
+<span id="_CPPv323SPECIAL_VALUE_SEQ_EMPTY"></span><span id="_CPPv223SPECIAL_VALUE_SEQ_EMPTY"></span><span id="SPECIAL_VALUE_SEQ_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaf15ddce1b19bd66715996a7d34571e25"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SEQ_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;seq.empty&quot;</span></span><a class="headerlink" href="#_CPPv423SPECIAL_VALUE_SEQ_EMPTY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing the empty sequence. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv423SPECIAL_VALUE_SET_EMPTY">
+<span id="_CPPv323SPECIAL_VALUE_SET_EMPTY"></span><span id="_CPPv223SPECIAL_VALUE_SET_EMPTY"></span><span id="SPECIAL_VALUE_SET_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaa74d9fc629689bbc1cdaa92549f67e3c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SET_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;set.empty&quot;</span></span><a class="headerlink" href="#_CPPv423SPECIAL_VALUE_SET_EMPTY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing the empty set. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv426SPECIAL_VALUE_SET_UNIVERSE">
+<span id="_CPPv326SPECIAL_VALUE_SET_UNIVERSE"></span><span id="_CPPv226SPECIAL_VALUE_SET_UNIVERSE"></span><span id="SPECIAL_VALUE_SET_UNIVERSE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga2ea12515a7530ac84898bf2ad31870b6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SET_UNIVERSE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;set.universe&quot;</span></span><a class="headerlink" href="#_CPPv426SPECIAL_VALUE_SET_UNIVERSE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a term representing the universe set. </p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="term.html" class="btn btn-neutral float-left" title="Term" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advanced.html" class="btn btn-neutral float-right" title="Advanced Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

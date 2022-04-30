@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSM: States &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FSM" href="fsm.html" />
+    <link rel="prev" title="FSM: Actions" href="action.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../advanced.html">Advanced Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sort.html">Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../term.html">Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sort_kind.html">Sort Kind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operator.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operator_kinds.html">Pre-Defined Operator Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../special_value_kinds.html">Pre-Defined Special Value Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html">Theories</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">The Finite State Machine (FSM)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">FSM: Actions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FSM: States</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#state">State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fsm.html">FSM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../solver_manager.html">Solver Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../solver_option.html">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../advanced.html">Advanced Documentation</a> &raquo;</li>
+          <li><a href="index.html">The Finite State Machine (FSM)</a> &raquo;</li>
+      <li>FSM: States</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fsm-states">
+<span id="states"></span><h1>FSM: States<a class="headerlink" href="#fsm-states" title="Permalink to this headline"></a></h1>
+<p>A state of the FSM corresponds to the current state of the solver under test.
+Transitions from one state to another (or the same) state either have an
+“action” (the execution of one or more solver API calls) associated,
+or are “empty”, i.e., do not execute any solver API calls.
+Taking a transition executes its action.</p>
+<p>Transitions are weighted, and their weight is defined via its <em>priority</em>
+when adding transitions to a state via <a class="reference internal" href="#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a>.
+A priority of <code class="docutils literal notranslate"><span class="pre">1</span></code> indicates highest priority, <code class="docutils literal notranslate"><span class="pre">UINT32_MAX</span></code> lowest priority,
+and <code class="docutils literal notranslate"><span class="pre">0</span></code> disables the transition.</p>
+<p>A transition with an associated action is defined by adding a
+<a class="reference internal" href="action.html#_CPPv4N6murxla6ActionE" title="murxla::Action"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Action</span></code></a> to a state via
+<a class="reference internal" href="#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a> while defining its priority and next
+state.
+Similarly, empty transitions are added as instances of
+<a class="reference internal" href="action.html#_CPPv4N6murxla10TransitionE" title="murxla::Transition"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Transition</span></code></a>.</p>
+<p>Each state of the FSM may provide a pre-condition for transitioning into
+that state (<code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::State::f_precond</span></code>).
+Use <a class="reference internal" href="fsm.html#_CPPv4N6murxla3FSM9new_stateERKN5State4KindENSt8functionIFbvEEEbbN5State10ConfigKindE" title="murxla::FSM::new_state"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::FSM::new_state()</span></code></a> to create and add new states to the
+FSM.
+To add solver-specific actions to a state, retrieve the state via
+<a class="reference internal" href="fsm.html#_CPPv4NK6murxla3FSM9get_stateERKN5State4KindE" title="murxla::FSM::get_state"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::FSM::get_state()</span></code></a>.</p>
+<section id="state">
+<h2>State<a class="headerlink" href="#state" title="Permalink to this headline"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5StateE">
+<span id="_CPPv3N6murxla5StateE"></span><span id="_CPPv2N6murxla5StateE"></span><span id="murxla::State"></span><span class="target" id="classmurxla_1_1State"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">State</span></span></span><a class="headerlink" href="#_CPPv4N6murxla5StateE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A state of the <a class="reference internal" href="fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a>.</p>
+<p>Corresponds to a state of the solver under test.</p>
+<p>We distinguish three configuration kinds (<a class="reference internal" href="#classmurxla_1_1State_1a5e8d20cd949c5e9fecf6260a81baa15d"><span class="std std-ref">State::ConfigKind</span></a>) of states:<ul class="simple">
+<li><p><strong>regular</strong> states</p></li>
+<li><p><strong>decision</strong> states</p></li>
+<li><p><strong>choice</strong> states</p></li>
+</ul>
+</p>
+<p>We further identify one state as the <em>initial</em> state, and one state as the <em>final</em> state.</p>
+<p>A <strong>decision state</strong> is a state that only serves as decision point with a single point of entrance and only specific transitions (the choices to be made) out of the state. A decision state is not to be extended with any other actions other than the transitions that represent the choices this decision state has been created for. From a decision state, we may only transition into the choice states that represent the valid choices for this decision.</p>
+<p>A <strong>choice state</strong> is a state that represents a valid choice for a specific decision. It represents a very specific solver state that is a precondition for specific actions (solver API calls) to be executed. Choice states may only be transitioned into from their corresponding decision state.</p>
+<p>As an example, we use a decision state <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a> for handling different solver states after a satisfiability check in state <a class="reference internal" href="#classmurxla_1_1State_1a1da125e0992092db88984b616cbeb2b3"><span class="std std-ref">CHECK_SAT</span></a>. From <a class="reference internal" href="#classmurxla_1_1State_1a1da125e0992092db88984b616cbeb2b3"><span class="std std-ref">CHECK_SAT</span></a>, we transition into <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a>, from where we transition into either choice state <a class="reference internal" href="#classmurxla_1_1State_1acd3530a13ed3cc4b5d6505eb7f473d4f"><span class="std std-ref">SAT</span></a> (when the result is <em>sat</em> or <em>unknown</em>) or <a class="reference internal" href="#classmurxla_1_1State_1aaca9ddcdf82f158b2ca1c631ec6fab8e"><span class="std std-ref">UNSAT</span></a> (when the result is <em>unsat</em>). Each choice state configure actions to make additional queries to the solver under the specific premise that a check-sat call has been issued and the satisfiability result is either sat or unsat. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10ConfigKindE">
+<span id="_CPPv3N6murxla5State10ConfigKindE"></span><span id="_CPPv2N6murxla5State10ConfigKindE"></span><span class="target" id="classmurxla_1_1State_1a5e8d20cd949c5e9fecf6260a81baa15d"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ConfigKind</span></span></span><a class="headerlink" href="#_CPPv4N6murxla5State10ConfigKindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The configuration kind of a state. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10ConfigKind7REGULARE">
+<span id="_CPPv3N6murxla5State10ConfigKind7REGULARE"></span><span id="_CPPv2N6murxla5State10ConfigKind7REGULARE"></span><span class="target" id="classmurxla_1_1State_1a5e8d20cd949c5e9fecf6260a81baa15dad52210b6209b4fccd91ca7ae7eaed644"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">REGULAR</span></span></span><a class="headerlink" href="#_CPPv4N6murxla5State10ConfigKind7REGULARE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Regular state. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10ConfigKind8DECISIONE">
+<span id="_CPPv3N6murxla5State10ConfigKind8DECISIONE"></span><span id="_CPPv2N6murxla5State10ConfigKind8DECISIONE"></span><span class="target" id="classmurxla_1_1State_1a5e8d20cd949c5e9fecf6260a81baa15da8c31f29014182e363cc625cf821bbf1e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DECISION</span></span></span><a class="headerlink" href="#_CPPv4N6murxla5State10ConfigKind8DECISIONE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Decision state. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10ConfigKind6CHOICEE">
+<span id="_CPPv3N6murxla5State10ConfigKind6CHOICEE"></span><span id="_CPPv2N6murxla5State10ConfigKind6CHOICEE"></span><span class="target" id="classmurxla_1_1State_1a5e8d20cd949c5e9fecf6260a81baa15da496c3ec981f9b69ccd6a8c5518f0b0a3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CHOICE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla5State10ConfigKind6CHOICEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Choice state. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State4KindE">
+<span id="_CPPv3N6murxla5State4KindE"></span><span id="_CPPv2N6murxla5State4KindE"></span><span class="target" id="classmurxla_1_1State_1a42402d3d460f05ec8b5050abd74629fc"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Kind</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><a class="headerlink" href="#_CPPv4N6murxla5State4KindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The kind of a state.</p>
+<p>This is used a state identifier when retrieving states that have been added to the <a class="reference internal" href="fsm.html#classmurxla_1_1FSM"><span class="std std-ref">FSM</span></a> via <a class="reference internal" href="fsm.html#classmurxla_1_1FSM_1a762d5373568e2ca5b3e4a2a22472a345"><span class="std std-ref">FSM::get_state()</span></a>. We use strings here to make the set of state kinds easily extensible with solver-specific states. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State5StateEv">
+<span id="_CPPv3N6murxla5State5StateEv"></span><span id="_CPPv2N6murxla5State5StateEv"></span><span id="murxla::State::State"></span><span class="target" id="classmurxla_1_1State_1a90b2d0091b4e82a2cf5f1b376fbb1995"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">State</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State5StateEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State5StateERK4KindNSt8functionIFbvEEEbb10ConfigKind">
+<span id="_CPPv3N6murxla5State5StateERK4KindNSt8functionIFbvEEEbb10ConfigKind"></span><span id="_CPPv2N6murxla5State5StateERK4KindNSt8functionIFbvEEEbb10ConfigKind"></span><span class="target" id="classmurxla_1_1State_1a21e678eef6fe1907fd5131df0390c3df"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">State</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ignore</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_final</span></span>, <a class="reference internal" href="#_CPPv4N6murxla5State10ConfigKindE" title="murxla::State::ConfigKind"><span class="n"><span class="pre">ConfigKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State5StateERK4KindNSt8functionIFbvEEEbb10ConfigKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kind</strong> – The kind of the state. </p></li>
+<li><p><strong>fun</strong> – The precondition of the state. </p></li>
+<li><p><strong>ignore</strong> – True if the state should be ignored when adding actions to all states (add_action_to_all_states), or adding all configured states as next state for a transition (add_action_to_all_states_next). </p></li>
+<li><p><strong>is_final</strong> – True if state is a final state. </p></li>
+<li><p><strong>config</strong> – The configuration kind of the state. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State8get_kindEv">
+<span id="_CPPv3N6murxla5State8get_kindEv"></span><span id="_CPPv2N6murxla5State8get_kindEv"></span><span id="murxla::State::get_kind"></span><span class="target" id="classmurxla_1_1State_1ad6f4b9d9c8ce21d2ee2aa3b6f9e48756"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State8get_kindEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the kind of this state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The kind of this state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10get_configEv">
+<span id="_CPPv3N6murxla5State10get_configEv"></span><span id="_CPPv2N6murxla5State10get_configEv"></span><span id="murxla::State::get_config"></span><span class="target" id="classmurxla_1_1State_1a284a4df9bb7eae60eaa54fd80755b60d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State10ConfigKindE" title="murxla::State::ConfigKind"><span class="n"><span class="pre">ConfigKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_config</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State10get_configEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the configuration kind of this state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The configuration kind of this state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla5State6get_idEv">
+<span id="_CPPv3NK6murxla5State6get_idEv"></span><span id="_CPPv2NK6murxla5State6get_idEv"></span><span id="murxla::State::get_idC"></span><span class="target" id="classmurxla_1_1State_1a6069fe8a21fe67ecd4a32ae09a297b4f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_id</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla5State6get_idEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the id of this state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The id of this state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State6set_idE8uint64_t">
+<span id="_CPPv3N6murxla5State6set_idE8uint64_t"></span><span id="_CPPv2N6murxla5State6set_idE8uint64_t"></span><span id="murxla::State::set_id__uint64_t"></span><span class="target" id="classmurxla_1_1State_1a4a087233de4fe617a3be986ba3bf41b4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_id</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State6set_idE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the id of this state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – The unique identifier of this state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State8is_finalEv">
+<span id="_CPPv3N6murxla5State8is_finalEv"></span><span id="_CPPv2N6murxla5State8is_finalEv"></span><span id="murxla::State::is_final"></span><span class="target" id="classmurxla_1_1State_1aa11f7da2ede7e59ed15c79385afc1683"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_final</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State8is_finalEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this state is a final state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this state is a final state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State19update_preconditionENSt8functionIFbvEEE">
+<span id="_CPPv3N6murxla5State19update_preconditionENSt8functionIFbvEEE"></span><span id="_CPPv2N6murxla5State19update_preconditionENSt8functionIFbvEEE"></span><span class="target" id="classmurxla_1_1State_1a786f800d3161b8667009e43648b6f889"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update_precondition</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State19update_preconditionENSt8functionIFbvEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Update the function defining the precondition for entering the state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fun</strong> – The new precondition. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State3runER11RNGenerator">
+<span id="_CPPv3N6murxla5State3runER11RNGenerator"></span><span id="_CPPv2N6murxla5State3runER11RNGenerator"></span><span id="murxla::State::run__RNGeneratorR"></span><span class="target" id="classmurxla_1_1State_1a3472217846e5eb209e8bd959c2e29fdf"></span><a class="reference internal" href="#_CPPv4N6murxla5StateE" title="murxla::State"><span class="n"><span class="pre">State</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">run</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rng</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State3runER11RNGenerator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Take one of the transitions (and execute its associated action) associated with this state. Transitions with higher weight, are picked with a higher probability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rng</strong> – The associated random number generator. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The next state. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State">
+<span id="_CPPv3N6murxla5State10add_actionEP6Action8uint32_tP5State"></span><span id="_CPPv2N6murxla5State10add_actionEP6Action8uint32_tP5State"></span><span id="murxla::State::add_action__ActionP.uint32_t.StateP"></span><span class="target" id="classmurxla_1_1State_1ad64122b9e3df4ab2c385f462abe461a7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_action</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="action.html#_CPPv4N6murxla6ActionE" title="murxla::Action"><span class="n"><span class="pre">Action</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">action</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">priority</span></span>, <a class="reference internal" href="#_CPPv4N6murxla5StateE" title="murxla::State"><span class="n"><span class="pre">State</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">next</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add action to this state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action</strong> – The action to add. </p></li>
+<li><p><strong>priority</strong> – The priority of the action, determines the weight, and thus the probability to choose running the action. The actual weight of the action is computed as <code class="docutils literal notranslate"><span class="pre">sum/priority</span></code>, with <code class="docutils literal notranslate"><span class="pre">sum</span></code> being the sum of the priorities of all actions in that state. </p></li>
+<li><p><strong>next</strong> – The state to transition into after running the action. Optional, if not set, we stay in the current state. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State14disable_actionEN6Action4KindE">
+<span id="_CPPv3N6murxla5State14disable_actionEN6Action4KindE"></span><span id="_CPPv2N6murxla5State14disable_actionEN6Action4KindE"></span><span id="murxla::State::disable_action__Action::Kind"></span><span class="target" id="classmurxla_1_1State_1adb5d4b1c33a306b9f3dae05e124211ee"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_action</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="action.html#_CPPv4N6murxla6ActionE" title="murxla::Action"><span class="n"><span class="pre">Action</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="action.html#_CPPv4N6murxla6Action4KindE" title="murxla::Action::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla5State14disable_actionEN6Action4KindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable action of given <code class="docutils literal notranslate"><span class="pre">kind</span></code>. This will set the priority to 0. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kind</strong> – The kind of the action to disable. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State9UNDEFINEDE">
+<span id="_CPPv3N6murxla5State9UNDEFINEDE"></span><span id="_CPPv2N6murxla5State9UNDEFINEDE"></span><span id="murxla::State::UNDEFINED__KindC"></span><span class="target" id="classmurxla_1_1State_1a5dd1c8b88d92832438b349cbc552071d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UNDEFINED</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;undefined&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State9UNDEFINEDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The undefined state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State3NEWE">
+<span id="_CPPv3N6murxla5State3NEWE"></span><span id="_CPPv2N6murxla5State3NEWE"></span><span id="murxla::State::NEW__KindC"></span><span class="target" id="classmurxla_1_1State_1a35d853684f81e04198ce0afee083fe4c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NEW</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;new&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State3NEWE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where an instance of the solver under test is created and initialized.</p>
+<p>By default, this is configured as the <strong>initial</strong> state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State9SET_LOGICE">
+<span id="_CPPv3N6murxla5State9SET_LOGICE"></span><span id="_CPPv2N6murxla5State9SET_LOGICE"></span><span id="murxla::State::SET_LOGIC__KindC"></span><span class="target" id="classmurxla_1_1State_1aff5c4b17f78d4281365057f5f2ec0fd5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SET_LOGIC</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;set_logic&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State9SET_LOGICE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where the logic of the formulas to be created is configured. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State3OPTE">
+<span id="_CPPv3N6murxla5State3OPTE"></span><span id="_CPPv2N6murxla5State3OPTE"></span><span id="murxla::State::OPT__KindC"></span><span class="target" id="classmurxla_1_1State_1a776b1c7c5facb0476813c0d4937f3b35"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OPT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;opt&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State3OPTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where solver options are configured. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State7OPT_REQE">
+<span id="_CPPv3N6murxla5State7OPT_REQE"></span><span id="_CPPv2N6murxla5State7OPT_REQE"></span><span id="murxla::State::OPT_REQ__KindC"></span><span class="target" id="classmurxla_1_1State_1ae84822aa85ff7bd102098ed67aea8ba4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OPT_REQ</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;opt_req&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State7OPT_REQE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where solver options that are required based on the current solver configuration are configured (see <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_overrides.html#group__solver-may-override_1gad5a42b0d5076ad4e82c332e8ac192b81"><span class="std std-ref">Solver::get_required_options()</span></a>). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State6DELETEE">
+<span id="_CPPv3N6murxla5State6DELETEE"></span><span id="_CPPv2N6murxla5State6DELETEE"></span><span id="murxla::State::DELETE__KindC"></span><span class="target" id="classmurxla_1_1State_1ae68231579cc711443c137a3cca6fbac4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DELETE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;delete&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State6DELETEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where the instance of the solver under test is deleted (<strong>not</strong> the final state). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State5FINALE">
+<span id="_CPPv3N6murxla5State5FINALE"></span><span id="_CPPv2N6murxla5State5FINALE"></span><span id="murxla::State::FINAL__KindC"></span><span class="target" id="classmurxla_1_1State_1ac2ad9af55263594d6e1e28d952431d78"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FINAL</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;final&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State5FINALE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The final state.</p>
+<p>By default, no actions are performed in this state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State12CREATE_SORTSE">
+<span id="_CPPv3N6murxla5State12CREATE_SORTSE"></span><span id="_CPPv2N6murxla5State12CREATE_SORTSE"></span><span id="murxla::State::CREATE_SORTS__KindC"></span><span class="target" id="classmurxla_1_1State_1a05272ac7d41fd56f5507540d19a5aa36"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CREATE_SORTS</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;create_sorts&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State12CREATE_SORTSE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where sorts of enabled theories are created. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State13CREATE_INPUTSE">
+<span id="_CPPv3N6murxla5State13CREATE_INPUTSE"></span><span id="_CPPv2N6murxla5State13CREATE_INPUTSE"></span><span id="murxla::State::CREATE_INPUTS__KindC"></span><span class="target" id="classmurxla_1_1State_1abd1b6e088b26d9a0dfc4b8a684d6b556"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CREATE_INPUTS</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;create_inputs&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State13CREATE_INPUTSE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where inputs with avaible sorts are created. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State12CREATE_TERMSE">
+<span id="_CPPv3N6murxla5State12CREATE_TERMSE"></span><span id="_CPPv2N6murxla5State12CREATE_TERMSE"></span><span id="murxla::State::CREATE_TERMS__KindC"></span><span class="target" id="classmurxla_1_1State_1a55c015689d6f18dbc2720d49a20239b8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CREATE_TERMS</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;create_terms&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State12CREATE_TERMSE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where terms are created from available inputs and terms.</p>
+<p><strong>Precondition:</strong> At least one term (input) must already have been created. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State6ASSERTE">
+<span id="_CPPv3N6murxla5State6ASSERTE"></span><span id="_CPPv2N6murxla5State6ASSERTE"></span><span id="murxla::State::ASSERT__KindC"></span><span class="target" id="classmurxla_1_1State_1ac670ed69d3bcda17d0b5f3bf047a06f0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ASSERT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;assert&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State6ASSERTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where formulas (boolean terms) are asserted.</p>
+<p><strong>Precondition:</strong> At least one boolean term must already have been created. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State9CHECK_SATE">
+<span id="_CPPv3N6murxla5State9CHECK_SATE"></span><span id="_CPPv2N6murxla5State9CHECK_SATE"></span><span id="murxla::State::CHECK_SAT__KindC"></span><span class="target" id="classmurxla_1_1State_1a1da125e0992092db88984b616cbeb2b3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CHECK_SAT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;check_sat&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State9CHECK_SATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where satisfiability is checked, optionally under a given set of assumptions. formulas (boolean terms) are asserted.</p>
+<p>Depending on the result of the satisfiability check, by default, from this state we <em>always</em> transition into the <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a> decision state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State3SATE">
+<span id="_CPPv3N6murxla5State3SATE"></span><span id="_CPPv2N6murxla5State3SATE"></span><span id="murxla::State::SAT__KindC"></span><span class="target" id="classmurxla_1_1State_1acd3530a13ed3cc4b5d6505eb7f473d4f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SAT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;sat&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State3SATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The choice state representing the solver state after a <em>sat</em> or <em>unknown</em> result.</p>
+<p>
+This state may only be entered from the <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a> decision state. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a solver disallows querying model values after an <em>unknown</em> result, introduce a solver-specific choice state for <em>unknown</em> and add a transition from <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a> to this new solver-specific state accordingly.</p>
+</div>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State5UNSATE">
+<span id="_CPPv3N6murxla5State5UNSATE"></span><span id="_CPPv2N6murxla5State5UNSATE"></span><span id="murxla::State::UNSAT__KindC"></span><span class="target" id="classmurxla_1_1State_1aaca9ddcdf82f158b2ca1c631ec6fab8e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UNSAT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;unsat&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State5UNSATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The choice state representing the solver state after an <em>unsat</em> result.</p>
+<p>This state may only be entered from the <a class="reference internal" href="#classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"><span class="std std-ref">DECIDE_SAT_UNSAT</span></a> decision state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State8PUSH_POPE">
+<span id="_CPPv3N6murxla5State8PUSH_POPE"></span><span id="_CPPv2N6murxla5State8PUSH_POPE"></span><span id="murxla::State::PUSH_POP__KindC"></span><span class="target" id="classmurxla_1_1State_1add49dbea8eaef6e7df5c3b0be9fe5c39"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PUSH_POP</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;push_pop&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State8PUSH_POPE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The state where context levels are pushed and popped. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla5State16DECIDE_SAT_UNSATE">
+<span id="_CPPv3N6murxla5State16DECIDE_SAT_UNSATE"></span><span id="_CPPv2N6murxla5State16DECIDE_SAT_UNSATE"></span><span id="murxla::State::DECIDE_SAT_UNSAT__KindC"></span><span class="target" id="classmurxla_1_1State_1a4f8e5c9be43b8d8cf7946bf20522ddac"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla5State4KindE" title="murxla::State::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DECIDE_SAT_UNSAT</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;decide-sat_unsat&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla5State16DECIDE_SAT_UNSATE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The decision state that is reached immediately after an action is executed in state <a class="reference internal" href="#classmurxla_1_1State_1a1da125e0992092db88984b616cbeb2b3"><span class="std std-ref">CHECK_SAT</span></a>. This state is where it is decided which one of the corresponding choice states <a class="reference internal" href="#classmurxla_1_1State_1acd3530a13ed3cc4b5d6505eb7f473d4f"><span class="std std-ref">SAT</span></a> and <a class="reference internal" href="#classmurxla_1_1State_1aaca9ddcdf82f158b2ca1c631ec6fab8e"><span class="std std-ref">UNSAT</span></a> to enter, depending on the satisfiability result.</p>
+<p>As a decision state, it only serves as decision point for which choice state to transition into, with a single point of entrance (from state <a class="reference internal" href="#classmurxla_1_1State_1a1da125e0992092db88984b616cbeb2b3"><span class="std std-ref">CHECK_SAT</span></a>) and only specific transitions (the choices to be made) out of the state. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="action.html" class="btn btn-neutral float-left" title="FSM: Actions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fsm.html" class="btn btn-neutral float-right" title="FSM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

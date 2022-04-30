@@ -7,6 +7,7 @@
   <title>Solver Profiles &mdash; Murxla  documentation</title>
       <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="../static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../static/js/html5shiv.min.js"></script>
@@ -16,11 +17,12 @@
         <script src="../static/jquery.js"></script>
         <script src="../static/underscore.js"></script>
         <script src="../static/doctools.js"></script>
+        <script src="../static/tabs.js"></script>
     <script src="../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Advanced Documentation" href="../advanced.html" />
-    <link rel="prev" title="Solver Wrapper Interface: Solver" href="solver_wrapper/solver.html" /> 
+    <link rel="next" title="Solver Wrappers" href="solver_wrapper/solver_wrapper.html" />
+    <link rel="prev" title="How to Integrate a Solver" href="solver_integration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,37 +44,26 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="solver_integration.html">How to Integrate a Solver</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="solver_integration.html#overrides-for-solver-wrapper-implementation">Overrides for Solver Wrapper Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_integration.html#solver-wrapper-full-interface-documentation">Solver Wrapper: Full Interface Documentation</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="solver_integration.html#solver-profiles">Solver Profiles</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Solver Profiles</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#theory-restrictions">Theory Restrictions</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#supported-theories-required">Supported Theories (required)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#excluding-theory-combinations">Excluding Theory Combinations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#theory-restrictions">Theory Restrictions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#supported-theories-required">Supported Theories (required)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#excluding-theory-combinations">Excluding Theory Combinations</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#sort-restrictions">Sort Restrictions</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#excluding-sort-kinds">Excluding Sort Kinds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sort-restrictions">Sort Restrictions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#excluding-sort-kinds">Excluding Sort Kinds</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#operator-restrictions">Operator Restrictions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#filtering-errors">Filtering Errors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#customizing-solver-profiles">Customizing Solver Profiles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#default-profiles-of-supported-solvers">Default Profiles of Supported Solvers</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#boolector">Boolector</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#bitwuzla">Bitwuzla</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#cvc5">cvc5</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#yices">Yices</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#smt2-solver">SMT2 Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operator-restrictions">Operator Restrictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filtering-errors">Filtering Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-solver-profiles">Customizing Solver Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-profiles-of-supported-solvers">Default Profiles of Supported Solvers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html">Solver Wrappers</a></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Advanced Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
 
         </div>
@@ -100,14 +91,26 @@
            <div itemprop="articleBody">
              
   <section id="solver-profiles">
-<h1>Solver Profiles<a class="headerlink" href="#solver-profiles" title="Permalink to this headline"></a></h1>
-<p>A solver profile is a JSON file to tell Murxla what theories, operators, sorts,
-etc. should be tested for a given solver.
-Each solver provides a default profile that defines what the solver supports.
-The JSON keys described below will affect how Murxla generates API calls.
-However, the JSON file can be arbitrarily extended with solver-specific keys.</p>
+<span id="id1"></span><h1>Solver Profiles<a class="headerlink" href="#solver-profiles" title="Permalink to this headline"></a></h1>
+<p>A solver profile is a JSON file <code class="docutils literal notranslate"><span class="pre">profile.json</span></code> located in the solver
+directory
+(e.g., <a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/cvc5/profile.json">src/solver/cvc5/profile.json</a>)
+and allows to arbitrarily configure how and what should be tested.
+The profile file defines what is supported by the solver and therefore each
+solver must provide a profile.</p>
+<p>Murxla recognizes a set of <em>predefined</em> JSON keys as described below, which will
+affect how Murxla generates API calls. The solver profile JSON file can be
+arbitrarily extended with <em>solver-specific</em> keys.</p>
+<p>The predefined keys allow to define which theories to include, and optionally
+restrict sort and operator kinds.
+They further allow defining restrictions for unsupported features
+(or to configure a specific test environment, e.g., for fragments of a
+theory),
+skipping issues based on output patterns (useful for false positives that
+require an unreasonable amount of implementation effort to be avoided),
+and explicitly filtering for specific issues.</p>
 <dl class="simple">
-<dt><strong>Keys used by Murxla:</strong></dt><dd><ul class="simple">
+<dt><strong>Predefined keys used by Murxla:</strong></dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">theories</span></code> (<a class="reference internal" href="#theory-restrictions">theory restrictions</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sorts</span></code> (<a class="reference internal" href="#sort-restrictions">sort restrictions</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">operators</span></code> (<a class="reference internal" href="#operator-restrictions">operator restrictions</a>)</p></li>
@@ -115,16 +118,16 @@ However, the JSON file can be arbitrarily extended with solver-specific keys.</p
 </ul>
 </dd>
 </dl>
-<p>In the following <code class="docutils literal notranslate"><span class="pre">&lt;THEORY&gt;</span></code> refers to theories defined in
-<a class="reference internal" href="../theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a>,
-<code class="docutils literal notranslate"><span class="pre">&lt;SORT&gt;</span></code> refers to any sort kind <a class="reference internal" href="../sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::SortKind</span></code></a>,
-and <code class="docutils literal notranslate"><span class="pre">&lt;OP&gt;</span></code> refers to any operator <a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>.</p>
+<p>In the following, <code class="docutils literal notranslate"><span class="pre">&lt;THEORY&gt;</span></code> refers to theories defined in
+<a class="reference internal" href="../advanced/theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a>,
+<code class="docutils literal notranslate"><span class="pre">&lt;SORT&gt;</span></code> refers to any sort kind <a class="reference internal" href="../advanced/sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::SortKind</span></code></a>,
+and <code class="docutils literal notranslate"><span class="pre">&lt;OP&gt;</span></code> refers to any operator <a class="reference internal" href="../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>.</p>
 <section id="theory-restrictions">
 <h2>Theory Restrictions<a class="headerlink" href="#theory-restrictions" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">theories</span></code> key restricts how Murxla enables/disables theories.</p>
 <dl class="simple">
 <dt><strong>Available keys:</strong></dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">include</span></code>: List of supported theories. (see <a class="reference internal" href="../theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">include</span></code>: List of supported theories. (see <a class="reference internal" href="../advanced/theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">exclude-combinations</span></code>: Dictionary of unsupported theory combinations.</p></li>
 </ul>
 </dd>
@@ -149,7 +152,7 @@ as described below
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p>The <cite>include</cite> attribute is a required attribute for <cite>theories</cite>.</p></li>
-<li><p>Any theory from <a class="reference internal" href="../theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a> can be included except
+<li><p>Any theory from <a class="reference internal" href="../advanced/theory.html#_CPPv4N6murxla6TheoryE" title="murxla::Theory"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::Theory</span></code></a> can be included except
 <cite>THEORY_ALL</cite>.</p></li>
 <li><p><cite>THEORY_BOOL</cite> is always implicitly included.</p></li>
 </ul>
@@ -197,14 +200,14 @@ arrays or uninterpreted functions use:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">datatype-match</span></code>: Datatype match construct sort restrictions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">datatype-selector-codomain</span></code>: Datatype selector codomain sort restrictions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fun-domain</span></code>: Domain sort restrictions when creating functions
-(<code class="docutils literal notranslate"><span class="pre">define-fun</span></code> in SMT-LIBv2, <a class="reference internal" href="../fsm/action.html#_CPPv4N6murxla11ActionMkFunE" title="murxla::ActionMkFun"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkFun</span></code></a>).</p></li>
+(<code class="docutils literal notranslate"><span class="pre">define-fun</span></code> in SMT-LIBv2, <a class="reference internal" href="../advanced/fsm/action.html#_CPPv4N6murxla11ActionMkFunE" title="murxla::ActionMkFun"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkFun</span></code></a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fun-codomain</span></code>: Codomain sort restrictions when creating functions
-(<code class="docutils literal notranslate"><span class="pre">define-fun</span></code> in SMT-LIBv2, <a class="reference internal" href="../fsm/action.html#_CPPv4N6murxla11ActionMkFunE" title="murxla::ActionMkFun"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkFun</span></code></a>).</p></li>
+(<code class="docutils literal notranslate"><span class="pre">define-fun</span></code> in SMT-LIBv2, <a class="reference internal" href="../advanced/fsm/action.html#_CPPv4N6murxla11ActionMkFunE" title="murxla::ActionMkFun"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkFun</span></code></a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fun-sort-domain</span></code>: Domain sort restrictions when creating function sorts.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fun-sort-codomain</span></code>: Codomain sort restrictions when creating function
 sorts.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">get-value</span></code>: Sort restrictions on terms for querying model values
-(<code class="docutils literal notranslate"><span class="pre">get-value</span></code> in SMT-LIBv2, <a class="reference internal" href="../fsm/action.html#_CPPv4N6murxla14ActionGetValueE" title="murxla::ActionGetValue"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionGetValue</span></code></a>).</p></li>
+(<code class="docutils literal notranslate"><span class="pre">get-value</span></code> in SMT-LIBv2, <a class="reference internal" href="../advanced/fsm/action.html#_CPPv4N6murxla14ActionGetValueE" title="murxla::ActionGetValue"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionGetValue</span></code></a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seq-element</span></code>: Sequence element sort restrictions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">set-element</span></code>: Set element sort restrictions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort-param</span></code>: Sort restrictions on parameters of parametric sorts.</p></li>
@@ -213,7 +216,7 @@ sorts.</p></li>
 </dd>
 </dl>
 <p>The list of available sort kinds can be found here:
-<a class="reference internal" href="../sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::SortKind</span></code></a>.</p>
+<a class="reference internal" href="../advanced/sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">murxla::SortKind</span></code></a>.</p>
 <section id="excluding-sort-kinds">
 <h3>Excluding Sort Kinds<a class="headerlink" href="#excluding-sort-kinds" title="Permalink to this headline"></a></h3>
 <p>In special cases a solver may not support not all sort kinds associated to a
@@ -253,7 +256,7 @@ follows.</p>
 <h2>Operator Restrictions<a class="headerlink" href="#operator-restrictions" title="Permalink to this headline"></a></h2>
 <dl class="simple">
 <dt><strong>Available keys:</strong></dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">exclude</span></code>: List of operators. (see <a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude</span></code>: List of operators. (see <a class="reference internal" href="../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort-restrictions</span></code>: Dictionary of operators to sort kinds (only useful
 for restricting sorts for operators with sort kind <code class="docutils literal notranslate"><span class="pre">SORT_ANY</span></code>).</p></li>
 </ul>
@@ -310,8 +313,82 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
 </section>
 <section id="default-profiles-of-supported-solvers">
 <h2>Default Profiles of Supported Solvers<a class="headerlink" href="#default-profiles-of-supported-solvers" title="Permalink to this headline"></a></h2>
-<section id="boolector">
-<h3>Boolector<a class="headerlink" href="#boolector" title="Permalink to this headline"></a></h3>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Bitwuzla</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Boolector</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">cvc5</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Yices</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">SMT2 Solver</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/bzla/profile.json">src/solver/bzla/profile.json</a></p>
+<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;THEORY_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;THEORY_BOOL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;THEORY_BV&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;THEORY_FP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;THEORY_UF&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">&quot;operators&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;OP_FP_TO_REAL&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">&quot;sorts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;SORT_UNINTERPRETED&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;array-index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;array-element&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;fun-sort-domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;fun-sort-codomain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;fun-domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">&quot;fun-codomain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p><a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/btor/profile.json">src/solver/btor/profile.json</a></p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -394,85 +471,7 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-<section id="bitwuzla">
-<h3>Bitwuzla<a class="headerlink" href="#bitwuzla" title="Permalink to this headline"></a></h3>
-<div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;THEORY_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;THEORY_BOOL&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;THEORY_BV&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;THEORY_FP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;THEORY_UF&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">  </span><span class="nt">&quot;operators&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;OP_FP_TO_REAL&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">  </span><span class="nt">&quot;sorts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;SORT_UNINTERPRETED&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;array-index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;array-element&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;fun-sort-domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;fun-sort-codomain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;fun-domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-
-<span class="w">    </span><span class="nt">&quot;fun-codomain&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;exclude&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_ARRAY&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FUN&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_FP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;SORT_RM&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-</section>
-<section id="cvc5">
-<h3>cvc5<a class="headerlink" href="#cvc5" title="Permalink to this headline"></a></h3>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p><a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/cvc5/profile.json">src/solver/cvc5/profile.json</a></p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -631,9 +630,7 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-<section id="yices">
-<h3>Yices<a class="headerlink" href="#yices" title="Permalink to this headline"></a></h3>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p><a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/yices/profile.json">src/solver/yices/profile.json</a></p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -687,9 +684,7 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-<section id="smt2-solver">
-<h3>SMT2 Solver<a class="headerlink" href="#smt2-solver" title="Permalink to this headline"></a></h3>
+</div><div aria-labelledby="tab-0-0-4" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><p><a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/smt2/profile.json">src/solver/smt2/profile.json</a></p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;theories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;include&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -795,7 +790,7 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
+</div></div>
 </section>
 </section>
 
@@ -803,8 +798,8 @@ intersection of all <code class="docutils literal notranslate"><span class="pre"
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="solver_wrapper/solver.html" class="btn btn-neutral float-left" title="Solver Wrapper Interface: Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../advanced.html" class="btn btn-neutral float-right" title="Advanced Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solver_integration.html" class="btn btn-neutral float-left" title="How to Integrate a Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solver_wrapper/solver_wrapper.html" class="btn btn-neutral float-right" title="Solver Wrappers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

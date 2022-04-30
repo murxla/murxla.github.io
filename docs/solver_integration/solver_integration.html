@@ -7,6 +7,7 @@
   <title>How to Integrate a Solver &mdash; Murxla  documentation</title>
       <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/tabs.css" type="text/css" />
       <link rel="stylesheet" href="../static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../static/js/html5shiv.min.js"></script>
@@ -19,7 +20,7 @@
     <script src="../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Solver Wrapper Implementation for Sorts" href="abssort_overrides.html" />
+    <link rel="next" title="Solver Profiles" href="solver_profile.html" />
     <link rel="prev" title="User Guide" href="../usage.html" /> 
 </head>
 
@@ -42,23 +43,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How to Integrate a Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overrides-for-solver-wrapper-implementation">Overrides for Solver Wrapper Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="abssort_overrides.html">Solver Wrapper Implementation for Sorts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="absterm_overrides.html">Solver Wrapper Implementation for Terms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="solver_overrides.html">Solver Wrapper Implementation for Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_profile.html">Solver Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html">Solver Wrappers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#solver-wrapper-full-interface-documentation">Solver Wrapper: Full Interface Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="solver_wrapper/solver_wrapper.html">Solver Wrappers</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#solver-profiles">Solver Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="solver_profile.html">Solver Profiles</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced.html">Advanced Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
 
         </div>
@@ -86,60 +75,11 @@
              
   <section id="how-to-integrate-a-solver">
 <h1>How to Integrate a Solver<a class="headerlink" href="#how-to-integrate-a-solver" title="Permalink to this headline"></a></h1>
-<p>Integrating a new solver under test only requires to implement a dedicated
-solver wrapper, which then interfaces with Murxla’s core components.
-The interface of the wrapper is defined at
-<a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/solver.hpp">src/solver/solver.hpp</a>.
-It defines abstract classes for sorts (<a class="reference internal" href="solver_wrapper/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsSort</span></code></a>),
-terms (<a class="reference internal" href="solver_wrapper/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>) and the solver itself
-(<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a>).</p>
-<p>A solver wrapper derives from these three abstract classes and must at least
-override the member functions required to be overriden. Additionally,
-for each class, there exists a set of member functions with default
-implementations that should be overriden (if supported) to test the solver
-(see <a class="reference internal" href="#wrapper-overrides"><span class="std std-ref">the list of required and optional overrides</span></a>
-below).</p>
-<section id="overrides-for-solver-wrapper-implementation">
-<span id="wrapper-overrides"></span><h2>Overrides for Solver Wrapper Implementation<a class="headerlink" href="#overrides-for-solver-wrapper-implementation" title="Permalink to this headline"></a></h2>
-<p>The following list provides all the member functions of classes
-<a class="reference internal" href="solver_wrapper/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsSort</span></code></a>, <a class="reference internal" href="solver_wrapper/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a> and
-<a class="reference internal" href="solver_wrapper/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Solver</span></code></a> that are required or optional to be
-overriden by a solver wrapper.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="abssort_overrides.html">Solver Wrapper Implementation for Sorts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="abssort_overrides.html#abssort-functions-required-to-be-overriden">AbsSort: Functions Required to be Overriden</a></li>
-<li class="toctree-l2"><a class="reference internal" href="abssort_overrides.html#abssort-functions-to-be-overriden-optionally">AbsSort: Functions to be Overriden Optionally</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="absterm_overrides.html">Solver Wrapper Implementation for Terms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="absterm_overrides.html#absterm-functions-required-to-be-overriden">AbsTerm: Functions Required to be Overriden</a></li>
-<li class="toctree-l2"><a class="reference internal" href="absterm_overrides.html#absterm-functions-to-be-overriden-optionally">AbsTerm: Functions to be Overriden Optionally</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="solver_overrides.html">Solver Wrapper Implementation for Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="solver_overrides.html#solver-functions-required-to-be-overriden">Solver: Functions Required to be Overriden</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_overrides.html#solver-functions-to-be-overriden-optionally">Solver: Functions to be Overriden Optionally</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="solver-wrapper-full-interface-documentation">
-<h2>Solver Wrapper: Full Interface Documentation<a class="headerlink" href="#solver-wrapper-full-interface-documentation" title="Permalink to this headline"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="solver_wrapper/solver_wrapper.html">Solver Wrappers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#sort">Sort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#term">Term</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#solver-wrapper-interface">Solver Wrapper Interface</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="solver-profiles">
-<h2>Solver Profiles<a class="headerlink" href="#solver-profiles" title="Permalink to this headline"></a></h2>
+<p>Integrating a new solver under test only requires defining a
+<strong>solver configuration JSON profile</strong> (see <a class="reference internal" href="solver_profile.html#solver-profiles"><span class="std std-ref">Solver Profiles</span></a>)
+and implementing a dedicated <strong>solver wrapper</strong>.
+The solver profile configures what and how to test, and the solver wrapper
+interfaces with Murxla’s core components.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="solver_profile.html">Solver Profiles</a><ul>
@@ -151,9 +91,18 @@ overriden by a solver wrapper.</p>
 <li class="toctree-l2"><a class="reference internal" href="solver_profile.html#default-profiles-of-supported-solvers">Default Profiles of Supported Solvers</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="solver_wrapper/solver_wrapper.html">Solver Wrappers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/solver_wrapper_interface/abssort.html">Solver Wrapper Interface: AbsSort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/solver_wrapper_interface/absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#solver-wrapper-implementation">Solver Wrapper Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#global-sort-and-term-handling">Global Sort and Term Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#solver-specific-extensions">Solver-Specific Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper/solver_wrapper.html#solver-options">Solver Options</a></li>
+</ul>
+</li>
 </ul>
 </div>
-</section>
 </section>
 
 
@@ -161,7 +110,7 @@ overriden by a solver wrapper.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../usage.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="abssort_overrides.html" class="btn btn-neutral float-right" title="Solver Wrapper Implementation for Sorts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solver_profile.html" class="btn btn-neutral float-right" title="Solver Profiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

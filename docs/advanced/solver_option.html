@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solver Options &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Solver Manager" href="solver_manager.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort.html">Sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="term.html">Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort_kind.html">Sort Kind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator_kinds.html">Pre-Defined Operator Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="special_value_kinds.html">Pre-Defined Special Value Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html">Theories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="advanced.html">Advanced Documentation</a> &raquo;</li>
+      <li>Solver Options</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solver-options">
+<span id="id1"></span><h1>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla12SolverOptionE">
+<span id="_CPPv3N6murxla12SolverOptionE"></span><span id="_CPPv2N6murxla12SolverOptionE"></span><span id="murxla::SolverOption"></span><span class="target" id="classmurxla_1_1SolverOption"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOption</span></span></span><a class="headerlink" href="#_CPPv4N6murxla12SolverOptionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Base class representing a solver option. </p>
+<p>Subclassed by <a class="reference internal" href="#classmurxla_1_1SolverOptionBool"><span class="std std-ref">murxla::SolverOptionBool</span></a>, <a class="reference internal" href="#classmurxla_1_1SolverOptionList"><span class="std std-ref">murxla::SolverOptionList</span></a>, <a class="reference internal" href="#classmurxla_1_1SolverOptionNum"><span class="std std-ref">murxla::SolverOptionNum&lt; T &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla12SolverOption10pick_valueER11RNGenerator">
+<span id="_CPPv3NK6murxla12SolverOption10pick_valueER11RNGenerator"></span><span id="_CPPv2NK6murxla12SolverOption10pick_valueER11RNGenerator"></span><span id="murxla::SolverOption::pick_value__RNGeneratorRC"></span><span class="target" id="classmurxla_1_1SolverOption_1a24af5f00585da2c5fdfa593aa9dd0770"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rng</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla12SolverOption10pick_valueER11RNGenerator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick a random option value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla12SolverOption8get_nameEv">
+<span id="_CPPv3NK6murxla12SolverOption8get_nameEv"></span><span id="_CPPv2NK6murxla12SolverOption8get_nameEv"></span><span id="murxla::SolverOption::get_nameC"></span><span class="target" id="classmurxla_1_1SolverOption_1ab8a32b69564e8ee9c0ef48ecb5527c79"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla12SolverOption8get_nameEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the name of the option. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla12SolverOption6d_nameE">
+<span id="_CPPv3N6murxla12SolverOption6d_nameE"></span><span id="_CPPv2N6murxla12SolverOption6d_nameE"></span><span id="murxla::SolverOption::d_name__ss"></span><span class="target" id="classmurxla_1_1SolverOption_1a2d0593ef94e337fa1ddaf3dfb2984724"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_name</span></span></span><a class="headerlink" href="#_CPPv4N6murxla12SolverOption6d_nameE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The name of the option. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionBoolE">
+<span id="_CPPv3N6murxla16SolverOptionBoolE"></span><span id="_CPPv2N6murxla16SolverOptionBoolE"></span><span id="murxla::SolverOptionBool"></span><span class="target" id="classmurxla_1_1SolverOptionBool"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionBool</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6murxla12SolverOptionE" title="murxla::SolverOption"><span class="n"><span class="pre">SolverOption</span></span></a><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionBoolE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionBool16SolverOptionBoolERKNSt6stringEb">
+<span id="_CPPv3N6murxla16SolverOptionBool16SolverOptionBoolERKNSt6stringEb"></span><span id="_CPPv2N6murxla16SolverOptionBool16SolverOptionBoolERKNSt6stringEb"></span><span id="murxla::SolverOptionBool::SolverOptionBool__ssCR.b"></span><span class="target" id="classmurxla_1_1SolverOptionBool_1a5b1dea1464f3fab0b49ffacaaa2c18d6"></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionBool</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">default_value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionBool16SolverOptionBoolERKNSt6stringEb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for Boolean options. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla16SolverOptionBool10pick_valueER11RNGenerator">
+<span id="_CPPv3NK6murxla16SolverOptionBool10pick_valueER11RNGenerator"></span><span id="_CPPv2NK6murxla16SolverOptionBool10pick_valueER11RNGenerator"></span><span id="murxla::SolverOptionBool::pick_value__RNGeneratorRC"></span><span class="target" id="classmurxla_1_1SolverOptionBool_1a2ea65b46292adfa8ba0ece690cfa194f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rng</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK6murxla16SolverOptionBool10pick_valueER11RNGenerator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick random Boolean value. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionBool9d_defaultE">
+<span id="_CPPv3N6murxla16SolverOptionBool9d_defaultE"></span><span id="_CPPv2N6murxla16SolverOptionBool9d_defaultE"></span><span id="murxla::SolverOptionBool::d_default__b"></span><span class="target" id="classmurxla_1_1SolverOptionBool_1a21c02957e4be1fe0f7e14e3fa649de9e"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_default</span></span></span><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionBool9d_defaultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default Boolean value of the option. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN6murxla15SolverOptionNumE">
+<span id="_CPPv3I0EN6murxla15SolverOptionNumE"></span><span id="_CPPv2I0EN6murxla15SolverOptionNumE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classmurxla_1_1SolverOptionNum"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionNum</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6murxla12SolverOptionE" title="murxla::SolverOption"><span class="n"><span class="pre">SolverOption</span></span></a><a class="headerlink" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla15SolverOptionNum15SolverOptionNumERKNSt6stringE1T1T1T">
+<span id="_CPPv3N6murxla15SolverOptionNum15SolverOptionNumERKNSt6stringE1T1T1T"></span><span id="_CPPv2N6murxla15SolverOptionNum15SolverOptionNumERKNSt6stringE1T1T1T"></span><span id="murxla::SolverOptionNum::SolverOptionNum__ssCR.T.T.T"></span><span class="target" id="classmurxla_1_1SolverOptionNum_1a193eb771328d5e3459e6bce1ddecc5fb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionNum</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">min</span></span>, <a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">max</span></span>, <a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">default_value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla15SolverOptionNum15SolverOptionNumERKNSt6stringE1T1T1T" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for numeric options. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla15SolverOptionNum10pick_valueER11RNGenerator">
+<span id="_CPPv3NK6murxla15SolverOptionNum10pick_valueER11RNGenerator"></span><span id="_CPPv2NK6murxla15SolverOptionNum10pick_valueER11RNGenerator"></span><span id="murxla::SolverOptionNum::pick_value__RNGeneratorRC"></span><span class="target" id="classmurxla_1_1SolverOptionNum_1af61156c616284e9e0a87c5550d706c01"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rng</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK6murxla15SolverOptionNum10pick_valueER11RNGenerator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picks a random numeric value between d_min and d_max. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla15SolverOptionNum5d_minE">
+<span id="_CPPv3N6murxla15SolverOptionNum5d_minE"></span><span id="_CPPv2N6murxla15SolverOptionNum5d_minE"></span><span id="murxla::SolverOptionNum::d_min__T"></span><span class="target" id="classmurxla_1_1SolverOptionNum_1a10e56a2847e51f386bc612dca431a250"></span><a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_min</span></span></span><a class="headerlink" href="#_CPPv4N6murxla15SolverOptionNum5d_minE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The minimum numeric value of the option. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla15SolverOptionNum5d_maxE">
+<span id="_CPPv3N6murxla15SolverOptionNum5d_maxE"></span><span id="_CPPv2N6murxla15SolverOptionNum5d_maxE"></span><span id="murxla::SolverOptionNum::d_max__T"></span><span class="target" id="classmurxla_1_1SolverOptionNum_1abb32829f54e4ac682dd6e006d64ad7fa"></span><a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_max</span></span></span><a class="headerlink" href="#_CPPv4N6murxla15SolverOptionNum5d_maxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The maximum numeric value of the option. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla15SolverOptionNum9d_defaultE">
+<span id="_CPPv3N6murxla15SolverOptionNum9d_defaultE"></span><span id="_CPPv2N6murxla15SolverOptionNum9d_defaultE"></span><span id="murxla::SolverOptionNum::d_default__T"></span><span class="target" id="classmurxla_1_1SolverOptionNum_1aaba6056fa5669460e6c248d8ca1c899b"></span><a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_default</span></span></span><a class="headerlink" href="#_CPPv4N6murxla15SolverOptionNum9d_defaultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default numeric value of the option. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionListE">
+<span id="_CPPv3N6murxla16SolverOptionListE"></span><span id="_CPPv2N6murxla16SolverOptionListE"></span><span id="murxla::SolverOptionList"></span><span class="target" id="classmurxla_1_1SolverOptionList"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionList</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6murxla12SolverOptionE" title="murxla::SolverOption"><span class="n"><span class="pre">SolverOption</span></span></a><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionListE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionList16SolverOptionListERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE">
+<span id="_CPPv3N6murxla16SolverOptionList16SolverOptionListERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE"></span><span id="_CPPv2N6murxla16SolverOptionList16SolverOptionListERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE"></span><span id="murxla::SolverOptionList::SolverOptionList__ssCR.std::vector:ss:CR.ssCR"></span><span class="target" id="classmurxla_1_1SolverOptionList_1a75c9ddbfda6b3f0321cea7fc9f6a1788"></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOptionList</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">values</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">default_value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionList16SolverOptionListERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor for list options. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla16SolverOptionList10pick_valueER11RNGenerator">
+<span id="_CPPv3NK6murxla16SolverOptionList10pick_valueER11RNGenerator"></span><span id="_CPPv2NK6murxla16SolverOptionList10pick_valueER11RNGenerator"></span><span id="murxla::SolverOptionList::pick_value__RNGeneratorRC"></span><span class="target" id="classmurxla_1_1SolverOptionList_1af7bd3e4a158e416734ed381e70697c05"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rng</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK6murxla16SolverOptionList10pick_valueER11RNGenerator" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picks a random option value from the list of available values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionList8d_valuesE">
+<span id="_CPPv3N6murxla16SolverOptionList8d_valuesE"></span><span id="_CPPv2N6murxla16SolverOptionList8d_valuesE"></span><span id="murxla::SolverOptionList::d_values__std::vector:ss:"></span><span class="target" id="classmurxla_1_1SolverOptionList_1a2cc56cc0ac880faf2300e65a6d73f0b8"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_values</span></span></span><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionList8d_valuesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The list of valid option values. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla16SolverOptionList9d_defaultE">
+<span id="_CPPv3N6murxla16SolverOptionList9d_defaultE"></span><span id="_CPPv2N6murxla16SolverOptionList9d_defaultE"></span><span id="murxla::SolverOptionList::d_default__ss"></span><span class="target" id="classmurxla_1_1SolverOptionList_1aa6a21fd416d0ff66cdf1b6ff6d323df1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_default</span></span></span><a class="headerlink" href="#_CPPv4N6murxla16SolverOptionList9d_defaultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The default value of the option. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="solver_manager.html" class="btn btn-neutral float-left" title="Solver Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

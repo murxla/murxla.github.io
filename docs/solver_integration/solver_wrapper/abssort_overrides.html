@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solver Wrapper Implementation for Sorts &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Solver Wrapper Implementation for Terms" href="absterm_overrides.html" />
+    <link rel="prev" title="Overrides for Solver Wrapper Implementation" href="overrides.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../solver_integration.html">How to Integrate a Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../solver_profile.html">Solver Profiles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="solver_wrapper.html">Solver Wrappers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html">Solver Wrapper Interface: AbsSort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="solver_wrapper.html#solver-wrapper-implementation">Solver Wrapper Implementation</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="overrides.html">Overrides for Solver Wrapper Implementation</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Solver Wrapper Implementation for Sorts</a></li>
+<li class="toctree-l5"><a class="reference internal" href="absterm_overrides.html">Solver Wrapper Implementation for Terms</a></li>
+<li class="toctree-l5"><a class="reference internal" href="solver_overrides.html">Solver Wrapper Implementation for Solver</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="solver_wrapper.html#random-number-generator-rng">Random Number Generator (RNG)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper.html#global-sort-and-term-handling">Global Sort and Term Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper.html#solver-specific-extensions">Solver-Specific Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper.html#solver-options">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/advanced.html">Advanced Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
+          <li><a href="solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
+          <li><a href="overrides.html">Overrides for Solver Wrapper Implementation</a> &raquo;</li>
+      <li>Solver Wrapper Implementation for Sorts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solver-wrapper-implementation-for-sorts">
+<h1>Solver Wrapper Implementation for Sorts<a class="headerlink" href="#solver-wrapper-implementation-for-sorts" title="Permalink to this headline"></a></h1>
+<p>Solver wrappers derive a sort class from <a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsSort</span></code></a>, which
+manages construction and destruction of solver sort objects and implements
+required and optional member function overrides.</p>
+<p>Murxla uses naming convention <code class="docutils literal notranslate"><span class="pre">&lt;solver</span> <span class="pre">name</span> <span class="pre">(short)&gt;Sort</span></code> for solver wrapper
+sort implementations, e.g., the cvc5 implementation is called <code class="docutils literal notranslate"><span class="pre">Cvc5Sort</span></code> and
+the Bitwuzla implementation is called <code class="docutils literal notranslate"><span class="pre">BzlaSort</span></code>.</p>
+<p>An example for a <strong>required</strong> override is member function
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4NK6murxla7AbsSort6equalsERKNSt10shared_ptrI7AbsSortEE" title="murxla::AbsSort::equals"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::AbsSort::equals()</span></code></a>, which determines if two given sorts
+are equal. It is implemented in the solver wrapper for <strong>cvc5</strong> (using its
+C++ API) as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"></span>
+<span class="nf">Cvc5Sort::equals</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Sort</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Cvc5Sort</span><span class="o">*</span><span class="w"> </span><span class="n">cvc5_sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checked_cast</span><span class="o">&lt;</span><span class="n">Cvc5Sort</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cvc5_sort</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">d_sort</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">cvc5_sort</span><span class="o">-&gt;</span><span class="n">d_sort</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>An example for an <strong>optional</strong> override is member function
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4NK6murxla7AbsSort5is_bvEv" title="murxla::AbsSort::is_bv"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::AbsSort::is_bv()</span></code></a>, which determines if a given sort
+is a bit-vector sort. It is implemented in the solver wrapper for <strong>Bitwuzla</strong>
+(using its C API) as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"></span>
+<span class="nf">BzlaSort::is_bv</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">bitwuzla_sort_is_bv</span><span class="p">(</span><span class="n">d_sort</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The following list provides all the member functions of class
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsSort</span></code></a> that are required or optional to be
+overriden by a solver wrapper.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Optional overrides have default implementations, but should be overriden
+if supported by the solver.</p>
+</div>
+<section id="abssort-functions-required-to-be-overriden">
+<h2>AbsSort: Functions Required to be Overriden<a class="headerlink" href="#abssort-functions-required-to-be-overriden" title="Permalink to this headline"></a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4hashEv">
+<span id="_CPPv3NK4hashEv"></span><span id="_CPPv2NK4hashEv"></span><span id="hashC"></span><span class="target" id="group__sort-must-override_1gadf3e87adaa5ad0ed3c6ed678fabe7fc8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK4hashEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the hash value of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The hash value of this sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9to_stringEv">
+<span id="_CPPv3NK9to_stringEv"></span><span id="_CPPv2NK9to_stringEv"></span><span id="to_stringC"></span><span class="target" id="group__sort-must-override_1ga871f43b89514a455e1ce6e7f123ce39e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK9to_stringEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the string representation of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A string representation of this sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6equalsERKNSt10shared_ptrI7AbsSortEE">
+<span id="_CPPv3NK6equalsERKNSt10shared_ptrI7AbsSortEE"></span><span id="_CPPv2NK6equalsERKNSt10shared_ptrI7AbsSortEE"></span><span id="equals__std::shared_ptr:AbsSort:CRC"></span><span class="target" id="group__sort-must-override_1gad68f74bdfc8cdba4a7508b450bb82695"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsSort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6equalsERKNSt10shared_ptrI7AbsSortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is equal to the given sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The sort to compare this sort to. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if this sort is equal to the other sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="abssort-functions-to-be-overriden-optionally">
+<h2>AbsSort: Functions to be Overriden Optionally<a class="headerlink" href="#abssort-functions-to-be-overriden-optionally" title="Permalink to this headline"></a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK10not_equalsERKNSt10shared_ptrI7AbsSortEE">
+<span id="_CPPv3NK10not_equalsERKNSt10shared_ptrI7AbsSortEE"></span><span id="_CPPv2NK10not_equalsERKNSt10shared_ptrI7AbsSortEE"></span><span id="not_equals__std::shared_ptr:AbsSort:CRC"></span><span class="target" id="group__sort-may-override_1gaf4cbe64f9b25eb051ffeaf79af3d0c9f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">not_equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsSort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK10not_equalsERKNSt10shared_ptrI7AbsSortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is not equal to the given sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> – The sort to compare this sort to. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if this sort is not equal to the other sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK8is_arrayEv">
+<span id="_CPPv3NK8is_arrayEv"></span><span id="_CPPv2NK8is_arrayEv"></span><span id="is_arrayC"></span><span class="target" id="group__sort-may-override_1gafc7573322f98179e2af2d745ad30725d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_array</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8is_arrayEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is an Array sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is an Array sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6is_bagEv">
+<span id="_CPPv3NK6is_bagEv"></span><span id="_CPPv2NK6is_bagEv"></span><span id="is_bagC"></span><span class="target" id="group__sort-may-override_1gacdd35f46751bfbe674f96ede33a72121"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_bagEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a Bag sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a Bag sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7is_boolEv">
+<span id="_CPPv3NK7is_boolEv"></span><span id="_CPPv2NK7is_boolEv"></span><span id="is_boolC"></span><span class="target" id="group__sort-may-override_1ga07a5bc38f166217d37bc1e48737d96c3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7is_boolEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a Boolean sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a Boolean sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5is_bvEv">
+<span id="_CPPv3NK5is_bvEv"></span><span id="_CPPv2NK5is_bvEv"></span><span id="is_bvC"></span><span class="target" id="group__sort-may-override_1ga9b2357503e3946672488665db051c3f0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5is_bvEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a bit-vector sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a bit-vector sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5is_dtEv">
+<span id="_CPPv3NK5is_dtEv"></span><span id="_CPPv2NK5is_dtEv"></span><span id="is_dtC"></span><span class="target" id="group__sort-may-override_1ga1b46cd64f8b72719bd82fffdbe94b797"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5is_dtEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a datatype sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a datatype sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK16is_dt_parametricEv">
+<span id="_CPPv3NK16is_dt_parametricEv"></span><span id="_CPPv2NK16is_dt_parametricEv"></span><span id="is_dt_parametricC"></span><span class="target" id="group__sort-may-override_1gae12eb89446f7b51378ec870b19041fc0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt_parametric</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK16is_dt_parametricEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a parametric datatype sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a parametric datatype sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5is_fpEv">
+<span id="_CPPv3NK5is_fpEv"></span><span id="_CPPv2NK5is_fpEv"></span><span id="is_fpC"></span><span class="target" id="group__sort-may-override_1ga080304513a0280fb96e211222856e8e2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5is_fpEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a floating-point sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a floating-point sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6is_funEv">
+<span id="_CPPv3NK6is_funEv"></span><span id="_CPPv2NK6is_funEv"></span><span id="is_funC"></span><span class="target" id="group__sort-may-override_1gae46974a5c58e48cbe0f4dd899b5703b3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fun</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_funEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a function sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a function sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6is_intEv">
+<span id="_CPPv3NK6is_intEv"></span><span id="_CPPv2NK6is_intEv"></span><span id="is_intC"></span><span class="target" id="group__sort-may-override_1ga041b9f936119f5d4fbbcae561ec2aaf9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_intEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is an integer sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is an Int sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK7is_realEv">
+<span id="_CPPv3NK7is_realEv"></span><span id="_CPPv2NK7is_realEv"></span><span id="is_realC"></span><span class="target" id="group__sort-may-override_1gae3708c6b35cae8e1a69fcd1fa9764b84"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK7is_realEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a real sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a Real sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5is_rmEv">
+<span id="_CPPv3NK5is_rmEv"></span><span id="_CPPv2NK5is_rmEv"></span><span id="is_rmC"></span><span class="target" id="group__sort-may-override_1gaa22f4648f0fd856863c0ed340341d0f3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5is_rmEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a rounding mode sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a RoundingMode sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9is_reglanEv">
+<span id="_CPPv3NK9is_reglanEv"></span><span id="_CPPv2NK9is_reglanEv"></span><span id="is_reglanC"></span><span class="target" id="group__sort-may-override_1ga7f4772885f783c2667a0cb23e705c0e1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9is_reglanEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a regular language sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a RegLan sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6is_seqEv">
+<span id="_CPPv3NK6is_seqEv"></span><span id="_CPPv2NK6is_seqEv"></span><span id="is_seqC"></span><span class="target" id="group__sort-may-override_1gafbc8e95a07e06f793288946ebb015560"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_seqEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a sequence sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a Sequence sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6is_setEv">
+<span id="_CPPv3NK6is_setEv"></span><span id="_CPPv2NK6is_setEv"></span><span id="is_setC"></span><span class="target" id="group__sort-may-override_1gacd3b7af37683030174aa5237fe59ae80"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_setEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a set sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a Set sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK9is_stringEv">
+<span id="_CPPv3NK9is_stringEv"></span><span id="_CPPv2NK9is_stringEv"></span><span id="is_stringC"></span><span class="target" id="group__sort-may-override_1ga3b205dfa22c3384db6eedd121422c726"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK9is_stringEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is a string sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is a String sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK16is_uninterpretedEv">
+<span id="_CPPv3NK16is_uninterpretedEv"></span><span id="_CPPv2NK16is_uninterpretedEv"></span><span id="is_uninterpretedC"></span><span class="target" id="group__sort-may-override_1ga4e2803f11790c41f2fa0d3ad500f80ca"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_uninterpreted</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK16is_uninterpretedEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this sort is an uninterpreted sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this sort is an uninterpreted sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK18is_dt_well_foundedEv">
+<span id="_CPPv3NK18is_dt_well_foundedEv"></span><span id="_CPPv2NK18is_dt_well_foundedEv"></span><span id="is_dt_well_foundedC"></span><span class="target" id="group__sort-may-override_1gae601c070e13c88d0207c011b40cbaa1b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt_well_founded</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK18is_dt_well_foundedEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if this datatype sort is well founded.</p>
+<p>We use this to filter out datatype sorts that are not well founded. Default returns always true, must be overriden by solver to actually check if the datatype sort is well founded. If not, this may trigger (properly handled) errors in the solver due to non-well-foundedness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if this datatype sort is well founded. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_array_index_sortEv">
+<span id="_CPPv3NK20get_array_index_sortEv"></span><span id="_CPPv2NK20get_array_index_sortEv"></span><span id="get_array_index_sortC"></span><span class="target" id="group__sort-may-override_1ga324a042fb8e217e6f4ec7c6c6a95e742"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_index_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_array_index_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the array index sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The index sort of this array sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK22get_array_element_sortEv">
+<span id="_CPPv3NK22get_array_element_sortEv"></span><span id="_CPPv2NK22get_array_element_sortEv"></span><span id="get_array_element_sortC"></span><span class="target" id="group__sort-may-override_1gad5535e2e45308e46a5f81a47e857cdc4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK22get_array_element_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the array element sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The element sort of this array sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_bag_element_sortEv">
+<span id="_CPPv3NK20get_bag_element_sortEv"></span><span id="_CPPv2NK20get_bag_element_sortEv"></span><span id="get_bag_element_sortC"></span><span class="target" id="group__sort-may-override_1ga182b32f8401bf531fa872e5060c03f9e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_bag_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_bag_element_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the bag element sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The element sort of this bag sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11get_bv_sizeEv">
+<span id="_CPPv3NK11get_bv_sizeEv"></span><span id="_CPPv2NK11get_bv_sizeEv"></span><span id="get_bv_sizeC"></span><span class="target" id="group__sort-may-override_1ga2921b2c170437a56c544c594f5ddec28"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_bv_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11get_bv_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the bit-vector size of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The size of this bit-vector sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK11get_dt_nameEv">
+<span id="_CPPv3NK11get_dt_nameEv"></span><span id="_CPPv2NK11get_dt_nameEv"></span><span id="get_dt_nameC"></span><span class="target" id="group__sort-may-override_1ga2902e71ed27fc4af0067d2b4d0d19893"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dt_name</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11get_dt_nameEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the datatype name of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of this datatype sort, or an empty string by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK15get_dt_num_consEv">
+<span id="_CPPv3NK15get_dt_num_consEv"></span><span id="_CPPv2NK15get_dt_num_consEv"></span><span id="get_dt_num_consC"></span><span class="target" id="group__sort-may-override_1ga8b81577a49bdd2f810f11ee9d6815510"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dt_num_cons</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15get_dt_num_consEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of datatype constructors of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of constructors of this datatype sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17get_dt_cons_namesEv">
+<span id="_CPPv3NK17get_dt_cons_namesEv"></span><span id="_CPPv2NK17get_dt_cons_namesEv"></span><span id="get_dt_cons_namesC"></span><span class="target" id="group__sort-may-override_1ga9910e5e90e8d3236e5d6bd99c1667bfe"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dt_cons_names</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17get_dt_cons_namesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the datatype constructor names of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A vector with the constructor names of this datatype sort, or an empty vector by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_dt_cons_num_selsERKNSt6stringE">
+<span id="_CPPv3NK20get_dt_cons_num_selsERKNSt6stringE"></span><span id="_CPPv2NK20get_dt_cons_num_selsERKNSt6stringE"></span><span id="get_dt_cons_num_sels__ssCRC"></span><span class="target" id="group__sort-may-override_1ga6ef0163008065a1f0478e5ceba75b004"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dt_cons_num_sels</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_dt_cons_num_selsERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of selectors of the given datatype constructor of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of selectors of this datatype sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK21get_dt_cons_sel_namesERKNSt6stringE">
+<span id="_CPPv3NK21get_dt_cons_sel_namesERKNSt6stringE"></span><span id="_CPPv2NK21get_dt_cons_sel_namesERKNSt6stringE"></span><span id="get_dt_cons_sel_names__ssCRC"></span><span class="target" id="group__sort-may-override_1ga39c34f513747ca6b6b36d881d91573db"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dt_cons_sel_names</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK21get_dt_cons_sel_namesERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the selector names of the given datatype constructor of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the constructor for which to get the selector names. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A vector with the selector names of the given constructor of this datatype sort, or an empty vector by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK15get_fp_exp_sizeEv">
+<span id="_CPPv3NK15get_fp_exp_sizeEv"></span><span id="_CPPv2NK15get_fp_exp_sizeEv"></span><span id="get_fp_exp_sizeC"></span><span class="target" id="group__sort-may-override_1ga316b5becb311de6c4c664f5a5c06c93a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_exp_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15get_fp_exp_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the floating-point exponent size of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The exponent size of this floating-point sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK15get_fp_sig_sizeEv">
+<span id="_CPPv3NK15get_fp_sig_sizeEv"></span><span id="_CPPv2NK15get_fp_sig_sizeEv"></span><span id="get_fp_sig_sizeC"></span><span class="target" id="group__sort-may-override_1ga79c0a86b375378d2dafdc46ef6021de6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_sig_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15get_fp_sig_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the floating-point significand size of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The significand size of this floating-point sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK13get_fun_arityEv">
+<span id="_CPPv3NK13get_fun_arityEv"></span><span id="_CPPv2NK13get_fun_arityEv"></span><span id="get_fun_arityC"></span><span class="target" id="group__sort-may-override_1ga488957cade12855ff684bdb2032313de"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_arity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK13get_fun_arityEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the function arity of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The arity of this function sort, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK21get_fun_codomain_sortEv">
+<span id="_CPPv3NK21get_fun_codomain_sortEv"></span><span id="_CPPv2NK21get_fun_codomain_sortEv"></span><span id="get_fun_codomain_sortC"></span><span class="target" id="group__sort-may-override_1ga3f93e91bfb512ea66f30e5e08e18cc6c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_codomain_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK21get_fun_codomain_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the function codomain sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The codomain sort of this function sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_fun_domain_sortsEv">
+<span id="_CPPv3NK20get_fun_domain_sortsEv"></span><span id="_CPPv2NK20get_fun_domain_sortsEv"></span><span id="get_fun_domain_sortsC"></span><span class="target" id="group__sort-may-override_1ga41e61a5207dfd910a4b57ae0cac1fa7e"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_domain_sorts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_fun_domain_sortsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the function domain sorts of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A vector with the domain sorts of this function sort, or an empty vector by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_seq_element_sortEv">
+<span id="_CPPv3NK20get_seq_element_sortEv"></span><span id="_CPPv2NK20get_seq_element_sortEv"></span><span id="get_seq_element_sortC"></span><span class="target" id="group__sort-may-override_1ga49b2b18faa00081f6268c90479ed2462"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_seq_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_seq_element_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the sequence element sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The element sort of this sequence sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20get_set_element_sortEv">
+<span id="_CPPv3NK20get_set_element_sortEv"></span><span id="_CPPv2NK20get_set_element_sortEv"></span><span id="get_set_element_sortC"></span><span class="target" id="group__sort-may-override_1ga440d83aba1d04ddfc78710912503e862"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_set_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20get_set_element_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the set element sort of this sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The element sort of this set sort, or a nullptr by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overrides.html" class="btn btn-neutral float-left" title="Overrides for Solver Wrapper Implementation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="absterm_overrides.html" class="btn btn-neutral float-right" title="Solver Wrapper Implementation for Terms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

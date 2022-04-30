@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Term &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    <script src="../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pre-Defined Special Value Kinds" href="special_value_kinds.html" />
+    <link rel="prev" title="Sort" href="sort.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort.html">Sort</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Term</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort_kind.html">Sort Kind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operator_kinds.html">Pre-Defined Operator Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="special_value_kinds.html">Pre-Defined Special Value Kinds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html">Theories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solver_option.html">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../solver_integration/solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
+          <li><a href="../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
+      <li>Term</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="term">
+<h1>Term<a class="headerlink" href="#term" title="Permalink to this headline"></a></h1>
+<p>Murxla defines type
+<a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a>
+for term representations
+as an alias of shared pointer
+(<a class="reference external" href="https://en.cppreference.com/w/cpp/memory/shared_ptr">std::shared_ptr</a>)
+to <a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">AbsTerm</span></code></a>.
+We only deal with <a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a> objects in Murxla core
+components and at the interface between Murxla and the solver wrapper.</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla4TermE">
+<span id="_CPPv3N6murxla4TermE"></span><span id="_CPPv2N6murxla4TermE"></span><span class="target" id="namespacemurxla_1a43fafd2d9464385d6a34cf7b6aa86ee6"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Term</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla4TermE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The Murxla-internal representation of a term. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxlaeqERK4TermRK4Term">
+<span id="_CPPv3N6murxlaeqERK4TermRK4Term"></span><span id="_CPPv2N6murxlaeqERK4TermRK4Term"></span><span id="murxla::eq-operator__TermCR.TermCR"></span><span class="target" id="namespacemurxla_1afb6bfed7608528fdc7bbf4902365e7c0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaeqERK4TermRK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Operator overload for equality over Terms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The term to be compared with the other term. </p></li>
+<li><p><strong>b</strong> – The other term. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if <a class="reference internal" href="../solver_integration/solver_wrapper/absterm_overrides.html#group__term-must-override_1ga54054beac1e679a2abea40d647714fd6"><span class="std std-ref">AbsTerm::equals()</span></a> (which queries the solver) is true and the sorts of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are equal. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxlaneERK4TermRK4Term">
+<span id="_CPPv3N6murxlaneERK4TermRK4Term"></span><span id="_CPPv2N6murxlaneERK4TermRK4Term"></span><span id="murxla::neq-operator__TermCR.TermCR"></span><span class="target" id="namespacemurxla_1acb1a38a375e5a287a319de5c1436267a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaneERK4TermRK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – The term to be compared with the other term. </p></li>
+<li><p><strong>b</strong> – The other term. Operator overload for disequality over Terms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if <a class="reference internal" href="../solver_integration/solver_wrapper/absterm_overrides.html#group__term-may-override_1ga1d409f27c83e2d01f9a717b085dc4726"><span class="std std-ref">AbsTerm::not_equals()</span></a> (which queries the solver) is true and the sorts of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are not equal. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamEK4Term">
+<span id="_CPPv3N6murxlalsERNSt7ostreamEK4Term"></span><span id="_CPPv2N6murxlalsERNSt7ostreamEK4Term"></span><span id="murxla::lshift-operator__osR.TermC"></span><span class="target" id="namespacemurxla_1ab4782dbe5242ec91f544e1ca5284e2c2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Serialize a Term to given stream.</p>
+<p>This represents a term as ‘t’ + its id and is mainly intended for tracing purposes. For a representation of a term as provided by the corresponding solver, use <a class="reference internal" href="../solver_integration/solver_wrapper/absterm_overrides.html#group__term-must-override_1ga3d5af2ac7f5d4692c41cc3262053ff7b"><span class="std std-ref">AbsTerm::to_string()</span></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – The output stream. </p></li>
+<li><p><strong>t</strong> – The term to be serialized. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output stream. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE">
+<span id="_CPPv3N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE"></span><span id="_CPPv2N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE"></span><span id="murxla::lshift-operator__osR.std::vector:Term:CR"></span><span class="target" id="namespacemurxla_1a999cd4cff0a745a7b598cc1325470a36"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Serialize a vector of Terms to given stream.</p>
+<p>As above, a term is represented as <code class="docutils literal notranslate"><span class="pre">t</span></code> + its id, so this will yield a list of space separated <code class="docutils literal notranslate"><span class="pre">t&lt;id&gt;</span></code>s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – The output stream. </p></li>
+<li><p><strong>vector</strong> – The vector of terms to be serialized. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output stream. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sort.html" class="btn btn-neutral float-left" title="Sort" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="special_value_kinds.html" class="btn btn-neutral float-right" title="Pre-Defined Special Value Kinds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
