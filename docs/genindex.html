@@ -39,7 +39,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
@@ -979,7 +979,7 @@
 </li>
       <li><a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM14disable_actionEN6Action4KindE">FSM::disable_action (C++ function)</a>
 </li>
-      <li><a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM3FSMER11RNGeneratorR19SolverSeedGeneratorP6SolverR13SolverProfileRNSt7ostreamER13SolverOptionsbbbbbNSt6stringEPN10statistics10StatisticsERK12TheoryVectorRK9TheorySetKNSt6vectorINSt4pairINSt6stringENSt6stringEEEEEb">FSM::FSM (C++ function)</a>, <a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM3FSMEv">[1]</a>
+      <li><a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM3FSMER11RNGeneratorR19SolverSeedGeneratorP6SolverR13SolverProfileRNSt7ostreamER13SolverOptionsbbbbNSt6stringEPN10statistics10StatisticsERK12TheoryVectorRK9TheorySetKNSt6vectorINSt4pairINSt6stringENSt6stringEEEEEb">FSM::FSM (C++ function)</a>, <a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM3FSMEv">[1]</a>
 </li>
       <li><a href="advanced/fsm/fsm.html#_CPPv4N6murxla3FSM21get_action_id_mappingEv">FSM::get_action_id_mapping (C++ function)</a>
 </li>
@@ -1217,19 +1217,63 @@
 </li>
       <li><a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv47mk_termRKN2Op4KindE4SortRKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE">mk_term (C++ function)</a>, <a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv47mk_termRKN2Op4KindERKNSt6vectorI4TermEERKNSt6vectorI8uint32_tEE">[1]</a>, <a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv47mk_termRKN2Op4KindERKNSt6vectorINSt6stringEEERKNSt6vectorI4TermEE">[2]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv48mk_value4SortRKNSt6stringE">mk_value (C++ function)</a>, <a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv48mk_value4SortRKNSt6stringE4Base">[1]</a>, <a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv48mk_value4SortRKNSt6stringERKNSt6stringE">[2]</a>, <a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv48mk_value4Sortb">[3]</a>
 </li>
       <li><a href="solver_integration/solver_wrapper/solver_overrides.html#_CPPv46mk_var4SortRKNSt6stringE">mk_var (C++ function)</a>
 </li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE">MURXLA_CHECK_TRACE (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_EMPTY">MURXLA_CHECK_TRACE_EMPTY (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_NOT_EMPTY">MURXLA_CHECK_TRACE_NOT_EMPTY (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_NTOKENS">MURXLA_CHECK_TRACE_NTOKENS (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_NTOKENS_MIN">MURXLA_CHECK_TRACE_NTOKENS_MIN (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_NTOKENS_OF_SORT">MURXLA_CHECK_TRACE_NTOKENS_OF_SORT (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_SORT">MURXLA_CHECK_TRACE_SORT (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_CHECK_TRACE_TERM">MURXLA_CHECK_TRACE_TERM (C macro)</a>
+</li>
       <li><a href="advanced/operator.html#c.MURXLA_MK_TERM_N_ARGS">MURXLA_MK_TERM_N_ARGS (C macro)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="advanced/operator.html#c.MURXLA_MK_TERM_N_ARGS_BIN">MURXLA_MK_TERM_N_ARGS_BIN (C macro)</a>
+</li>
+      <li><a href="advanced/fsm/action.html#c.MURXLA_TEST">MURXLA_TEST (C macro)</a>
 </li>
       <li><a href="advanced/fsm/action.html#c.MURXLA_TRACE">MURXLA_TRACE (C macro)</a>
 </li>
       <li><a href="advanced/fsm/action.html#c.MURXLA_TRACE_RETURN">MURXLA_TRACE_RETURN (C macro)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla28MurxlaActionUntraceExceptionE">MurxlaActionUntraceException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla28MurxlaActionUntraceException28MurxlaActionUntraceExceptionERKNSt12stringstreamE">MurxlaActionUntraceException::MurxlaActionUntraceException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla28MurxlaActionUntraceException28MurxlaActionUntraceExceptionERKNSt6stringE">[1]</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla21MurxlaConfigExceptionE">MurxlaConfigException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla21MurxlaConfigException21MurxlaConfigExceptionERKNSt12stringstreamE">MurxlaConfigException::MurxlaConfigException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla21MurxlaConfigException21MurxlaConfigExceptionERKNSt6stringE">[1]</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla15MurxlaExceptionE">MurxlaException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4NK6murxla15MurxlaException7get_msgEv">MurxlaException::get_msg (C++ function)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla15MurxlaException15MurxlaExceptionERKNSt12stringstreamE">MurxlaException::MurxlaException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla15MurxlaException15MurxlaExceptionERKNSt6stringE">[1]</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla27MurxlaSolverOptionExceptionE">MurxlaSolverOptionException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla27MurxlaSolverOptionException27MurxlaSolverOptionExceptionERKNSt12stringstreamE">MurxlaSolverOptionException::MurxlaSolverOptionException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla27MurxlaSolverOptionException27MurxlaSolverOptionExceptionERKNSt6stringE">[1]</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla22MurxlaUntraceExceptionE">MurxlaUntraceException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla22MurxlaUntraceException22MurxlaUntraceExceptionERKNSt6stringE8uint32_tRKNSt12stringstreamE">MurxlaUntraceException::MurxlaUntraceException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla22MurxlaUntraceException22MurxlaUntraceExceptionERKNSt6stringE8uint32_tRKNSt6stringE">[1]</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla24MurxlaUntraceIdExceptionE">MurxlaUntraceIdException (C++ class)</a>
+</li>
+      <li><a href="advanced/exceptions.html#_CPPv4N6murxla24MurxlaUntraceIdException24MurxlaUntraceIdExceptionERKNSt12stringstreamE">MurxlaUntraceIdException::MurxlaUntraceIdException (C++ function)</a>, <a href="advanced/exceptions.html#_CPPv4N6murxla24MurxlaUntraceIdException24MurxlaUntraceIdExceptionERKNSt6stringE">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2061,7 +2105,165 @@
 </li>
       <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManagerE">SolverManager (C++ class)</a>
 </li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager14add_assumptionE4Term">SolverManager::add_assumption (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9add_constER4TermR4Sort8SortKind">SolverManager::add_const (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9add_inputER4TermR4Sort8SortKind">SolverManager::add_input (C++ function)</a>
+</li>
       <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption">SolverManager::add_option (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager8add_sortER4Sort8SortKindbb">SolverManager::add_sort (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager21add_string_char_valueER4Term">SolverManager::add_string_char_value (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager8add_termER4Term8SortKindRKNSt6vectorI4TermEE">SolverManager::add_term (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9add_valueER4TermR4Sort8SortKindRKN7AbsTerm16SpecialValueKindE">SolverManager::add_value (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager7add_varER4TermR4Sort8SortKind">SolverManager::add_var (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager5clearEv">SolverManager::clear (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager17clear_assumptionsEv">SolverManager::clear_assumptions (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager14d_arith_linearE">SolverManager::d_arith_linear (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager13d_incrementalE">SolverManager::d_incremental (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager11d_mbt_statsE">SolverManager::d_mbt_stats (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager11d_model_genE">SolverManager::d_model_gen (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager15d_n_push_levelsE">SolverManager::d_n_push_levels (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager13d_n_sat_callsE">SolverManager::d_n_sat_calls (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager12d_sat_calledE">SolverManager::d_sat_called (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager12d_sat_resultE">SolverManager::d_sat_result (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager16d_simple_symbolsE">SolverManager::d_simple_symbols (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager7d_statsE">SolverManager::d_stats (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager19d_unsat_assumptionsE">SolverManager::d_unsat_assumptions (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager13d_unsat_coresE">SolverManager::d_unsat_cores (C++ member)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager9find_sortE4Sort">SolverManager::find_sort (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9find_termE4Term4Sort8SortKind">SolverManager::find_term (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager20get_enabled_theoriesEv">SolverManager::get_enabled_theories (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager23get_num_terms_max_levelEv">SolverManager::get_num_terms_max_level (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager12get_num_varsEv">SolverManager::get_num_vars (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager6get_opERKN2Op4KindE">SolverManager::get_op (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager11get_profileEv">SolverManager::get_profile (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager7get_rngEv">SolverManager::get_rng (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager7get_sngEv">SolverManager::get_sng (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10get_solverEv">SolverManager::get_solver (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8get_termE8uint64_t">SolverManager::get_term (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9get_traceEv">SolverManager::get_trace (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager17get_untraced_sortE8uint64_t">SolverManager::get_untraced_sort (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager17get_untraced_termE8uint64_t">SolverManager::get_untraced_term (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager11has_assumedEv">SolverManager::has_assumed (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager7has_funERKNSt6vectorI4SortEE">SolverManager::has_fun (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager14has_quant_bodyEv">SolverManager::has_quant_body (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager14has_quant_termE4Sort">SolverManager::has_quant_term (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager14has_quant_termEv">[1]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_sortE4Sort">SolverManager::has_sort (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_sortE8SortKind">[1]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_sortERK11SortKindSet">[2]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_sortEv">[3]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager11has_sort_bvE8uint32_tb">SolverManager::has_sort_bv (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager15has_sort_bv_maxE8uint32_tb">SolverManager::has_sort_bv_max (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager22has_sort_dt_parametricEv">SolverManager::has_sort_dt_parametric (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager18has_sort_excludingE8uint32_tRKNSt13unordered_setI8SortKindEE">SolverManager::has_sort_excluding (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager18has_sort_excludingERKNSt13unordered_setI8SortKindEEb">[1]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager25has_sort_with_sort_paramsEv">SolverManager::has_sort_with_sort_params (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager21has_string_char_valueEv">SolverManager::has_string_char_value (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termE4Sort">SolverManager::has_term (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termE6size_t">[1]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termE8SortKind">[2]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termE8SortKind6size_t">[3]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termERK11SortKindSet">[4]</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager8has_termEv">[5]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager9has_valueE4Sort">SolverManager::has_value (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager9has_valueEv">[1]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager7has_varEv">SolverManager::has_var (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager16mark_option_usedERKNSt6stringE">SolverManager::mark_option_used (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager23pick_assumed_assumptionEv">SolverManager::pick_assumed_assumption (C++ function)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager8pick_funERKNSt6vectorI4SortEE">SolverManager::pick_fun (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager12pick_op_kindEb8SortKind">SolverManager::pick_op_kind (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager11pick_optionENSt6stringENSt6stringE">SolverManager::pick_option (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager15pick_quant_bodyEv">SolverManager::pick_quant_body (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager15pick_quant_termE4Sort">SolverManager::pick_quant_term (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager15pick_quant_termEv">[1]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_sortE8SortKindb">SolverManager::pick_sort (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_sortERK11SortKindSetb">[1]</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_sortEv">[2]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager12pick_sort_bvE8uint32_tb">SolverManager::pick_sort_bv (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager16pick_sort_bv_maxE8uint32_tb">SolverManager::pick_sort_bv_max (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager18pick_sort_dt_paramEv">SolverManager::pick_sort_dt_param (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager19pick_sort_excludingERK11SortKindSetb">SolverManager::pick_sort_excluding (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager14pick_sort_kindE8uint32_tRK11SortKindSet">SolverManager::pick_sort_kind (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager14pick_sort_kindERK11SortKindSetb">[1]</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager14pick_sort_kindEb">[2]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager19pick_sort_kind_dataEv">SolverManager::pick_sort_kind_data (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager24pick_sort_kind_excludingERK11SortKindSetb">SolverManager::pick_sort_kind_excluding (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager26pick_sort_with_sort_paramsEv">SolverManager::pick_sort_with_sort_params (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager22pick_string_char_valueEv">SolverManager::pick_string_char_value (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager11pick_symbolERKNSt6stringE">SolverManager::pick_symbol (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_termE4Sort">SolverManager::pick_term (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_termE6size_t">[1]</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_termE8SortKind">[2]</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_termE8SortKind6size_t">[3]</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9pick_termEv">[4]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager19pick_term_min_levelE4Sort6size_t">SolverManager::pick_term_min_level (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10pick_valueE4Sort">SolverManager::pick_value (C++ function)</a>, <a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10pick_valueEv">[1]</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager8pick_varEv">SolverManager::pick_var (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4NK6murxla13SolverManager9pick_varsE6size_t">SolverManager::pick_vars (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10remove_varERK4Term">SolverManager::remove_var (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager13report_resultEN6Solver6ResultE">SolverManager::report_result (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager5resetEv">SolverManager::reset (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager9reset_satEv">SolverManager::reset_sat (C++ function)</a>
+</li>
+      <li><a href="advanced/solver_manager.html#_CPPv4N6murxla13SolverManager5StatsE">SolverManager::Stats (C++ struct)</a>
 </li>
       <li><a href="advanced/solver_option.html#_CPPv4N6murxla12SolverOptionE">SolverOption (C++ class)</a>
 </li>
@@ -2089,8 +2291,6 @@
 </li>
       <li><a href="advanced/solver_option.html#_CPPv4N6murxla16SolverOptionList16SolverOptionListERKNSt6stringERKNSt6vectorINSt6stringEEERKNSt6stringE">SolverOptionList::SolverOptionList (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="advanced/solver_option.html#_CPPv4I0EN6murxla15SolverOptionNumE">SolverOptionNum (C++ class)</a>
 </li>
       <li><a href="advanced/solver_option.html#_CPPv4N6murxla15SolverOptionNum9d_defaultE">SolverOptionNum::d_default (C++ member)</a>

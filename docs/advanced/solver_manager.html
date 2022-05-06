@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
@@ -55,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solver_option.html">Solver Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -91,12 +92,1332 @@
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager5clearEv">
+<span id="_CPPv3N6murxla13SolverManager5clearEv"></span><span id="_CPPv2N6murxla13SolverManager5clearEv"></span><span id="murxla::SolverManager::clear"></span><span class="target" id="classmurxla_1_1SolverManager_1aaf0ca789711bef3ed7d2667caa64031a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager5clearEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear all data. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager10get_solverEv">
+<span id="_CPPv3N6murxla13SolverManager10get_solverEv"></span><span id="_CPPv2N6murxla13SolverManager10get_solverEv"></span><span id="murxla::SolverManager::get_solver"></span><span class="target" id="classmurxla_1_1SolverManager_1ac5ff05c71e906d7e88266e5b227b6ff1"></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><span class="n"><span class="pre">Solver</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_solver</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager10get_solverEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get solver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A reference to the solver (wrapper) instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager7get_rngEv">
+<span id="_CPPv3NK6murxla13SolverManager7get_rngEv"></span><span id="_CPPv2NK6murxla13SolverManager7get_rngEv"></span><span id="murxla::SolverManager::get_rngC"></span><span class="target" id="classmurxla_1_1SolverManager_1a9b1099fb6c73fc39fbea1f621c8e8bec"></span><span class="n"><span class="pre">RNGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_rng</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager7get_rngEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the associated global random number generator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A reference to the RNG instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager7get_sngEv">
+<span id="_CPPv3N6murxla13SolverManager7get_sngEv"></span><span id="_CPPv2N6murxla13SolverManager7get_sngEv"></span><span id="murxla::SolverManager::get_sng"></span><span class="target" id="classmurxla_1_1SolverManager_1a13f75f542219fd0d20093c0445ac8aaf"></span><span class="n"><span class="pre">SolverSeedGenerator</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_sng</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager7get_sngEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the associated solver seed generator. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A reference to the solver seed generator instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager20get_enabled_theoriesEv">
+<span id="_CPPv3NK6murxla13SolverManager20get_enabled_theoriesEv"></span><span id="_CPPv2NK6murxla13SolverManager20get_enabled_theoriesEv"></span><span id="murxla::SolverManager::get_enabled_theoriesC"></span><span class="target" id="classmurxla_1_1SolverManager_1a71cce87fffe01b7dfbf18ca0b7f5892a"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="theory.html#_CPPv4N6murxla9TheorySetE" title="murxla::TheorySet"><span class="n"><span class="pre">TheorySet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_enabled_theories</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager20get_enabled_theoriesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get set of enabled theories. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The set of currently enabled theories. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9get_traceEv">
+<span id="_CPPv3N6murxla13SolverManager9get_traceEv"></span><span id="_CPPv2N6murxla13SolverManager9get_traceEv"></span><span id="murxla::SolverManager::get_trace"></span><span class="target" id="classmurxla_1_1SolverManager_1a4ea279c8606040ef2db2c46710462b9b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_trace</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9get_traceEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get a reference to the trace stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A reference to the trace stream. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager16mark_option_usedERKNSt6stringE">
+<span id="_CPPv3N6murxla13SolverManager16mark_option_usedERKNSt6stringE"></span><span id="_CPPv2N6murxla13SolverManager16mark_option_usedERKNSt6stringE"></span><span id="murxla::SolverManager::mark_option_used__ssCR"></span><span class="target" id="classmurxla_1_1SolverManager_1a185846a3bed40a6f6d47cb1c424868c8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mark_option_used</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">opt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager16mark_option_usedERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mark given option as already configured. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>opt</strong> – The option to mark. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager23get_num_terms_max_levelEv">
+<span id="_CPPv3NK6murxla13SolverManager23get_num_terms_max_levelEv"></span><span id="_CPPv2NK6murxla13SolverManager23get_num_terms_max_levelEv"></span><span id="murxla::SolverManager::get_num_terms_max_levelC"></span><span class="target" id="classmurxla_1_1SolverManager_1a9723217f92da9f0f2500fb04f637b21a"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_terms_max_level</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager23get_num_terms_max_levelEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of created terms in the top scope. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of created terms in the current top scope. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager12get_num_varsEv">
+<span id="_CPPv3NK6murxla13SolverManager12get_num_varsEv"></span><span id="_CPPv2NK6murxla13SolverManager12get_num_varsEv"></span><span id="murxla::SolverManager::get_num_varsC"></span><span class="target" id="classmurxla_1_1SolverManager_1a92cd7b2fc847eecb1cbf7ff2d1da6749"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_vars</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager12get_num_varsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the number of available variables. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of available variables. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager8add_sortER4Sort8SortKindbb">
+<span id="_CPPv3N6murxla13SolverManager8add_sortER4Sort8SortKindbb"></span><span id="_CPPv2N6murxla13SolverManager8add_sortER4Sort8SortKindbb"></span><span id="murxla::SolverManager::add_sort__SortR.SortKind.b.b"></span><span class="target" id="classmurxla_1_1SolverManager_1ae43da379f7adb589e635d01ab469339e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">parametric</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">well_founded</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager8add_sortER4Sort8SortKindbb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add sort to sort database.</p>
+<p>Parametric sorts are not added to the main database (the database that we pick sorts from), but to a separate database that we only pick from when we explicitly need parametric sorts (see <a class="reference internal" href="#classmurxla_1_1SolverManager_1a9c7bdb1e218ce2e9f749d2fe5a332d4f"><span class="std std-ref">pick_sort_dt_param()</span></a>).</p>
+<p>We only add well founded sorts. A sort that is not well founded gets an id to trace the return statement of mk-sort, but is otherwise discarded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort to add to the databse. </p></li>
+<li><p><strong>sort_kind</strong> – The kind of the sort. </p></li>
+<li><p><strong>parametric</strong> – True if given sort has parameter sorts. </p></li>
+<li><p><strong>well_founded</strong> – True if fiven sort is well founded. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9add_valueER4TermR4Sort8SortKindRKN7AbsTerm16SpecialValueKindE">
+<span id="_CPPv3N6murxla13SolverManager9add_valueER4TermR4Sort8SortKindRKN7AbsTerm16SpecialValueKindE"></span><span id="_CPPv2N6murxla13SolverManager9add_valueER4TermR4Sort8SortKindRKN7AbsTerm16SpecialValueKindE"></span><span id="murxla::SolverManager::add_value__TermR.SortR.SortKind.AbsTerm::SpecialValueKindCR"></span><span class="target" id="classmurxla_1_1SolverManager_1a178f10834db23061467be6e21f5d9b31"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_kind</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTerm18SPECIAL_VALUE_NONEE" title="murxla::AbsTerm::SPECIAL_VALUE_NONE"><span class="n"><span class="pre">SPECIAL_VALUE_NONE</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9add_valueER4TermR4Sort8SortKindRKN7AbsTerm16SpecialValueKindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add value to term database. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – The term to add to the database. </p></li>
+<li><p><strong>sort</strong> – The sort of the term to add. </p></li>
+<li><p><strong>sort_kind</strong> – The sort of the sort of the term to add. </p></li>
+<li><p><strong>value_kind</strong> – The kind of the special value, <a class="reference internal" href="special_value_kinds.html#group__special-value-kinds_1gaab7128d0e871d22c7e59439ff61e77f9"><span class="std std-ref">AbsTerm::SPECIAL_VALUE_NONE</span></a> if given term is not a special value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager21add_string_char_valueER4Term">
+<span id="_CPPv3N6murxla13SolverManager21add_string_char_valueER4Term"></span><span id="_CPPv2N6murxla13SolverManager21add_string_char_valueER4Term"></span><span id="murxla::SolverManager::add_string_char_value__TermR"></span><span class="target" id="classmurxla_1_1SolverManager_1a190cdadb4491554dc987402820dc41ea"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_string_char_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager21add_string_char_valueER4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add string value of length 1. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>term</strong> – A term representing a string value of length 1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9add_inputER4TermR4Sort8SortKind">
+<span id="_CPPv3N6murxla13SolverManager9add_inputER4TermR4Sort8SortKind"></span><span id="_CPPv2N6murxla13SolverManager9add_inputER4TermR4Sort8SortKind"></span><span id="murxla::SolverManager::add_input__TermR.SortR.SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1abd4defd76cc9a48d15eca1d97e876072"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_input</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9add_inputER4TermR4Sort8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add input to term database. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – A term representing an input. </p></li>
+<li><p><strong>sort</strong> – The sort of the term. </p></li>
+<li><p><strong>sort_kind</strong> – The sort of the sort of the term. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager7add_varER4TermR4Sort8SortKind">
+<span id="_CPPv3N6murxla13SolverManager7add_varER4TermR4Sort8SortKind"></span><span id="_CPPv2N6murxla13SolverManager7add_varER4TermR4Sort8SortKind"></span><span id="murxla::SolverManager::add_var__TermR.SortR.SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1a9fabf19c1bb83c5bcb303749fcb51604"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_var</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager7add_varER4TermR4Sort8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add var to term database. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – A term representing a variable. </p></li>
+<li><p><strong>sort</strong> – The sort of the term. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9add_constER4TermR4Sort8SortKind">
+<span id="_CPPv3N6murxla13SolverManager9add_constER4TermR4Sort8SortKind"></span><span id="_CPPv2N6murxla13SolverManager9add_constER4TermR4Sort8SortKind"></span><span id="murxla::SolverManager::add_const__TermR.SortR.SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1a02886bec82c0bb9e269bc1a9a1ba3eb4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_const</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9add_constER4TermR4Sort8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add const to term database. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – A term representing a constant. </p></li>
+<li><p><strong>sort</strong> – The sort of the term. </p></li>
+<li><p><strong>sort_kind</strong> – The kind of the sort of the term. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager8add_termER4Term8SortKindRKNSt6vectorI4TermEE">
+<span id="_CPPv3N6murxla13SolverManager8add_termER4Term8SortKindRKNSt6vectorI4TermEE"></span><span id="_CPPv2N6murxla13SolverManager8add_termER4Term8SortKindRKNSt6vectorI4TermEE"></span><span id="murxla::SolverManager::add_term__TermR.SortKind.std::vector:Term:CR"></span><span class="target" id="classmurxla_1_1SolverManager_1a098e8a213e60c618d87a6fe3dc0a5ed8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">args</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager8add_termER4Term8SortKindRKNSt6vectorI4TermEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add non-input term to term database. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> – A term representing anything other than an input </p></li>
+<li><p><strong>sort_kind</strong> – The kind of the sort of the term. </p></li>
+<li><p><strong>args</strong> – The argument terms to the given term. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager11pick_symbolERKNSt6stringE">
+<span id="_CPPv3N6murxla13SolverManager11pick_symbolERKNSt6stringE"></span><span id="_CPPv2N6murxla13SolverManager11pick_symbolERKNSt6stringE"></span><span id="murxla::SolverManager::pick_symbol__ssCR"></span><span class="target" id="classmurxla_1_1SolverManager_1a67a98296843b21b9ed82701ebc82ecda"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_symbol</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">prefix</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;_x&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager11pick_symbolERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick arbitrary symbol (simple or piped). Simple symbols are generated as <code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;&lt;id&gt;</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prefix</strong> – The prefix of the symbol. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An arbitrary symbol. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager14pick_sort_kindEb">
+<span id="_CPPv3N6murxla13SolverManager14pick_sort_kindEb"></span><span id="_CPPv2N6murxla13SolverManager14pick_sort_kindEb"></span><span id="murxla::SolverManager::pick_sort_kind__b"></span><span class="target" id="classmurxla_1_1SolverManager_1a4f45c63f96957fd5b9395d9a995a0e48"></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_kind</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager14pick_sort_kindEb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort kind of existing (= created) sort.</p>
+<p>Optionally restrict selection to sort kinds with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>with_terms</strong> – True to only pick sort kinds of a sort for which we have already created terms. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager14pick_sort_kindERK11SortKindSetb">
+<span id="_CPPv3N6murxla13SolverManager14pick_sort_kindERK11SortKindSetb"></span><span id="_CPPv2N6murxla13SolverManager14pick_sort_kindERK11SortKindSetb"></span><span id="murxla::SolverManager::pick_sort_kind__SortKindSetCR.b"></span><span class="target" id="classmurxla_1_1SolverManager_1accf920d16a3d4aac993b79ffe2b98e4a"></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_kind</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort_kinds</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager14pick_sort_kindERK11SortKindSetb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort kind of existing (= created) sort out of given set of sort kinds. Asserts that a sort of any of the given kinds exists.</p>
+<p>Optionally restrict selection to sort kinds with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort_kinds</strong> – The set of sort kinds to pick from. </p></li>
+<li><p><strong>with_terms</strong> – True to only pick sort kinds of a sort for which we have already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager24pick_sort_kind_excludingERK11SortKindSetb">
+<span id="_CPPv3NK6murxla13SolverManager24pick_sort_kind_excludingERK11SortKindSetb"></span><span id="_CPPv2NK6murxla13SolverManager24pick_sort_kind_excludingERK11SortKindSetb"></span><span id="murxla::SolverManager::pick_sort_kind_excluding__SortKindSetCR.bC"></span><span class="target" id="classmurxla_1_1SolverManager_1ac15e3e1d21453d42b36c056383f5fbb7"></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_kind_excluding</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">exclude_sort_kinds</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager24pick_sort_kind_excludingERK11SortKindSetb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick a sort kind of existing (= created) sort, excluding the given sort kinds.</p>
+<p>Optionally restrict selection to sort kinds with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exclude_sort_kinds</strong> – The sort kinds to exclude. </p></li>
+<li><p><strong>with_terms</strong> – True to only pick sort kinds of a sort for which we have already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager14pick_sort_kindE8uint32_tRK11SortKindSet">
+<span id="_CPPv3N6murxla13SolverManager14pick_sort_kindE8uint32_tRK11SortKindSet"></span><span id="_CPPv2N6murxla13SolverManager14pick_sort_kindE8uint32_tRK11SortKindSet"></span><span id="murxla::SolverManager::pick_sort_kind__uint32_t.SortKindSetCR"></span><span class="target" id="classmurxla_1_1SolverManager_1a93356a61d6fd6cb3400afa3294452452"></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_kind</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">exclude_sort_kinds</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager14pick_sort_kindE8uint32_tRK11SortKindSet" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort kind of existing (= created) sort with terms at given level.</p>
+<p>Optionally, exclude given sort kinds.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> – The scope level of existing terms to pick the sort kind from. </p></li>
+<li><p><strong>exclude_sort_kinds</strong> – The sort kinds to exclude. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager19pick_sort_kind_dataEv">
+<span id="_CPPv3N6murxla13SolverManager19pick_sort_kind_dataEv"></span><span id="_CPPv2N6murxla13SolverManager19pick_sort_kind_dataEv"></span><span id="murxla::SolverManager::pick_sort_kind_data"></span><span class="target" id="classmurxla_1_1SolverManager_1a84fbcc1a39f5d65fbc0c575c76367b8a"></span><span class="n"><span class="pre">SortKindData</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_kind_data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager19pick_sort_kind_dataEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick enabled sort kind (and get its data).</p>
+<p>Only sort kinds of enabled theories are picked. This function does not guarantee that a sort of this kind alreay exists.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager12pick_op_kindEb8SortKind">
+<span id="_CPPv3N6murxla13SolverManager12pick_op_kindEb8SortKind"></span><span id="_CPPv2N6murxla13SolverManager12pick_op_kindEb8SortKind"></span><span id="murxla::SolverManager::pick_op_kind__b.SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1a69c6e8ba3c76ad91898e57249cd4cfce"></span><a class="reference internal" href="operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_op_kind</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">SORT_ANY</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager12pick_op_kindEb8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick enabled operator kind (and get its data).</p>
+<p>Optionally restricted to operator kinds that create terms of given sort kind.</p>
+<p>Only operator kinds of enabled theories are picked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>with_terms</strong> – True to only pick operator kinds of already created terms. </p></li>
+<li><p><strong>The</strong> – sort kind of terms of the operator kind to select. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The operator kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager6get_opERKN2Op4KindE">
+<span id="_CPPv3N6murxla13SolverManager6get_opERKN2Op4KindE"></span><span id="_CPPv2N6murxla13SolverManager6get_opERKN2Op4KindE"></span><span id="murxla::SolverManager::get_op__Op::KindCR"></span><span class="target" id="classmurxla_1_1SolverManager_1adcf97485fc2000ad16b8a4f8e5d8f7e9"></span><a class="reference internal" href="operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_op</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager6get_opERKN2Op4KindE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the <a class="reference internal" href="operator.html#structmurxla_1_1Op"><span class="std std-ref">Op</span></a> data for given operator kind. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kind</strong> – The operator kind. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The configuration data of the operator. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager10pick_valueEv">
+<span id="_CPPv3N6murxla13SolverManager10pick_valueEv"></span><span id="_CPPv2N6murxla13SolverManager10pick_valueEv"></span><span id="murxla::SolverManager::pick_value"></span><span class="target" id="classmurxla_1_1SolverManager_1aa1a70ea0d15fc10f5cfa0e390d7942af"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager10pick_valueEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick a value of any sort.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that a value of any sort exists.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager10pick_valueE4Sort">
+<span id="_CPPv3N6murxla13SolverManager10pick_valueE4Sort"></span><span id="_CPPv2N6murxla13SolverManager10pick_valueE4Sort"></span><span id="murxla::SolverManager::pick_value__Sort"></span><span class="target" id="classmurxla_1_1SolverManager_1a328fd68e41fe5091704e6a63983f26b4"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager10pick_valueE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick a value of given sort.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that a value of given sort exists.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort</strong> – The sort of the value to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager22pick_string_char_valueEv">
+<span id="_CPPv3N6murxla13SolverManager22pick_string_char_valueEv"></span><span id="_CPPv2N6murxla13SolverManager22pick_string_char_valueEv"></span><span id="murxla::SolverManager::pick_string_char_value"></span><span class="target" id="classmurxla_1_1SolverManager_1a1aa9dbab63ce425b8ea9db232980d950"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_string_char_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager22pick_string_char_valueEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick string value with length 1. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A term representing a string value of length 1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_termE4Sort">
+<span id="_CPPv3N6murxla13SolverManager9pick_termE4Sort"></span><span id="_CPPv2N6murxla13SolverManager9pick_termE4Sort"></span><span id="murxla::SolverManager::pick_term__Sort"></span><span class="target" id="classmurxla_1_1SolverManager_1a9fe0088e621ba68dc4f201a5c5fb45b6"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_termE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick a term of given sort. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of this sort exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort</strong> – The sort of the term to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_termE8SortKind6size_t">
+<span id="_CPPv3N6murxla13SolverManager9pick_termE8SortKind6size_t"></span><span id="_CPPv2N6murxla13SolverManager9pick_termE8SortKind6size_t"></span><span id="murxla::SolverManager::pick_term__SortKind.s"></span><span class="target" id="classmurxla_1_1SolverManager_1adc16010aa7d72ff1737e2afc1e2592cb"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_termE8SortKind6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick term of given sort kind and scope level. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of this sort kind exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort_kind</strong> – The kind of the sort of the term to pick. </p></li>
+<li><p><strong>level</strong> – The scope level of the term to pick. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_termE8SortKind">
+<span id="_CPPv3N6murxla13SolverManager9pick_termE8SortKind"></span><span id="_CPPv2N6murxla13SolverManager9pick_termE8SortKind"></span><span id="murxla::SolverManager::pick_term__SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1a1645888a7a0694bb4698dbb3d8fad292"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_termE8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick term of given sort kind. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of this sort kind exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort_kind</strong> – The kind of the sort of the term to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_termEv">
+<span id="_CPPv3N6murxla13SolverManager9pick_termEv"></span><span id="_CPPv2N6murxla13SolverManager9pick_termEv"></span><span id="murxla::SolverManager::pick_term"></span><span class="target" id="classmurxla_1_1SolverManager_1a3b96d2e9ef292c6460df51d438994092"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_termEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick any term. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of any sort kind exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_termE6size_t">
+<span id="_CPPv3N6murxla13SolverManager9pick_termE6size_t"></span><span id="_CPPv2N6murxla13SolverManager9pick_termE6size_t"></span><span id="murxla::SolverManager::pick_term__s"></span><span class="target" id="classmurxla_1_1SolverManager_1ab986a7dec65f215bd60e8a48ea6d069c"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_termE6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick any term from given level. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of any sort kind exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> – The scope level of the term to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager19pick_term_min_levelE4Sort6size_t">
+<span id="_CPPv3N6murxla13SolverManager19pick_term_min_levelE4Sort6size_t"></span><span id="_CPPv2N6murxla13SolverManager19pick_term_min_levelE4Sort6size_t"></span><span id="murxla::SolverManager::pick_term_min_level__Sort.s"></span><span class="target" id="classmurxla_1_1SolverManager_1affac660804176ea6d42f48c59ce47242"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_term_min_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager19pick_term_min_levelE4Sort6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick any term from any level from the given level to the max level. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that terms of any sort kind exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> – The scope level of the term to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager8pick_funERKNSt6vectorI4SortEE">
+<span id="_CPPv3N6murxla13SolverManager8pick_funERKNSt6vectorI4SortEE"></span><span id="_CPPv2N6murxla13SolverManager8pick_funERKNSt6vectorI4SortEE"></span><span id="murxla::SolverManager::pick_fun__std::vector:Sort:CR"></span><span class="target" id="classmurxla_1_1SolverManager_1abd794c3b18834b85e6c46e8b40029244"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_fun</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">domain_sorts</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager8pick_funERKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick function term with given domain sorts. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that such terms exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>domain_sorts</strong> – The sorts of the domain of the function to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A term representing a function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager8pick_varEv">
+<span id="_CPPv3N6murxla13SolverManager8pick_varEv"></span><span id="_CPPv2N6murxla13SolverManager8pick_varEv"></span><span id="murxla::SolverManager::pick_var"></span><span class="target" id="classmurxla_1_1SolverManager_1a4f78aae463f149844f81d639cb53cbdc"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager8pick_varEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick variable from current scope level. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that a variable exists. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A term representing a variable. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager9pick_varsE6size_t">
+<span id="_CPPv3NK6murxla13SolverManager9pick_varsE6size_t"></span><span id="_CPPv2NK6murxla13SolverManager9pick_varsE6size_t"></span><span id="murxla::SolverManager::pick_vars__sC"></span><span class="target" id="classmurxla_1_1SolverManager_1a046d5c1a0a1879c6ba90af459ef40567"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_vars</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_vars</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager9pick_varsE6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick <code class="docutils literal notranslate"><span class="pre">num_vars</span></code> variables. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that at least <code class="docutils literal notranslate"><span class="pre">num_vars</span></code> variables exist. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_vars</strong> – The number of variables to pick. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A vector with the picked variables. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager10remove_varERK4Term">
+<span id="_CPPv3N6murxla13SolverManager10remove_varERK4Term"></span><span id="_CPPv2N6murxla13SolverManager10remove_varERK4Term"></span><span id="murxla::SolverManager::remove_var__TermCR"></span><span class="target" id="classmurxla_1_1SolverManager_1a95f703b2ad4d64cd32bcb4c46fe8257a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remove_var</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">var</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager10remove_varERK4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove variable from current scope level. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Must be called before calling add_term. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var</strong> – The variable to remove. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager15pick_quant_bodyEv">
+<span id="_CPPv3N6murxla13SolverManager15pick_quant_bodyEv"></span><span id="_CPPv2N6murxla13SolverManager15pick_quant_bodyEv"></span><span id="murxla::SolverManager::pick_quant_body"></span><span class="target" id="classmurxla_1_1SolverManager_1afc98b3788c090677be5f0e895738ff22"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_quant_body</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager15pick_quant_bodyEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick Boolean term from current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager15pick_quant_termEv">
+<span id="_CPPv3N6murxla13SolverManager15pick_quant_termEv"></span><span id="_CPPv2N6murxla13SolverManager15pick_quant_termEv"></span><span id="murxla::SolverManager::pick_quant_term"></span><span class="target" id="classmurxla_1_1SolverManager_1a9e26382c1b5e691653c8b76c16be67d9"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_quant_term</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager15pick_quant_termEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick term of any sort from current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager15pick_quant_termE4Sort">
+<span id="_CPPv3N6murxla13SolverManager15pick_quant_termE4Sort"></span><span id="_CPPv2N6murxla13SolverManager15pick_quant_termE4Sort"></span><span id="murxla::SolverManager::pick_quant_term__Sort"></span><span class="target" id="classmurxla_1_1SolverManager_1aaa1a48732591103e4e567c53cfac1bd8"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_quant_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager15pick_quant_termE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick term of given sort from current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager14add_assumptionE4Term">
+<span id="_CPPv3N6murxla13SolverManager14add_assumptionE4Term"></span><span id="_CPPv2N6murxla13SolverManager14add_assumptionE4Term"></span><span id="murxla::SolverManager::add_assumption__Term"></span><span class="target" id="classmurxla_1_1SolverManager_1a7368e685b6138c0ab8462bf1e305de17"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_assumption</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager14add_assumptionE4Term" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add given term to the set of currently assumed assumptions. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The assumption to cache. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager23pick_assumed_assumptionEv">
+<span id="_CPPv3N6murxla13SolverManager23pick_assumed_assumptionEv"></span><span id="_CPPv2N6murxla13SolverManager23pick_assumed_assumptionEv"></span><span id="murxla::SolverManager::pick_assumed_assumption"></span><span class="target" id="classmurxla_1_1SolverManager_1ad8d810e12df00a6cdd670103b367c851"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_assumed_assumption</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager23pick_assumed_assumptionEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick assumption out of the set of currently assumed assumptions. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires that d_assumptions is not empty. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A term representing an assumptions. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager5resetEv">
+<span id="_CPPv3N6murxla13SolverManager5resetEv"></span><span id="_CPPv2N6murxla13SolverManager5resetEv"></span><span id="murxla::SolverManager::reset"></span><span class="target" id="classmurxla_1_1SolverManager_1a148ce1d092b444590157da7393621ebe"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager5resetEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset solver manager state into start mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9reset_satEv">
+<span id="_CPPv3N6murxla13SolverManager9reset_satEv"></span><span id="_CPPv2N6murxla13SolverManager9reset_satEv"></span><span id="murxla::SolverManager::reset_sat"></span><span class="target" id="classmurxla_1_1SolverManager_1a65fbc78454a17b7e63656e882a40bfcb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset_sat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9reset_satEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reset solver manager state into assert mode.</p>
+<p>After this call, calling<ul class="simple">
+<li><p>get_unsat_assumptions()</p></li>
+<li><p>get_unsat_core() and is not possible until after the next SAT call. </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager9has_valueEv">
+<span id="_CPPv3NK6murxla13SolverManager9has_valueEv"></span><span id="_CPPv2NK6murxla13SolverManager9has_valueEv"></span><span id="murxla::SolverManager::has_valueC"></span><span class="target" id="classmurxla_1_1SolverManager_1a006b9db064a633978e24511dc8ff62f0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager9has_valueEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any value of any sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains any value of any sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager9has_valueE4Sort">
+<span id="_CPPv3NK6murxla13SolverManager9has_valueE4Sort"></span><span id="_CPPv2NK6murxla13SolverManager9has_valueE4Sort"></span><span id="murxla::SolverManager::has_value__SortC"></span><span class="target" id="classmurxla_1_1SolverManager_1ac69693d6131f8a0a896ea8dc1d08ecee"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager9has_valueE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any value of given sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains any value of given sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager21has_string_char_valueEv">
+<span id="_CPPv3NK6murxla13SolverManager21has_string_char_valueEv"></span><span id="_CPPv2NK6murxla13SolverManager21has_string_char_valueEv"></span><span id="murxla::SolverManager::has_string_char_valueC"></span><span class="target" id="classmurxla_1_1SolverManager_1aece73039a3e55c1b6db50197c71c0903"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_string_char_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager21has_string_char_valueEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if we already created string values with length 1. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if we already created string values with length 1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termEv">
+<span id="_CPPv3NK6murxla13SolverManager8has_termEv"></span><span id="_CPPv2NK6murxla13SolverManager8has_termEv"></span><span id="murxla::SolverManager::has_termC"></span><span class="target" id="classmurxla_1_1SolverManager_1ad16b5169d946ded75cbf60e5e7d0e79c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains any term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termE6size_t">
+<span id="_CPPv3NK6murxla13SolverManager8has_termE6size_t"></span><span id="_CPPv2NK6murxla13SolverManager8has_termE6size_t"></span><span id="murxla::SolverManager::has_term__sC"></span><span class="target" id="classmurxla_1_1SolverManager_1ae1c4b06f0c969674d55e46d25a3e8410"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termE6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term on given level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> – The scope level to query for terms. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if term database contains any term on given level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termE8SortKind6size_t">
+<span id="_CPPv3NK6murxla13SolverManager8has_termE8SortKind6size_t"></span><span id="_CPPv2NK6murxla13SolverManager8has_termE8SortKind6size_t"></span><span id="murxla::SolverManager::has_term__SortKind.sC"></span><span class="target" id="classmurxla_1_1SolverManager_1aa2614b6336e4ea42fac49ba7dbfd4466"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termE8SortKind6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term of given sort kind at given level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort_kind</strong> – The sort kind of the terms to query for. </p></li>
+<li><p><strong>level</strong> – The scope level to query for terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if term database contains any term of given sort kind at given level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termE8SortKind">
+<span id="_CPPv3NK6murxla13SolverManager8has_termE8SortKind"></span><span id="_CPPv2NK6murxla13SolverManager8has_termE8SortKind"></span><span id="murxla::SolverManager::has_term__SortKindC"></span><span class="target" id="classmurxla_1_1SolverManager_1a7dc5c53a9f0f36cfe8ead70cd22e35d2"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termE8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term of given sort kind. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort_kind</strong> – The sort kind of the terms to query for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if term database contains any term of given sort kind. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termERK11SortKindSet">
+<span id="_CPPv3NK6murxla13SolverManager8has_termERK11SortKindSet"></span><span id="_CPPv2NK6murxla13SolverManager8has_termERK11SortKindSet"></span><span id="murxla::SolverManager::has_term__SortKindSetCRC"></span><span class="target" id="classmurxla_1_1SolverManager_1a90027cbfa997dcbb9eeac733588cce6a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort_kinds</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termERK11SortKindSet" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term of one of the given sort kinds. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort_kind</strong> – The sort kind of the terms to query for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if term database contains any term of one of the given sort kinds. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_termE4Sort">
+<span id="_CPPv3NK6murxla13SolverManager8has_termE4Sort"></span><span id="_CPPv2NK6murxla13SolverManager8has_termE4Sort"></span><span id="murxla::SolverManager::has_term__SortC"></span><span class="target" id="classmurxla_1_1SolverManager_1ac3aa7cc5ade20adc47eb15dc21291cd1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_termE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains any term of given sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort</strong> – The sort of the terms to query for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if term database contains any term of given sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager11has_assumedEv">
+<span id="_CPPv3NK6murxla13SolverManager11has_assumedEv"></span><span id="_CPPv2NK6murxla13SolverManager11has_assumedEv"></span><span id="murxla::SolverManager::has_assumedC"></span><span class="target" id="classmurxla_1_1SolverManager_1ac1a83f483eb62de6197239a9504bb37b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_assumed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager11has_assumedEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if d_assumptions is not empty. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if d_assumptions is not empty. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager7has_funERKNSt6vectorI4SortEE">
+<span id="_CPPv3NK6murxla13SolverManager7has_funERKNSt6vectorI4SortEE"></span><span id="_CPPv2NK6murxla13SolverManager7has_funERKNSt6vectorI4SortEE"></span><span id="murxla::SolverManager::has_fun__std::vector:Sort:CRC"></span><span class="target" id="classmurxla_1_1SolverManager_1abc7092adbe57644295a1e7d68a48de38"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_fun</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">domain_sorts</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager7has_funERKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains a function term with given domain sorts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>domain_sorts</strong> – The domain sorts of the function to query for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if term database contains a function term with given domain sorts. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager7has_varEv">
+<span id="_CPPv3NK6murxla13SolverManager7has_varEv"></span><span id="_CPPv2NK6murxla13SolverManager7has_varEv"></span><span id="murxla::SolverManager::has_varC"></span><span class="target" id="classmurxla_1_1SolverManager_1a8959568c12abc89c9ff6e871ff585aa0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager7has_varEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains a variable. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>true if term database contains a variable. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager14has_quant_bodyEv">
+<span id="_CPPv3NK6murxla13SolverManager14has_quant_bodyEv"></span><span id="_CPPv2NK6murxla13SolverManager14has_quant_bodyEv"></span><span id="murxla::SolverManager::has_quant_bodyC"></span><span class="target" id="classmurxla_1_1SolverManager_1ad5a34964b187ad3189ee0c24e5fa3673"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_quant_body</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager14has_quant_bodyEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains a variable and a Boolean term in the current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains a variable and a Boolean term in the current scope level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager14has_quant_termEv">
+<span id="_CPPv3NK6murxla13SolverManager14has_quant_termEv"></span><span id="_CPPv2NK6murxla13SolverManager14has_quant_termEv"></span><span id="murxla::SolverManager::has_quant_termC"></span><span class="target" id="classmurxla_1_1SolverManager_1a3c96107ed10970278880885664fa14c4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_quant_term</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager14has_quant_termEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains a variable and a term of any sort in the current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains a variable and a term of any sort in the current scope level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager14has_quant_termE4Sort">
+<span id="_CPPv3NK6murxla13SolverManager14has_quant_termE4Sort"></span><span id="_CPPv2NK6murxla13SolverManager14has_quant_termE4Sort"></span><span id="murxla::SolverManager::has_quant_term__SortC"></span><span class="target" id="classmurxla_1_1SolverManager_1a983047dac63c7f1f73dc0ac637175d01"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_quant_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager14has_quant_termE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if term database contains a variable and a term of given sort in the current scope level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if term database contains a variable and a term of given sort in the current scope level. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9find_termE4Term4Sort8SortKind">
+<span id="_CPPv3N6murxla13SolverManager9find_termE4Term4Sort8SortKind"></span><span id="_CPPv2N6murxla13SolverManager9find_termE4Term4Sort8SortKind"></span><span id="murxla::SolverManager::find_term__Term.Sort.SortKind"></span><span class="target" id="classmurxla_1_1SolverManager_1ab3d662cf4a66cfaa4196f44715af0a84"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_term</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">term</span></span>, <a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span>, <a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9find_termE4Term4Sort8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Find the Term in the Term database that wraps the same solver term with the given sort and sort kind.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We need this for Terms returned by the solver that are only wrapped solver terms without sort information.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A nullptr if given Term is not in the term database. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8get_termE8uint64_t">
+<span id="_CPPv3NK6murxla13SolverManager8get_termE8uint64_t"></span><span id="_CPPv2NK6murxla13SolverManager8get_termE8uint64_t"></span><span id="murxla::SolverManager::get_term__uint64_tC"></span><span class="target" id="classmurxla_1_1SolverManager_1a1fda34ddcd84bef9cf3ed013154a27cd"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8get_termE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the term with the given id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – The id of the term. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The term with the given id. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager17get_untraced_termE8uint64_t">
+<span id="_CPPv3NK6murxla13SolverManager17get_untraced_termE8uint64_t"></span><span id="_CPPv2NK6murxla13SolverManager17get_untraced_termE8uint64_t"></span><span id="murxla::SolverManager::get_untraced_term__uint64_tC"></span><span class="target" id="classmurxla_1_1SolverManager_1af63c4973bf315673ae9514729235bbec"></span><a class="reference internal" href="term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_untraced_term</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager17get_untraced_termE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the untraced term with the given id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – The id of the term. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The untraced term with the given id. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_sortEv">
+<span id="_CPPv3N6murxla13SolverManager9pick_sortEv"></span><span id="_CPPv2N6murxla13SolverManager9pick_sortEv"></span><span id="murxla::SolverManager::pick_sort"></span><span class="target" id="classmurxla_1_1SolverManager_1af16684b42d7d7fe9951a4b36787f09bf"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort.</p>
+<p>It is not guaranteed that there exist terms of the returned sort.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager26pick_sort_with_sort_paramsEv">
+<span id="_CPPv3N6murxla13SolverManager26pick_sort_with_sort_paramsEv"></span><span id="_CPPv2N6murxla13SolverManager26pick_sort_with_sort_paramsEv"></span><span id="murxla::SolverManager::pick_sort_with_sort_params"></span><span class="target" id="classmurxla_1_1SolverManager_1a978fc2a17bff9b8969ea4160c835d45e"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_with_sort_params</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager26pick_sort_with_sort_paramsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort that has sort parameters.</p>
+<p>It is not guaranteed that there exist terms of the returned sort.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This includes (parametric) datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_sortE8SortKindb">
+<span id="_CPPv3N6murxla13SolverManager9pick_sortE8SortKindb"></span><span id="_CPPv2N6murxla13SolverManager9pick_sortE8SortKindb"></span><span id="murxla::SolverManager::pick_sort__SortKind.b"></span><span class="target" id="classmurxla_1_1SolverManager_1a98b2246b5ec887f48e165150bbbb63ca"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_sortE8SortKindb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort of given sort kind.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort_kind</strong> – The sort_kind of the sort to pick. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager9pick_sortERK11SortKindSetb">
+<span id="_CPPv3N6murxla13SolverManager9pick_sortERK11SortKindSetb"></span><span id="_CPPv2N6murxla13SolverManager9pick_sortERK11SortKindSetb"></span><span id="murxla::SolverManager::pick_sort__SortKindSetCR.b"></span><span class="target" id="classmurxla_1_1SolverManager_1a2b9f4dc46602fbfc3126b8ca10c4f62d"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort_kinds</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager9pick_sortERK11SortKindSetb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort of any of the given sort kinds.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort_kinds</strong> – The set of sort kinds to pick from. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This excludes parametric datatype sorts. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager19pick_sort_excludingERK11SortKindSetb">
+<span id="_CPPv3N6murxla13SolverManager19pick_sort_excludingERK11SortKindSetb"></span><span id="_CPPv2N6murxla13SolverManager19pick_sort_excludingERK11SortKindSetb"></span><span id="murxla::SolverManager::pick_sort_excluding__SortKindSetCR.b"></span><span class="target" id="classmurxla_1_1SolverManager_1a394ca46e558144ad73437edf957390e7"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_excluding</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">exclude_sort_kinds</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager19pick_sort_excludingERK11SortKindSetb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick sort, excluding sorts of kinds included in <code class="docutils literal notranslate"><span class="pre">exclude_sort_kinds</span></code>.</p>
+<p>It is not guaranteed that there exist terms of the returned sort.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exclude_sort_kinds</strong> – The sort kinds to exclude. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This excludes parametric datatype sorts. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager12pick_sort_bvE8uint32_tb">
+<span id="_CPPv3N6murxla13SolverManager12pick_sort_bvE8uint32_tb"></span><span id="_CPPv2N6murxla13SolverManager12pick_sort_bvE8uint32_tb"></span><span id="murxla::SolverManager::pick_sort_bv__uint32_t.b"></span><span class="target" id="classmurxla_1_1SolverManager_1a0d0b0ad72fdd5f714a8f85098d7d7c2f"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_bv</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager12pick_sort_bvE8uint32_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick bit-vector sort with given bit-width.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bw</strong> – The bit-width of the bit-vector sort to pick. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager16pick_sort_bv_maxE8uint32_tb">
+<span id="_CPPv3N6murxla13SolverManager16pick_sort_bv_maxE8uint32_tb"></span><span id="_CPPv2N6murxla13SolverManager16pick_sort_bv_maxE8uint32_tb"></span><span id="murxla::SolverManager::pick_sort_bv_max__uint32_t.b"></span><span class="target" id="classmurxla_1_1SolverManager_1a2b3099fcad487c5f31f73def38e04639"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_bv_max</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw_max</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager16pick_sort_bv_maxE8uint32_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick bit-vector sort with given maximum bit-width.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bw_max</strong> – The maximum bit-width (incl.) of the bit-vector sort to pick. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager18pick_sort_dt_paramEv">
+<span id="_CPPv3N6murxla13SolverManager18pick_sort_dt_paramEv"></span><span id="_CPPv2N6murxla13SolverManager18pick_sort_dt_paramEv"></span><span id="murxla::SolverManager::pick_sort_dt_param"></span><span class="target" id="classmurxla_1_1SolverManager_1a9c7bdb1e218ce2e9f749d2fe5a332d4f"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_sort_dt_param</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager18pick_sort_dt_paramEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick parametric datatypes sort. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_sortEv">
+<span id="_CPPv3NK6murxla13SolverManager8has_sortEv"></span><span id="_CPPv2NK6murxla13SolverManager8has_sortEv"></span><span id="murxla::SolverManager::has_sortC"></span><span class="target" id="classmurxla_1_1SolverManager_1aea9d4c1af877a6f499c12f2a5bfe9470"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_sortEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if any sort has been created.</p>
+<p>This does not guarantee that any terms have been created.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if any sort has been created. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_sortE8SortKind">
+<span id="_CPPv3NK6murxla13SolverManager8has_sortE8SortKind"></span><span id="_CPPv2NK6murxla13SolverManager8has_sortE8SortKind"></span><span id="murxla::SolverManager::has_sort__SortKindC"></span><span class="target" id="classmurxla_1_1SolverManager_1a2628a2b6f7a104e1f7ee6ade76a54ba4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort_kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_sortE8SortKind" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if a sort of given kind exists.</p>
+<p>This does not guarantee that any terms of this sort have been created.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort_kind</strong> – The sort kind to check for created sorts. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if a sort of given kind exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_sortERK11SortKindSet">
+<span id="_CPPv3NK6murxla13SolverManager8has_sortERK11SortKindSet"></span><span id="_CPPv2NK6murxla13SolverManager8has_sortERK11SortKindSet"></span><span id="murxla::SolverManager::has_sort__SortKindSetCRC"></span><span class="target" id="classmurxla_1_1SolverManager_1a04c6735278d8f69f7b4e46629ea94189"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla11SortKindSetE" title="murxla::SortKindSet"><span class="n"><span class="pre">SortKindSet</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">sort_kinds</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_sortERK11SortKindSet" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if a sort of any of the given kinds exists.</p>
+<p>This does not guarantee that any terms of these sorts have been created.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort_kinds</strong> – The sort kinds to check for created sorts. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if a sort of any of the given kinds exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager8has_sortE4Sort">
+<span id="_CPPv3NK6murxla13SolverManager8has_sortE4Sort"></span><span id="_CPPv2NK6murxla13SolverManager8has_sortE4Sort"></span><span id="murxla::SolverManager::has_sort__SortC"></span><span class="target" id="classmurxla_1_1SolverManager_1a07e76acae7adc802a30b1d1fca731115"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager8has_sortE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if given sort already exists.</p>
+<p>This does not guarantee that any terms of this sort have been created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>sort The sort to query for. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if given sort already exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager18has_sort_excludingERKNSt13unordered_setI8SortKindEEb">
+<span id="_CPPv3NK6murxla13SolverManager18has_sort_excludingERKNSt13unordered_setI8SortKindEEb"></span><span id="_CPPv2NK6murxla13SolverManager18has_sort_excludingERKNSt13unordered_setI8SortKindEEb"></span><span id="murxla::SolverManager::has_sort_excluding__std::unordered_set:SortKind:CR.bC"></span><span class="target" id="classmurxla_1_1SolverManager_1a52975dc216dc41e911a6a3369e64dcd8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_excluding</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_set</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">exclude_sort_kinds</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager18has_sort_excludingERKNSt13unordered_setI8SortKindEEb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if sorts of a kind other than the kinds given in exclude_sort_kinds have been created.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This excludes parametric datatype sorts. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exclude_sort_kinds</strong> – The sort kinds to exclude. </p></li>
+<li><p><strong>with_terms</strong> – True to restrict to sorts with already created terms. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if sort of a kind other than the given kinds have been created. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager18has_sort_excludingE8uint32_tRKNSt13unordered_setI8SortKindEE">
+<span id="_CPPv3NK6murxla13SolverManager18has_sort_excludingE8uint32_tRKNSt13unordered_setI8SortKindEE"></span><span id="_CPPv2NK6murxla13SolverManager18has_sort_excludingE8uint32_tRKNSt13unordered_setI8SortKindEE"></span><span id="murxla::SolverManager::has_sort_excluding__uint32_t.std::unordered_set:SortKind:CRC"></span><span class="target" id="classmurxla_1_1SolverManager_1afd553f3f40777bb090d0d761be914560"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_excluding</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_set</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="sort_kind.html#_CPPv4N6murxla8SortKindE" title="murxla::SortKind"><span class="n"><span class="pre">SortKind</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">exclude_sort_kinds</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager18has_sort_excludingE8uint32_tRKNSt13unordered_setI8SortKindEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if terms with sorts of a kind other than the kinds given in <code class="docutils literal notranslate"><span class="pre">exclude_sort_kinds</span></code> at the given scope level have been created. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> – The scope level. </p></li>
+<li><p><strong>exclude_sort_kinds</strong> – The sort kinds to exclude. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if terms with sorts of a kind other than the kinds given in <code class="docutils literal notranslate"><span class="pre">exclude_sort_kinds</span></code> have been created. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager25has_sort_with_sort_paramsEv">
+<span id="_CPPv3NK6murxla13SolverManager25has_sort_with_sort_paramsEv"></span><span id="_CPPv2NK6murxla13SolverManager25has_sort_with_sort_paramsEv"></span><span id="murxla::SolverManager::has_sort_with_sort_paramsC"></span><span class="target" id="classmurxla_1_1SolverManager_1ae6f76db1b83d47b6b4cd8d636002052b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_with_sort_params</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager25has_sort_with_sort_paramsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if sorts that have sort parameters have been created. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This includes non-parametric datatypes. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if sorts that have sort parameters have been created. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager11has_sort_bvE8uint32_tb">
+<span id="_CPPv3NK6murxla13SolverManager11has_sort_bvE8uint32_tb"></span><span id="_CPPv2NK6murxla13SolverManager11has_sort_bvE8uint32_tb"></span><span id="murxla::SolverManager::has_sort_bv__uint32_t.bC"></span><span class="target" id="classmurxla_1_1SolverManager_1a6a590c56a5ed6b8893e4ec620b43827a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_bv</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager11has_sort_bvE8uint32_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if a bit-vector sort with given bit-width exists.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if a bit-vector sort with given bit-width exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager15has_sort_bv_maxE8uint32_tb">
+<span id="_CPPv3NK6murxla13SolverManager15has_sort_bv_maxE8uint32_tb"></span><span id="_CPPv2NK6murxla13SolverManager15has_sort_bv_maxE8uint32_tb"></span><span id="murxla::SolverManager::has_sort_bv_max__uint32_t.bC"></span><span class="target" id="classmurxla_1_1SolverManager_1a20281c874d4a3889284cb2ef675baae1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_bv_max</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">bw_max</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">with_terms</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager15has_sort_bv_maxE8uint32_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if a bit-vector sort up to given maximum bit-width exists.</p>
+<p>Optionally restrict selection to sorts with terms only if <code class="docutils literal notranslate"><span class="pre">with_terms</span></code> is true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if a bit-vector sort up to given maximum bit-width exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager22has_sort_dt_parametricEv">
+<span id="_CPPv3NK6murxla13SolverManager22has_sort_dt_parametricEv"></span><span id="_CPPv2NK6murxla13SolverManager22has_sort_dt_parametricEv"></span><span id="murxla::SolverManager::has_sort_dt_parametricC"></span><span class="target" id="classmurxla_1_1SolverManager_1ad03cf703035acb90f4ac1ec7348258ce"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">has_sort_dt_parametric</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager22has_sort_dt_parametricEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if a parametric datatypes sort exists. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if a parametric datatypes sort exists. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager17get_untraced_sortE8uint64_t">
+<span id="_CPPv3NK6murxla13SolverManager17get_untraced_sortE8uint64_t"></span><span id="_CPPv2NK6murxla13SolverManager17get_untraced_sortE8uint64_t"></span><span id="murxla::SolverManager::get_untraced_sort__uint64_tC"></span><span class="target" id="classmurxla_1_1SolverManager_1aab296bd3e853f5115f8a0cc8f2d883a8"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_untraced_sort</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager17get_untraced_sortE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the untraced sort with the given id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The untraced sort with the given id. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla13SolverManager9find_sortE4Sort">
+<span id="_CPPv3NK6murxla13SolverManager9find_sortE4Sort"></span><span id="_CPPv2NK6murxla13SolverManager9find_sortE4Sort"></span><span id="murxla::SolverManager::find_sort__SortC"></span><span class="target" id="classmurxla_1_1SolverManager_1a1e1b9ef699abed9f98be9a3a484fbaf6"></span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla13SolverManager9find_sortE4Sort" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Find a matching sort for the given sort in the sort database <code class="docutils literal notranslate"><span class="pre">d_sorts</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sort</strong> – The sort to find. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The sort cached in <code class="docutils literal notranslate"><span class="pre">d_sorts</span></code>, if found, else the given sort. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager11pick_optionENSt6stringENSt6stringE">
+<span id="_CPPv3N6murxla13SolverManager11pick_optionENSt6stringENSt6stringE"></span><span id="_CPPv2N6murxla13SolverManager11pick_optionENSt6stringENSt6stringE"></span><span id="murxla::SolverManager::pick_option__ss.ss"></span><span class="target" id="classmurxla_1_1SolverManager_1a0537a38befd3c32e5cd34031891b4839"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pick_option</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager11pick_optionENSt6stringENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pick an option and an option value.</p>
+<p>If either are given, enforce option or value. If no option or the given option / value can be set, return empty pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The option name. </p></li>
+<li><p><strong>value</strong> – The option value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pair of picked option name and value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager17clear_assumptionsEv">
+<span id="_CPPv3N6murxla13SolverManager17clear_assumptionsEv"></span><span id="_CPPv2N6murxla13SolverManager17clear_assumptionsEv"></span><span id="murxla::SolverManager::clear_assumptions"></span><span class="target" id="classmurxla_1_1SolverManager_1a7b1518e07696bf5a37d25e0e6f11d9a8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear_assumptions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager17clear_assumptionsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear cached set of assumptions. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption">
 <span id="_CPPv3N6murxla13SolverManager10add_optionEP12SolverOption"></span><span id="_CPPv2N6murxla13SolverManager10add_optionEP12SolverOption"></span><span id="murxla::SolverManager::add_option__SolverOptionP"></span><span class="target" id="classmurxla_1_1SolverManager_1a832436d4176d9f9e7fd50401c3d997df"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_option</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="solver_option.html#_CPPv4N6murxla12SolverOptionE" title="murxla::SolverOption"><span class="n"><span class="pre">SolverOption</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">opt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Add solver option. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>opt</strong> – The solver option to add. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager13report_resultEN6Solver6ResultE">
+<span id="_CPPv3N6murxla13SolverManager13report_resultEN6Solver6ResultE"></span><span id="_CPPv2N6murxla13SolverManager13report_resultEN6Solver6ResultE"></span><span id="murxla::SolverManager::report_result__Solver::Result"></span><span class="target" id="classmurxla_1_1SolverManager_1af2065647083c1f7805b405a0c9be5f23"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">report_result</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><span class="n"><span class="pre">Solver</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver6ResultE" title="murxla::Solver::Result"><span class="n"><span class="pre">Result</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager13report_resultEN6Solver6ResultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Report solver result to solver manager. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>res</strong> – The solver result. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager11get_profileEv">
+<span id="_CPPv3N6murxla13SolverManager11get_profileEv"></span><span id="_CPPv2N6murxla13SolverManager11get_profileEv"></span><span id="murxla::SolverManager::get_profile"></span><span class="target" id="classmurxla_1_1SolverManager_1a5be7382f7d2aa76a23a019248e453061"></span><span class="n"><span class="pre">SolverProfile</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_profile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager11get_profileEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the currently configured solver profile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The solver profile. </p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager7d_statsE">
+<span id="_CPPv3N6murxla13SolverManager7d_statsE"></span><span id="_CPPv2N6murxla13SolverManager7d_statsE"></span><span id="murxla::SolverManager::d_stats__Stats"></span><span class="target" id="classmurxla_1_1SolverManager_1adf417428576ebbd4aabeecb1b96eae65"></span><a class="reference internal" href="#_CPPv4N6murxla13SolverManager5StatsE" title="murxla::SolverManager::Stats"><span class="n"><span class="pre">Stats</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_stats</span></span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager7d_statsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Statistics. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager14d_arith_linearE">
+<span id="_CPPv3N6murxla13SolverManager14d_arith_linearE"></span><span id="_CPPv2N6murxla13SolverManager14d_arith_linearE"></span><span id="murxla::SolverManager::d_arith_linear__b"></span><span class="target" id="classmurxla_1_1SolverManager_1a9ad9e32cf14cefc2c940c0a9ad69bd3b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_arith_linear</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager14d_arith_linearE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True to restrict arithmetic operators to linear fragment. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager16d_simple_symbolsE">
+<span id="_CPPv3N6murxla13SolverManager16d_simple_symbolsE"></span><span id="_CPPv2N6murxla13SolverManager16d_simple_symbolsE"></span><span id="murxla::SolverManager::d_simple_symbols__b"></span><span class="target" id="classmurxla_1_1SolverManager_1ad0212665d7acd7636ad13901a74301af"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_simple_symbols</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager16d_simple_symbolsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if all symbols for terms should be of the form ‘_sX’ rather than a random string. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager13d_incrementalE">
+<span id="_CPPv3N6murxla13SolverManager13d_incrementalE"></span><span id="_CPPv2N6murxla13SolverManager13d_incrementalE"></span><span id="murxla::SolverManager::d_incremental__b"></span><span class="target" id="classmurxla_1_1SolverManager_1a5f2b0252131814e28f63209eb45aa075"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_incremental</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager13d_incrementalE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if incremental solving is enabled. (SMT-LIB: option :incremental). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager11d_model_genE">
+<span id="_CPPv3N6murxla13SolverManager11d_model_genE"></span><span id="_CPPv2N6murxla13SolverManager11d_model_genE"></span><span id="murxla::SolverManager::d_model_gen__b"></span><span class="target" id="classmurxla_1_1SolverManager_1a8eff5ddb3d5c2f8e0b619ee2eac0f67a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_model_gen</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager11d_model_genE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if model generation is enabled. (SMT-LIB: option :produce-models). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager19d_unsat_assumptionsE">
+<span id="_CPPv3N6murxla13SolverManager19d_unsat_assumptionsE"></span><span id="_CPPv2N6murxla13SolverManager19d_unsat_assumptionsE"></span><span id="murxla::SolverManager::d_unsat_assumptions__b"></span><span class="target" id="classmurxla_1_1SolverManager_1acca340e8bd9d568d9321685e6ab4e0af"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_unsat_assumptions</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager19d_unsat_assumptionsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if producing unsat assumptions is enabled. (SMT-LIB: option :produce-unsat-assumptions). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager13d_unsat_coresE">
+<span id="_CPPv3N6murxla13SolverManager13d_unsat_coresE"></span><span id="_CPPv2N6murxla13SolverManager13d_unsat_coresE"></span><span id="murxla::SolverManager::d_unsat_cores__b"></span><span class="target" id="classmurxla_1_1SolverManager_1a6dc0d7130af451ab8488848786a7f394"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_unsat_cores</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager13d_unsat_coresE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if producing unsat cores is enabled. (SMT-LIB: option :produce-unsat-cores). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager15d_n_push_levelsE">
+<span id="_CPPv3N6murxla13SolverManager15d_n_push_levelsE"></span><span id="_CPPv2N6murxla13SolverManager15d_n_push_levelsE"></span><span id="murxla::SolverManager::d_n_push_levels__uint32_t"></span><span class="target" id="classmurxla_1_1SolverManager_1ab876517b0bbe829fee5950916a06f741"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_n_push_levels</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager15d_n_push_levelsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of scope levels previously pushed. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager12d_sat_calledE">
+<span id="_CPPv3N6murxla13SolverManager12d_sat_calledE"></span><span id="_CPPv2N6murxla13SolverManager12d_sat_calledE"></span><span id="murxla::SolverManager::d_sat_called__b"></span><span class="target" id="classmurxla_1_1SolverManager_1adec7f137b66310d7d33af0094b4afd00"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_sat_called</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager12d_sat_calledE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>True if a previous check-sat call is still “active”, i.e., if no formulas have been asserted or assumed since. While true it is save to check failed assumptions and query model values. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager12d_sat_resultE">
+<span id="_CPPv3N6murxla13SolverManager12d_sat_resultE"></span><span id="_CPPv2N6murxla13SolverManager12d_sat_resultE"></span><span id="murxla::SolverManager::d_sat_result__Solver::Result"></span><span class="target" id="classmurxla_1_1SolverManager_1aade46672ec7ea3fee10710bc0a3f3293"></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><span class="n"><span class="pre">Solver</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver6ResultE" title="murxla::Solver::Result"><span class="n"><span class="pre">Result</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_sat_result</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6SolverE" title="murxla::Solver"><span class="n"><span class="pre">Solver</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver6ResultE" title="murxla::Solver::Result"><span class="n"><span class="pre">Result</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver6Result7UNKNOWNE" title="murxla::Solver::Result::UNKNOWN"><span class="n"><span class="pre">UNKNOWN</span></span></a><a class="headerlink" href="#_CPPv4N6murxla13SolverManager12d_sat_resultE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The result of the previous sat call. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager13d_n_sat_callsE">
+<span id="_CPPv3N6murxla13SolverManager13d_n_sat_callsE"></span><span id="_CPPv2N6murxla13SolverManager13d_n_sat_callsE"></span><span id="murxla::SolverManager::d_n_sat_calls__uint32_t"></span><span class="target" id="classmurxla_1_1SolverManager_1afe8d425cbf2e02ec343c4ad43b25da24"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">d_n_sat_calls</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager13d_n_sat_callsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The number of check-sat calls issued. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager11d_mbt_statsE">
+<span id="_CPPv3N6murxla13SolverManager11d_mbt_statsE"></span><span id="_CPPv2N6murxla13SolverManager11d_mbt_statsE"></span><span id="murxla::SolverManager::d_mbt_stats__statistics::StatisticsP"></span><span class="target" id="classmurxla_1_1SolverManager_1a182ebf155579fbbb3860043ae2c15b69"></span><span class="n"><span class="pre">statistics</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Statistics</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">d_mbt_stats</span></span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager11d_mbt_statsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A pointer to the murxla-level statistics object. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N6murxla13SolverManager5StatsE">
+<span id="_CPPv3N6murxla13SolverManager5StatsE"></span><span id="_CPPv2N6murxla13SolverManager5StatsE"></span><span id="murxla::SolverManager::Stats"></span><span class="target" id="structmurxla_1_1SolverManager_1_1Stats"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Stats</span></span></span><a class="headerlink" href="#_CPPv4N6murxla13SolverManager5StatsE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>

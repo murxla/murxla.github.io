@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../advanced.html">Advanced Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
@@ -54,6 +54,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory.html">Theories</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">The Finite State Machine (FSM)</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">FSM: Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#murxla-action-generate">murxla::Action::generate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#murxla-action-name-run-args">murxla::Action&lt;Name&gt;::run(&lt;args&gt;)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#macro-for-testing-solver-behavior">Macro for Testing Solver Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#murxla-action-untrace">murxla::Action::untrace()</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#macros-for-checking-trace-tokens">Macros for Checking Trace Tokens</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#solver-specific-actions">Solver-specific Actions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tracing">Tracing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fsm-configuration">FSM Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-base-class-for-actions">The Base Class for Actions</a></li>
@@ -67,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../solver_manager.html">Solver Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../solver_option.html">Solver Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -123,11 +134,23 @@ while tracing this execution (implemented in member function
 function <code class="docutils literal notranslate"><span class="pre">run(&lt;args&gt;)</span></code> to ensure that <a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a>
 and <a class="reference internal" href="#_CPPv4N6murxla6Action7untraceERKNSt6vectorINSt6stringEEE" title="murxla::Action::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::untrace()</span></code></a> execute an action in the same way</p></li>
 </ul>
+<section id="murxla-action-generate">
+<h2>murxla::Action::generate()<a class="headerlink" href="#murxla-action-generate" title="Permalink to this headline"></a></h2>
+<p>Function <a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a> is responsible for checking an
+action’s preconditions and selecting (and, in execeptional cases, creating) the
+arguments for its execution.
+For this, it queries the solver manager
+(see <a class="reference internal" href="../solver_manager.html#_CPPv4N6murxla13SolverManagerE" title="murxla::SolverManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverManager</span></code></a>),
+which provides a rich interface to pick and manage sorts, terms and manage
+a solver’s current state.</p>
 <p>For example, action <a class="reference internal" href="#_CPPv4N6murxla19ActionAssertFormulaE" title="murxla::ActionAssertFormula"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula</span></code></a>
 (from the <a class="reference internal" href="#base-actions"><span class="std std-ref">base set of actions</span></a>)
 is responsible for asserting a random formula (SMT-LIB: <code class="docutils literal notranslate"><span class="pre">assert</span></code>).
-It generates the arguments to the action execution by picking a random
-Boolean term:</p>
+It asserts that the solver is initialized for Murxla-level debugging purposes,
+and checks the required precondition that Boolean terms already exist in the
+term database.
+It then generates the arguments to the action execution by picking a
+random Boolean term:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"></span>
 <span class="nf">ActionAssertFormula::generate</span><span class="p">()</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -140,8 +163,71 @@ Boolean term:</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Its execution is implemented in <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula::run()</span></code>
-and interacts with the solver via the generic solver wrapper API:</p>
+<p>In general, <a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a> should only pick existing
+sorts and terms as arguments. However, there exist some exceptional cases
+where it is beneficial to create arguments on demand. For example,
+it makes no sense to globally create patterns
+(<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op13DT_MATCH_CASEE" title="murxla::Op::DT_MATCH_CASE"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::DT_MATCH_CASE</span></code></a>,
+<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op18DT_MATCH_BIND_CASEE" title="murxla::Op::DT_MATCH_BIND_CASE"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::DT_MATCH_BIND_CASE</span></code></a>)
+for <a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op8DT_MATCHE" title="murxla::Op::DT_MATCH"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::DT_MATCH</span></code></a> (SMT-LIB: <code class="docutils literal notranslate"><span class="pre">match</span></code>).
+If created globally, they would be added to the term database and could
+potentially be picked when selecting arguments for an operator other than
+<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op8DT_MATCHE" title="murxla::Op::DT_MATCH"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::DT_MATCH</span></code></a>, which shouldn’t be the case.
+Instead, we create these patterns on demand
+in <a class="reference internal" href="#_CPPv4N6murxla12ActionMkTerm8generateEv" title="murxla::ActionMkTerm::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionMkTerm::generate()</span></code></a>.</p>
+<p>For example, for a patterns that matches a specific non-nullary datatype constructor (of kind
+<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op18DT_MATCH_BIND_CASEE" title="murxla::Op::DT_MATCH_BIND_CASE"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::DT_MATCH_BIND_CASE</span></code></a>),
+we need variables of a specific sort for each selector of the
+constructor, and a quantified term that possibly uses these variables. We thus
+create such patterns on demand as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ActionMkVar</span><span class="w"> </span><span class="nf">mkvar</span><span class="p">(</span><span class="n">d_smgr</span><span class="p">);</span><span class="w">  </span><span class="c1">// to create variables on demand</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sel_names</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Create variable of selector codomain sort for each selector. */</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">var_id</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">      </span><span class="n">mkvar</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">dt_sort</span><span class="o">-&gt;</span><span class="n">get_dt_sel_sort</span><span class="p">(</span><span class="n">dt_sort</span><span class="p">,</span><span class="w"> </span><span class="n">ctor</span><span class="p">,</span><span class="w"> </span><span class="n">sel</span><span class="p">),</span><span class="w"></span>
+<span class="w">                </span><span class="n">d_smgr</span><span class="p">.</span><span class="n">pick_symbol</span><span class="p">())[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="n">match_case_args</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">d_smgr</span><span class="p">.</span><span class="n">get_term</span><span class="p">(</span><span class="n">var_id</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="cm">/* Create some terms that (possibly) use these variables. */</span><span class="w"></span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">n_terms_created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="o">!</span><span class="n">d_smgr</span><span class="p">.</span><span class="n">has_quant_term</span><span class="p">(</span><span class="n">sort</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">d_smgr</span><span class="p">.</span><span class="n">has_term</span><span class="p">(</span><span class="n">sort</span><span class="p">))</span><span class="w"></span>
+<span class="w">       </span><span class="o">||</span><span class="w"> </span><span class="n">n_terms_created</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MURXLA_MIN_N_QUANT_TERMS</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* We only create op terms here (no consts, values, vars). The</span>
+<span class="cm">   * former two wouldn&#39;t be quantified terms that use the created vars</span>
+<span class="cm">   * anyways, and we have already picked a sort with terms, so we do</span>
+<span class="cm">   * have terms of that sort in the term db. We may consider to create</span>
+<span class="cm">   * vars here in the future. */</span><span class="w"></span>
+<span class="w">  </span><span class="n">Op</span><span class="o">::</span><span class="n">Kind</span><span class="w"> </span><span class="n">op_kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d_smgr</span><span class="p">.</span><span class="n">pick_op_kind</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">sort_kind</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">op_kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">DT_MATCH</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Do not create quantifiers since this would bind the variables</span>
+<span class="cm">   * created above. */</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">op_kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">FORALL</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">op_kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">EXISTS</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">generate</span><span class="p">(</span><span class="n">op_kind</span><span class="p">))</span><span class="w"> </span><span class="n">n_terms_created</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">match_case_kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">DT_MATCH_BIND_CASE</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="murxla-action-name-run-args">
+<h2>murxla::Action&lt;Name&gt;::run(&lt;args&gt;)<a class="headerlink" href="#murxla-action-name-run-args" title="Permalink to this headline"></a></h2>
+<p>The execution of an action is implemented in a (usually private) member
+function <code class="docutils literal notranslate"><span class="pre">murxla::Action&lt;Name&gt;::run(&lt;args&gt;)</span></code>, which allows to use the same
+action execution code for both <a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a> and
+<a class="reference internal" href="#_CPPv4N6murxla6Action7untraceERKNSt6vectorINSt6stringEEE" title="murxla::Action::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::untrace()</span></code></a>.
+This function is responsible for <a class="reference internal" href="#tracing"><span class="std std-ref">tracing</span></a>, and is usually the
+only one to interact with the solver via the generic solver wrapper API (or
+directly via the solver API for solver-specific actions).
+It is further responsible for registering created sorts and terms with the
+solver manager (if to be used in the future).</p>
+<p>For example, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula::run()</span></code> is implemented
+as follows:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"></span>
 <span class="nf">ActionAssertFormula::run</span><span class="p">(</span><span class="n">Term</span><span class="w"> </span><span class="n">assertion</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -151,7 +237,63 @@ and interacts with the solver via the generic solver wrapper API:</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Its replayed via <a class="reference internal" href="#_CPPv4N6murxla19ActionAssertFormula7untraceERKNSt6vectorINSt6stringEEE" title="murxla::ActionAssertFormula::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula::untrace()</span></code></a> as follows:</p>
+<p>In this example, we first trace the actioan via <a class="reference internal" href="#c.MURXLA_TRACE" title="MURXLA_TRACE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE</span></code></a>,
+then reset the solver state from <em>sat</em> to <em>assert</em> (see Fig. 4.1 of the
+<a class="reference external" href="https://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.6-r2021-05-12.pdf">SMT-LIB Standard 2.6</a>),
+and then assert the formula via <a class="reference internal" href="../solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver14assert_formulaERK4Term" title="murxla::Solver::assert_formula"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::assert_formula()</span></code></a>.</p>
+<p>Actions that create new sorts and terms must trace these return values via
+macro <a class="reference internal" href="#c.MURXLA_TRACE_RETURN" title="MURXLA_TRACE_RETURN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE_RETURN</span></code></a> (see <a class="reference internal" href="#tracing"><span class="std std-ref">Tracing</span></a>).
+Further, for testing assertions about the solver under test, we use macro
+<a class="reference internal" href="#c.MURXLA_TEST" title="MURXLA_TEST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TEST</span></code></a>.
+For example, the action execution of action <a class="reference internal" href="#_CPPv4N6murxla12ActionMkSortE" title="murxla::ActionMkSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkSort</span></code></a>
+is implemented as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">ActionMkSort</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">SortKind</span><span class="w"> </span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bw</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">MURXLA_TRACE</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">get_kind</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">bw</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Sort</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d_solver</span><span class="p">.</span><span class="n">mk_sort</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span><span class="w"> </span><span class="n">bw</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">MURXLA_TEST</span><span class="p">(</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">get_bv_size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bw</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">d_smgr</span><span class="p">.</span><span class="n">add_sort</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">kind</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">check_sort</span><span class="p">(</span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">MURXLA_TRACE_RETURN</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">get_id</span><span class="p">()};</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This first traces the action, then asserts that the given sort kind is the
+bit-vector sort kind (Murxla-level debug assertion), then creates the sort
+via <a class="reference internal" href="../solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver7mk_sortE8SortKind" title="murxla::Solver::mk_sort"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_sort()</span></code></a>, tests if the created sort has
+the expected bit-width via <a class="reference internal" href="#c.MURXLA_TEST" title="MURXLA_TEST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TEST</span></code></a>, adds the sort to the sort
+database via <a class="reference internal" href="../solver_manager.html#_CPPv4N6murxla13SolverManager8add_sortER4Sort8SortKindbb" title="murxla::SolverManager::add_sort"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::SolverManager::add_sort()</span></code></a>, performs some
+checks on the sort via <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionMkSort::check_sort()</span></code>, traces
+the sort as return value via <a class="reference internal" href="#c.MURXLA_TRACE_RETURN" title="MURXLA_TRACE_RETURN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE_RETURN</span></code></a> and returns its id
+(used for untracing only).</p>
+<section id="macro-for-testing-solver-behavior">
+<h3>Macro for Testing Solver Behavior<a class="headerlink" href="#macro-for-testing-solver-behavior" title="Permalink to this headline"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_TEST">
+<span class="target" id="except_8hpp_1afde0f2fcd6c988956c53b9893e87f082"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_TEST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cond</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_TEST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Test assertion about a solver’s behavior. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cond</strong> – The asserted condition. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="murxla-action-untrace">
+<h2>murxla::Action::untrace()<a class="headerlink" href="#murxla-action-untrace" title="Permalink to this headline"></a></h2>
+<p>Actions are replayed via <a class="reference internal" href="#_CPPv4N6murxla6Action7untraceERKNSt6vectorINSt6stringEEE" title="murxla::Action::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::untrace()</span></code></a>,
+which takes a vector of tokens as arguments, converts those tokens into
+sort and term objects where necessary, and executes the action via
+<a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a>.</p>
+<p>For example, action <a class="reference internal" href="#_CPPv4N6murxla19ActionAssertFormulaE" title="murxla::ActionAssertFormula"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula</span></code></a> is replayed via
+<a class="reference internal" href="#_CPPv4N6murxla19ActionAssertFormula7untraceERKNSt6vectorINSt6stringEEE" title="murxla::ActionAssertFormula::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula::untrace()</span></code></a> as follows:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="w"></span>
 <span class="n">ActionAssertFormula</span><span class="o">::</span><span class="n">untrace</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">tokens</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -163,9 +305,141 @@ and interacts with the solver via the generic solver wrapper API:</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Solver-specific actions derived from <a class="reference internal" href="#_CPPv4N6murxla6ActionE" title="murxla::Action"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Action</span></code></a>, on the other
-hand, access the API of the solver under test directly, without going through
-the solver wrapper API. For example, Bitwuzla defines a solver-specific
+<p>Murxla provides a set of
+<a class="reference internal" href="#check-trace-macros"><span class="std std-ref">macros for checking expected properties</span></a> of given
+action line trace tokens.
+In the example above, we use macro <a class="reference internal" href="#c.MURXLA_CHECK_TRACE_NTOKENS" title="MURXLA_CHECK_TRACE_NTOKENS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_NTOKENS</span></code></a> to
+check if <code class="docutils literal notranslate"><span class="pre">tokens</span></code> holds exactly one trace token (the id of the asserted term).
+We retrieve the term matched to the traced term id via
+<a class="reference internal" href="#_CPPv4N6murxla6Action17get_untraced_termE8uint64_t" title="murxla::Action::get_untraced_term"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::get_untraced_term()</span></code></a> (similarly, traced sorts are
+retrieved from the sort database via
+<a class="reference internal" href="#_CPPv4N6murxla6Action17get_untraced_sortE8uint64_t" title="murxla::Action::get_untraced_sort"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::get_untraced_sort()</span></code></a>),
+and check if we were able to match the term (or if the given id is unknown)
+via <a class="reference internal" href="#c.MURXLA_CHECK_TRACE_TERM" title="MURXLA_CHECK_TRACE_TERM"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_TERM</span></code></a> (similarly, for sorts, via
+<a class="reference internal" href="#c.MURXLA_CHECK_TRACE_SORT" title="MURXLA_CHECK_TRACE_SORT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_SORT</span></code></a>).</p>
+<section id="macros-for-checking-trace-tokens">
+<span id="check-trace-macros"></span><h3>Macros for Checking Trace Tokens<a class="headerlink" href="#macros-for-checking-trace-tokens" title="Permalink to this headline"></a></h3>
+<p>Murxla defines the following macros for checking trace line properties.
+These macros are only used for error checking traces when untracing.</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE">
+<span class="target" id="group__macros-check-trace_1gaee1aa991cae6f9cefd2d3ee6f04c82d4"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">cond</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if condition <code class="docutils literal notranslate"><span class="pre">cond</span></code> is true. If it is false, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cond</strong> – The condition to check. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_EMPTY">
+<span class="target" id="group__macros-check-trace_1ga4232d24cdbf325f6e3d2b029dce8ec24"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_EMPTY</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">tokens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_EMPTY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if list of tokens <code class="docutils literal notranslate"><span class="pre">tokens</span></code> is empty. If it is not, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tokens</strong> – The tokenized trace line, a vector strings. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_NOT_EMPTY">
+<span class="target" id="group__macros-check-trace_1ga96f8ed9283459b49ac63f20d81271d02"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_NOT_EMPTY</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">tokens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_NOT_EMPTY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if list of tokens <code class="docutils literal notranslate"><span class="pre">tokens</span></code> is not empty. If it is not, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tokens</strong> – The tokenized trace line, a vector strings. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_NTOKENS">
+<span class="target" id="group__macros-check-trace_1gaa44525a553626aa0d3909030e43695b2"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_NTOKENS</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">expected</span></span>, <span class="n"><span class="pre">ntokens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_NTOKENS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if given number of trace tokens <code class="docutils literal notranslate"><span class="pre">ntokens</span></code> matches the expected number <code class="docutils literal notranslate"><span class="pre">expected</span></code>. If not, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – The expected number of tokens. </p></li>
+<li><p><strong>ntokens</strong> – The actual number of tokens. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_NTOKENS_MIN">
+<span class="target" id="group__macros-check-trace_1ga80deadbea1ec04074ce3d481d466a87a"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_NTOKENS_MIN</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">expected</span></span>, <span class="n"><span class="pre">what</span></span>, <span class="n"><span class="pre">ntokens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_NTOKENS_MIN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if at least as many number of trace tokens are given (<code class="docutils literal notranslate"><span class="pre">ntokens</span></code>) as the number of (min) expected trace tokens (<code class="docutils literal notranslate"><span class="pre">expected</span></code>) and create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>, if this is not the case. String <code class="docutils literal notranslate"><span class="pre">what</span></code> specifies what kind of trace tokens were expected. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – The minimum number of expected trace tokens. </p></li>
+<li><p><strong>what</strong> – A string specifying what kind of trace tokens were expected. </p></li>
+<li><p><strong>ntokens</strong> – The actual number of trace tokens. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_NTOKENS_OF_SORT">
+<span class="target" id="group__macros-check-trace_1ga9247df165b30df02e74d10b6be45ef4c"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_NTOKENS_OF_SORT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">expected</span></span>, <span class="n"><span class="pre">ntokens</span></span>, <span class="n"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_NTOKENS_OF_SORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if the given number of trace tokens <code class="docutils literal notranslate"><span class="pre">ntokens</span></code> matches the expected number <code class="docutils literal notranslate"><span class="pre">expected</span></code> and create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>, if this is not the case. String <code class="docutils literal notranslate"><span class="pre">sort</span></code> specifies the expected sort of the given tokens. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expected</strong> – The number of expected trace tokens. </p></li>
+<li><p><strong>sort</strong> – The expected sort of the given tokens. </p></li>
+<li><p><strong>ntokens</strong> – The actual number of trace tokens. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_SORT">
+<span class="target" id="group__macros-check-trace_1ga8577c11b70aa108e05a95b6b2a329e23"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_SORT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">sort</span></span>, <span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_SORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if given untraced sort (matched to <code class="docutils literal notranslate"><span class="pre">id</span></code>) is not null. If it is, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The sort to check. </p></li>
+<li><p><strong>id</strong> – The id of the sort. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.MURXLA_CHECK_TRACE_TERM">
+<span class="target" id="group__macros-check-trace_1ga4905b27745830d9645b50d9efcc6f181"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_CHECK_TRACE_TERM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">term</span></span>, <span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.MURXLA_CHECK_TRACE_TERM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Check if given untraced term (matched to <code class="docutils literal notranslate"><span class="pre">id</span></code>) is not null. If it is, create a murxla::UntraceExceptionStream, which throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaActionUntraceException"><span class="std std-ref">murxla::MurxlaActionUntraceException</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sort</strong> – The term to check. </p></li>
+<li><p><strong>id</strong> – The id of the sort. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="solver-specific-actions">
+<h2>Solver-specific Actions<a class="headerlink" href="#solver-specific-actions" title="Permalink to this headline"></a></h2>
+<p>Solver-specific actions derived from <a class="reference internal" href="#_CPPv4N6murxla6ActionE" title="murxla::Action"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Action</span></code></a>
+usually access the API of the solver under test directly, without going through
+the solver wrapper API.</p>
+<p>For example, Bitwuzla defines a solver-specific
 action <code class="docutils literal notranslate"><span class="pre">BzlaActionTermIsEqualSort</span></code> for comparing the sort of two terms,
 and its execution <code class="docutils literal notranslate"><span class="pre">BzlaActionTermIsEqualSort::run(Term,</span> <span class="pre">Term)</span></code> is implemented
 follows:</p>
@@ -181,6 +455,7 @@ follows:</p>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
+</section>
 <section id="tracing">
 <span id="id1"></span><h2>Tracing<a class="headerlink" href="#tracing" title="Permalink to this headline"></a></h2>
 <p>In order to be able to replay a sequence of actions that triggered an issue
@@ -196,24 +471,53 @@ terms:</p>
 </pre></div>
 </div>
 <p>Additionally, in the first line of a trace, Murxla records the command line
-options provided to generate this trace. For example, the following trace
-triggered an issue in cvc5:</p>
-<div class="highlight-trace notranslate"><div class="highlight"><pre><span></span><span class="k">set-murxla-options</span> <span class="n">--cvc5</span> <span class="n">-t</span> <span class="m">1</span> <span class="n">-m</span> <span class="m">10000</span> <span class="n">--fuzz-opts</span>
-<span class="m">92880</span> <span class="k">new</span>
-<span class="m">32252</span> <span class="k">set-logic</span> <span class="n">BVFPNIA</span>
-<span class="m">96760</span> <span class="k">set-option</span> <span class="n">incremental</span> <span class="n">false</span>
-<span class="m">3046</span> <span class="k">set-option</span> <span class="n">solve-int-as-bv</span> <span class="m">925956265872928556</span>
-<span class="m">36189</span> <span class="k">mk-sort</span> <span class="na">SORT_INT</span>
-<span class="k">return</span> <span class="n">s14</span>
-<span class="m">19629</span> <span class="k">mk-const</span> <span class="n">s14</span> <span class="s">&quot;_x35&quot;</span>
-<span class="k">return</span> <span class="n">t46</span>
-<span class="m">81876</span> <span class="k">mk-term</span> <span class="o">OP_INT_DIV </span><span class="na">SORT_INT </span><span class="m">2</span> <span class="n">t46</span> <span class="n">t46</span>
-<span class="k">return</span> <span class="n">t125</span> <span class="n">s14</span>
-<span class="m">50301</span> <span class="k">mk-term</span> <span class="o">OP_INT_LTE </span><span class="na">SORT_BOOL </span><span class="m">2</span> <span class="n">t125</span> <span class="n">t125</span>
-<span class="k">return</span> <span class="n">t127</span> <span class="n">s12</span>
-<span class="m">88360</span> <span class="n">cvc5-simplify</span> <span class="n">t127</span>
+options provided to generate this trace.</p>
+<p>For example, the following trace triggered an issue in cvc5:</p>
+<div class="highlight-trace notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">set-murxla-options</span> <span class="n">--cvc5</span> <span class="n">-t</span> <span class="m">1</span> <span class="n">-m</span> <span class="m">10000</span> <span class="n">--fuzz-opts</span>
+<span class="linenos"> 2</span><span class="m">92880</span> <span class="k">new</span>
+<span class="linenos"> 3</span><span class="m">32252</span> <span class="k">set-logic</span> <span class="n">BVFPNIA</span>
+<span class="linenos"> 4</span><span class="m">96760</span> <span class="k">set-option</span> <span class="n">incremental</span> <span class="n">false</span>
+<span class="linenos"> 5</span><span class="m">3046</span> <span class="k">set-option</span> <span class="n">solve-int-as-bv</span> <span class="m">925956265872928556</span>
+<span class="linenos"> 6</span><span class="m">36189</span> <span class="k">mk-sort</span> <span class="na">SORT_INT</span>
+<span class="linenos"> 7</span><span class="k">return</span> <span class="n">s14</span>
+<span class="linenos"> 8</span><span class="m">19629</span> <span class="k">mk-const</span> <span class="n">s14</span> <span class="s">&quot;_x35&quot;</span>
+<span class="linenos"> 9</span><span class="k">return</span> <span class="n">t46</span>
+<span class="linenos">10</span><span class="m">81876</span> <span class="k">mk-term</span> <span class="o">OP_INT_DIV </span><span class="na">SORT_INT </span><span class="m">2</span> <span class="n">t46</span> <span class="n">t46</span>
+<span class="linenos">11</span><span class="k">return</span> <span class="n">t125</span> <span class="n">s14</span>
+<span class="linenos">12</span><span class="m">50301</span> <span class="k">mk-term</span> <span class="o">OP_INT_LTE </span><span class="na">SORT_BOOL </span><span class="m">2</span> <span class="n">t125</span> <span class="n">t125</span>
+<span class="linenos">13</span><span class="k">return</span> <span class="n">t127</span> <span class="n">s12</span>
+<span class="linenos">14</span><span class="m">88360</span> <span class="n">cvc5-simplify</span> <span class="n">t127</span>
 </pre></div>
 </div>
+<p>As indicated in the first line, this trace  was generated when running Murxla
+continuously for 1000 runs to test cvc5 with a one second time limit per run
+and with option fuzzing enabled.
+Line <strong>2</strong> creates a new solver instance, line <strong>3</strong> restricts the logic to
+<code class="docutils literal notranslate"><span class="pre">BVFPNIA</span></code>, lines <strong>4-5</strong> enable incremental solving and a cvc5-specific
+option that translates integers to bit-vectors, line <strong>6</strong> queries the integer
+sort from the solver, lines <strong>8-9</strong> create and return a constant of that sort,
+lines <strong>10-11</strong> create and return an integer division
+(<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op7INT_DIVE" title="murxla::Op::INT_DIV"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::INT_DIV</span></code></a>) and an integer less-than-or-equal
+(<a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op7INT_LTEE" title="murxla::Op::INT_LTE"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::INT_LTE</span></code></a>) term, and line <strong>14</strong> executes a
+cvc5-specific action <code class="docutils literal notranslate"><span class="pre">cvc5-simplify</span></code> to simplify the integer division term
+<code class="docutils literal notranslate"><span class="pre">t127</span></code>.</p>
+<p>As shown in lines <strong>10-11</strong>, when creating terms, we trace argument lists
+while also providing the number of arguments, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">t46</span> <span class="pre">t46</span></code> in line
+<strong>10</strong>. If an operator is indexed, we similarly provide the list of indices
+with its size, e.g., a bit-vector extract from index <strong>4</strong> to <strong>3</strong>
+on a term <code class="docutils literal notranslate"><span class="pre">t99</span></code> of sort <code class="docutils literal notranslate"><span class="pre">9</span></code> we would trace as</p>
+<div class="highlight-trace notranslate"><div class="highlight"><pre><span></span><span class="n">&lt;seed&gt;</span> <span class="k">mk-term</span> <span class="o">OP_BV_EXTRACT </span><span class="na">SORT_BV </span><span class="m">9</span> <span class="m">1</span> <span class="n">t99</span> <span class="m">2</span> <span class="m">4</span> <span class="m">3</span>
+</pre></div>
+</div>
+<p>Generally, also for solver-specific actions, it is recommended to also trace
+the size of argument lists to an action whenever they can be of arbitrary size.</p>
+<p>Further, as shown in lines <strong>11</strong> and <strong>13</strong>, for actions that create new terms
+that should be added to the term database (and are thus traced in a <code class="docutils literal notranslate"><span class="pre">return</span></code>
+statement), we not only need to the trace the returned term but also its sort.
+This is due to the fact that some operators create new sorts
+(e.g., <a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op10BV_EXTRACTE" title="murxla::Op::BV_EXTRACT"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Op::BV_EXTRACT</span></code></a>) that may not have been encountered
+in the trace yet, but are added to the sorts database and can thus occur
+later in the trace.</p>
 <p>We use macro <a class="reference internal" href="#c.MURXLA_TRACE" title="MURXLA_TRACE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE</span></code></a> for tracing action executions, and macro
 <a class="reference internal" href="#c.MURXLA_TRACE_RETURN" title="MURXLA_TRACE_RETURN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE_RETURN</span></code></a> for tracing an action’s return values.</p>
 <p>Furthermore, in order to be able to <strong>deterministically</strong> replay a given trace,
@@ -229,15 +533,13 @@ there and prepend the seed to the trace line:</p>
 <span class="cp">  d_solver.get_rng().reseed(d_sng.seed()),                           \</span>
 <span class="cp">      OstreamVoider()                                                \</span>
 <span class="cp">          &amp; Action::TraceStream(d_smgr).stream()                     \</span>
-<span class="cp">                &lt;&lt; (d_smgr.d_trace_seeds ? d_smgr.trace_seed() : &quot;&quot;) \</span>
 <span class="cp">                &lt;&lt; std::setw(5) &lt;&lt; d_sng.seed() &lt;&lt; &quot; &quot;</span>
 </pre></div>
 </div>
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.MURXLA_TRACE">
 <span class="target" id="action_8hpp_1a15a86d121c73a99b499074357ca89d9b"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_TRACE</span></span></span><a class="headerlink" href="#c.MURXLA_TRACE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>[docs-murxla_trace start] </p>
-<p>The macro to be used for tracing an exection of an action.</p>
+<dd><p>The macro to be used for tracing an exection of an action.</p>
 <p>Seeds the solver wrapper RNG and prepends the current seed to the trace line. Add trace line contents via <code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;</span></code>, e.g., <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MURXLA_TRACE</span> <span class="o">&lt;&lt;</span> <span class="o">&lt;</span><span class="n">action</span><span class="o">&gt;.</span><span class="n">get_kind</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">&lt;</span><span class="n">args</span><span class="o">...&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -247,8 +549,7 @@ there and prepend the seed to the trace line:</p>
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.MURXLA_TRACE_RETURN">
 <span class="target" id="action_8hpp_1ad1770d4d26c6d6978d83917846fb4a60"></span><span class="sig-name descname"><span class="n"><span class="pre">MURXLA_TRACE_RETURN</span></span></span><a class="headerlink" href="#c.MURXLA_TRACE_RETURN" title="Permalink to this definition"></a><br /></dt>
-<dd><p>[docs-murxla_trace end] </p>
-<p>The macro to be used for tracing the return value of an action’s execution.</p>
+<dd><p>The macro to be used for tracing the return value of an action’s execution.</p>
 <p>Add trace return line contents via <code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;</span></code>, e.g., for a sort return value with id 1, <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MURXLA_TRACE_RETURN</span> <span class="o">&lt;&lt;</span> <span class="o">&lt;</span><span class="n">created</span> <span class="n">sort</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -492,7 +793,7 @@ disabling the action.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla6Action17untrace_str_to_idERKNSt6stringE">
 <span id="_CPPv3N6murxla6Action17untrace_str_to_idERKNSt6stringE"></span><span id="_CPPv2N6murxla6Action17untrace_str_to_idERKNSt6stringE"></span><span id="murxla::Action::untrace_str_to_id__ssCR"></span><span class="target" id="classmurxla_1_1Action_1a9da12b2c2f7b3ff88212b4c610851a0d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">untrace_str_to_id</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla6Action17untrace_str_to_idERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Convert traced sort id (<code class="docutils literal notranslate"><span class="pre">&quot;s&lt;id&gt;&quot;</span></code>) or term id (<code class="docutils literal notranslate"><span class="pre">&quot;t&lt;id&gt;&quot;</span></code>) string to id.</p>
-<p>Throws a MurxlaUntraceIdException if given string does not represent a valid sort or term id.</p>
+<p>Throws a <a class="reference internal" href="../exceptions.html#classmurxla_1_1MurxlaUntraceIdException"><span class="std std-ref">MurxlaUntraceIdException</span></a> if given string does not represent a valid sort or term id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>s</strong> – The sort or term id string. </p>

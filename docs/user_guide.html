@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Guide &mdash; Murxla  documentation</title>
+      <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Integrate a Solver" href="solver_integration/solver_integration.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Murxla
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#testing-an-smt-solver">Testing an SMT Solver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing-an-integrated-solver">Testing an Integrated Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-via-the-smt-libv2-interface">Testing via the SMT-LIBv2 Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#replaying-and-minimizing-traces">Replaying and Minimizing Traces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#minimizing-traces">Minimizing Traces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-usage-scenarios">Advanced Usage Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cross-checking-solvers">Cross-Checking Solvers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-options">Command Line Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/advanced.html">Advanced Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Murxla</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline"></a></h1>
+<p>This guide covers the most common usage scenarios of Murxla.</p>
+<section id="testing-an-smt-solver">
+<h2>Testing an SMT Solver<a class="headerlink" href="#testing-an-smt-solver" title="Permalink to this headline"></a></h2>
+<p>Murxla provides a <strong>continuous</strong> and <strong>one-shot</strong> mode for testing an SMT solver.
+In the continuous mode, Murxla will continuously fuzz test a solver until Murxla
+is interrupted or a specified maximum number of test runs were performed
+(option <code class="docutils literal notranslate"><span class="pre">-m</span></code>).
+This mode is usually used to find solver errors.</p>
+<p>In the one-shot mode, Murxla will perform one test run given a specific seed
+for Murxla’s random number generator (option <code class="docutils literal notranslate"><span class="pre">-s</span></code>) or an API trace (option
+<code class="docutils literal notranslate"><span class="pre">-u</span></code>).
+This mode is usually used to inspect a specific test run in more detail, .e.g,
+for debugging purposes.</p>
+<section id="testing-an-integrated-solver">
+<h3>Testing an Integrated Solver<a class="headerlink" href="#testing-an-integrated-solver" title="Permalink to this headline"></a></h3>
+<p>Fuzz testing a solver natively supported by Murxla only requires to enable
+the solver via the corresponding solver option.
+For example, testing Bitwuzla is done as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ murxla --bzla
+</pre></div>
+</div>
+<p>In continuous mode, Murxla prints overall <strong>fuzzing statistics</strong> while running.
+<code class="docutils literal notranslate"><span class="pre">seed</span></code> refers to the random number generator seed that produced the run,
+<code class="docutils literal notranslate"><span class="pre">runs</span></code> corresponds to the total number of runs so far,
+<code class="docutils literal notranslate"><span class="pre">r/s</span></code> is the run throughput per second,
+<code class="docutils literal notranslate"><span class="pre">sat</span></code>, <code class="docutils literal notranslate"><span class="pre">unsat</span></code>, <code class="docutils literal notranslate"><span class="pre">unknw</span></code> are the numbers of sat/unsat/unknown answers of the
+solver, while <code class="docutils literal notranslate"><span class="pre">to</span></code> and <code class="docutils literal notranslate"><span class="pre">err</span></code> refer to the number of timeouts and issues
+encountered so far.</p>
+<p>Each time Murxla encounters a <strong>timeout</strong> it will print the seed of the
+instance.
+When an <strong>issue</strong> is encountered, it will also print the name of the recorded
+trace as well as the error message of the solver.
+Murxla groups error traces that trigger the same error message into
+subdirectories (1, 2, …) and stores the corresponding error message in
+in a file called <code class="docutils literal notranslate"><span class="pre">error.txt</span></code>.</p>
+<p>Murxla stores all generated API traces (and subdirectories) in the current
+working directory.
+It is recommended to use option <code class="docutils literal notranslate"><span class="pre">-O</span> <span class="pre">&lt;dir&gt;</span></code> to specify an output directory to
+store all these files and directories in <code class="docutils literal notranslate"><span class="pre">&lt;dir&gt;</span></code> in order to separate them
+from previous Murxla runs.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Example: Murxla continuous mode output</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>             seed  runs      r/s   sat unsat unknw    to   err
+ b26a7cc83776f149    50    40.49    39    42     0     0     0 [timeout]
+ 98f13b87a5752b3b   136    35.10   129    88     0     1     0 [timeout]
+ 970db7d5eb91f78e   137    28.01   132    90     0     2     0 [timeout]
+ 8ff9472ab9d37c40   237    30.28   219   159     0     3     0 [timeout]
+ aacf82a16bb98777   366    31.92   328   248     0     4     0 [timeout]
+ f086b8bb42a62fc5   382    30.20   349   261     0     5     0 [timeout]
+ ...
+ 2287b2bd77a3b84c  1209    21.53  1033   825     0    23     0 [error:1] 1/murxla-2287b2bd77a3b84c.trace
+
+ [bzlachkmodel] bzla_check_model: invalid model
+ ...
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default time limit per run is 1 second and can be changed with option
+<code class="docutils literal notranslate"><span class="pre">-t</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above seeds may not produce the same API traces on different machines
+due to different library versions installed on a system.
+However, replaying a trace on a different machine will trigger the original
+behavior.</p>
+</div>
+</section>
+<section id="testing-via-the-smt-libv2-interface">
+<h3>Testing via the SMT-LIBv2 Interface<a class="headerlink" href="#testing-via-the-smt-libv2-interface" title="Permalink to this headline"></a></h3>
+<p>If an SMT solver is not natively integrated into Murxla, the solver binary can
+still be tested via Murxla’s interactive SMT-LIBv2 interface.
+In this mode, Murxla will randomly generate SMT-LIBv2 compliant problems with
+all SMT-LIBv2 theories enabled.
+If the solver under test does not support specific theories or operators, the
+default SMT-LIBv2 profile can be overridden with a custom
+<a class="reference internal" href="solver_integration/solver_profile.html#solver-profiles"><span class="std std-ref">solver profile</span></a>,
+which can be loaded via option <code class="docutils literal notranslate"><span class="pre">-p</span></code>.</p>
+<p>For example, testing z3 via the SMT-LIBv2 interface on QF_BV problems can be
+achieved as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ murxla --smt2 z3.sh --bv
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">z3 Wrapper Script z3.sh</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">trap</span> <span class="s1">&#39;kill $(jobs -p)&#39;</span> SIGABRT
+z3 <span class="nv">smtlib2_compliant</span><span class="o">=</span><span class="nb">true</span> -in -smt2
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The wrapper script is required in this case since we want to pass
+additional command line arguments to z3 as Murxla’s SMT-LIBv2
+interface communicates with the solver binary via stdin/stdout.
+The trap makes sure to properly clean up the z3 process if the
+wrapper script is terminated by Murxla.</p>
+</div>
+</section>
+</section>
+<section id="replaying-and-minimizing-traces">
+<h2>Replaying and Minimizing Traces<a class="headerlink" href="#replaying-and-minimizing-traces" title="Permalink to this headline"></a></h2>
+<p>Murxla generates API trace files if an issue is encountered.
+Replaying a trace file with Murxla executes the exact same API call sequence
+that was executed when recording the trace and will trigger the same error
+behavior.</p>
+<p>In the above example,
+seed <code class="docutils literal notranslate"><span class="pre">2287b2bd77a3b84c</span></code> triggered an issue in Bitwuzla.
+Murxla stores the API trace
+in <code class="docutils literal notranslate"><span class="pre">1/murxla-2287b2bd77a3b84c.trace</span></code>, which can be replayed as follows.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Example: Replaying API Traces</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-trace notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">murxla</span> <span class="n">-u</span> <span class="m">1</span><span class="n">/murxla-2287b2bd77a3b84c.trace</span>
+
+  <span class="k">set-murxla-options</span> <span class="n">--bzla</span>
+ <span class="m">1174</span> <span class="k">new</span>
+<span class="m">97715</span> <span class="k">set-logic</span> <span class="n">QF_UFBVFP</span>
+<span class="m">15569</span> <span class="k">set-option</span> <span class="n">produce-models</span> <span class="n">true</span>
+<span class="m">14778</span> <span class="k">set-option</span> <span class="n">incremental</span> <span class="n">true</span>
+<span class="m">60732</span> <span class="k">set-option</span> <span class="n">produce-unsat-assumptions</span> <span class="n">false</span>
+ <span class="m">3698</span> <span class="k">set-option</span> <span class="n">produce-unsat-cores</span> <span class="n">true</span>
+<span class="m">34675</span> <span class="k">mk-sort</span> <span class="na">SORT_FP </span><span class="m">15</span> <span class="m">113</span>
+      <span class="k">return</span> <span class="n">s1</span>
+<span class="m">34675</span> <span class="k">mk-sort</span> <span class="na">SORT_BV </span><span class="m">1</span>
+      <span class="k">return</span> <span class="n">s2</span>
+<span class="m">34675</span> <span class="k">mk-sort</span> <span class="na">SORT_BV </span><span class="m">15</span>
+      <span class="k">return</span> <span class="n">s3</span>
+
+<span class="n">...</span> (cut) <span class="n">...</span>
+
+<span class="m">32294</span> <span class="k">mk-term</span> <span class="o">OP_FP_EQ </span><span class="na">SORT_BOOL </span><span class="m">2</span> <span class="n">t191</span> <span class="n">t155</span>
+      <span class="k">return</span> <span class="n">t198</span> <span class="n">s8</span>
+<span class="m">33829</span> <span class="k">check-sat</span>
+ <span class="m">9200</span> <span class="k">get-value</span> <span class="m">5</span> <span class="n">t197</span> <span class="n">t24</span> <span class="n">t198</span> <span class="n">t147</span> <span class="n">t163</span>
+<span class="m">99576</span> <span class="n">bzla-get-fun-value</span> <span class="n">t174</span>
+[bzlachkmodel] bzla_check_model: invalid model
+</pre></div>
+</div>
+</div>
+<section id="minimizing-traces">
+<h3>Minimizing Traces<a class="headerlink" href="#minimizing-traces" title="Permalink to this headline"></a></h3>
+<p>Murxla provides a trace minimizer that takes an API trace and tries to minimize
+it while preserving the behavior of the original execution.</p>
+<p>The trace minimizer implements simple minimization techniques in the following
+three phases:</p>
+<ol class="arabic simple">
+<li><p>line-based minimization to reduce the number of trace lines</p></li>
+<li><p>minimization of action lines to reduce the number of arguments</p></li>
+<li><p>term substitution, where terms are replaced with simpler terms of the same
+sort</p></li>
+</ol>
+<p>For example, API trace <code class="docutils literal notranslate"><span class="pre">1/murxla-2287b2bd77a3b84c.trace</span></code> has 602 lines and
+can be minimized with option <code class="docutils literal notranslate"><span class="pre">-d</span></code> as follows.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">Example: Minimizing API Traces</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ murxla -u 1/murxla-2287b2bd77a3b84c.trace -d
+
+[murxla] dd: minimizing untraced file &#39;1/murxla-2287b2bd77a3b84c.trace&#39;
+[murxla] dd: start minimizing file &#39;/tmp/murxla-63714/tmp.trace&#39;
+[murxla] dd: golden exit: error
+[murxla] dd: golden stdout output:
+[murxla] dd: golden stderr output: [bzlachkmodel] bzla_check_model: invalid model
+
+[murxla] dd: trying to minimize number of trace lines ...
+[murxla] dd: &gt;&gt; number of lines reduced to 92.21% of original number
+[murxla] dd: &gt;&gt; number of lines reduced to 74.77% of original number
+[murxla] dd: &gt;&gt; number of lines reduced to 31.15% of original number
+[murxla] dd: trying to minimize trace lines ...
+
+... (cut) ...
+
+[murxla] dd: trying to minimize number of trace lines ...
+[murxla] dd:
+[murxla] dd: 276 (of 1491) tests reduced successfully
+[murxla] dd: written to: 1/murxla-2287b2bd77a3b84c.min.trace
+[murxla] dd: file reduced to 7.50% of original size
+</pre></div>
+</div>
+</div>
+<p>The minimized trace is 7.5% of the original trace (59 lines) but still triggers
+the original erroneous behavior.
+If the minimized API trace does not contain any solver-specific extensions
+it can usually be translated to SMT-LIB via option <code class="docutils literal notranslate"><span class="pre">--smt2</span></code> (without a
+binary), which can then often be further reduced using a delta-debugging tool
+such as <a class="reference external" href="https://github.com/ddsmt/ddsmt">ddSMT</a>.</p>
+</section>
+</section>
+<section id="advanced-usage-scenarios">
+<h2>Advanced Usage Scenarios<a class="headerlink" href="#advanced-usage-scenarios" title="Permalink to this headline"></a></h2>
+<section id="cross-checking-solvers">
+<h3>Cross-Checking Solvers<a class="headerlink" href="#cross-checking-solvers" title="Permalink to this headline"></a></h3>
+<p>Murxla’s cross-checking feature (option <code class="docutils literal notranslate"><span class="pre">-c</span></code>) can be used to find problems on
+which two solvers disagree.
+It compares the results of two solvers after each <code class="docutils literal notranslate"><span class="pre">(check-sat)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">(check-sat-assuming)</span></code> call and reports an error if the two solvers disagree.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">Cross-checking Bitwuzla against cvc5</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla --bzla -c cvc5
+</pre></div>
+</div>
+</div>
+<p>Murxla also allows to cross-check solver binaries used via the
+SMT-LIBv2 interface against the native solvers.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">Cross-checking a z3 binary via the SMT-LIB interface against cvc5</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla --smt2 z3.sh -c cvc5
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="command-line-options">
+<h2>Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline"></a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Usage:  murxla [options]
+
+  -h, --help                 print this message and exit
+  -p, --profile &lt;profile&gt;    load solver profile
+  -v, --verbosity            increase verbosity
+  -T, --tmp-dir &lt;dir&gt;        write temporary files to given directory
+  -O, --out-dir &lt;dir&gt;        write output files to given directory
+  -l, --smt-lib              generate SMT-LIB compliant traces only
+  -y, --random-symbols       use random symbol names
+  --stats                    print statistics
+  --print-fsm                print FSM configuration, may be combined
+                             with solver option to show config for
+
+ Continuous mode options:
+  -t, --time &lt;double&gt;        time limit per test run
+  -m, --max-runs &lt;int&gt;       limit number of test runs
+  --csv                      print error summary in csv format
+  -e, --export-errors &lt;out&gt;  export found errors to JSON file &lt;out&gt;
+
+ One-shot mode options:
+  -s, --seed &lt;int&gt;           seed for random number generator
+  -a, --api-trace &lt;file&gt;     trace API call sequence into &lt;file&gt;
+  -f, --smt2-file &lt;file&gt;     write --smt2 output to &lt;file&gt;
+  -u, --untrace &lt;file&gt;       replay given API call sequence
+  --solver-trace             print native solver API trace to stdout
+
+ Trace minimizer:
+  -d, --dd                   enable delta debugging
+  --dd-match-err &lt;string&gt;    check for occurrence of &lt;string&gt; in stderr
+                             output when delta debugging
+  --dd-match-out &lt;string&gt;    check for occurrence of &lt;string&gt; in stdout
+                             output when delta debugging
+  --dd-ignore-err            ignore stderr output when delta debugging
+  --dd-ignore-out            ignore stdout output when delta debugging
+  -D, --dd-trace &lt;file&gt;      delta debug API trace into &lt;file&gt;
+
+ Solvers:
+  --btor                     test Boolector
+  --bzla                     test Bitwuzla
+  --cvc5                     test cvc5
+  --yices                    test Yices
+  --smt2 [&lt;binary&gt;]          print SMT-LIB 2 (optionally to solver binary
+                             via stdout)
+  -o name=value,...          solver options enabled by default
+  --fuzz-opts [wildcard,...] restrict options to be fuzzed with multiple
+                             wildcards, which are matched against option
+                             names. use ^ to indicate a wildcard must
+                             match the beginning of an option name
+  -c, --cross-check &lt;solver&gt; cross check with &lt;solver&gt; (SMT-LIB only)
+  --cross-check-opts name=value,...
+                             options for cross check solver
+  -C, --check [&lt;solver&gt;]     check unsat cores/assumptions and
+                             model values with &lt;solver&gt;
+
+ Enable/disable theories:
+  --[no-]arrays                theory of arrays
+  --[no-]bags                  theory of bags
+  --[no-]bv                    theory of bit-vectors
+  --[no-]dt                    theory of datatypes
+  --[no-]fp                    theory of floating-points
+  --[no-]ints                  theory of integers
+  --[no-]quant                 quantifiers
+  --[no-]reals                 theory of reals
+  --[no-]seq                   theory of sequences
+  --[no-]sets                  theory of sets
+  --[no-]strings               theory of strings
+  --[no-]trans                 theory of transcendentals
+  --[no-]uf                    uninterpreted functions
+
+ Options for enabled theories:
+  --linear                   restrict arithmetic to linear fragment
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solver_integration/solver_integration.html" class="btn btn-neutral float-right" title="How to Integrate a Solver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, the authors of Murxla.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

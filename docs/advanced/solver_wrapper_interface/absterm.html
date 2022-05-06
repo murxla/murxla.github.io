@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../solver_integration/solver_integration.html">How to Integrate a Solver</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../solver_integration/solver_profile.html">Solver Profiles</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a><ul class="current">
@@ -541,8 +541,8 @@
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8get_kindEv">
 <span id="_CPPv3NK6murxla7AbsTerm8get_kindEv"></span><span id="_CPPv2NK6murxla7AbsTerm8get_kindEv"></span><span id="murxla::AbsTerm::get_kindC"></span><span class="target" id="group__term-may-override_1gaf2738f68294059d31ef8405e13afc821"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8get_kindEv" title="Permalink to this definition"></a><br /></dt>
 <dd><p>Get the kind of this term.</p>
-<p>This kind is not a kind we cache on creation, but the kind that the solver reports. May be <a class="reference internal" href="../operator.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a>.</p>
-<p>Must be overriden and may not return <a class="reference internal" href="../operator.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a> if the solver supports the theory of bags, sets and sequences (required for properly initializing sorts that are implicitly created, e.g., sequence sorts for <a class="reference internal" href="../operator.html#group__operator-kinds_1ga6175d2ef35ef214db9982df68a4c31d4"><span class="std std-ref">Op::SEQ_UNIT</span></a>).</p>
+<p>This kind is not a kind we cache on creation, but the kind that the solver reports. May be <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a>.</p>
+<p>Must be overriden and may not return <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a> if the solver supports the theory of bags, sets and sequences (required for properly initializing sorts that are implicitly created, e.g., sequence sorts for <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga6175d2ef35ef214db9982df68a4c31d4"><span class="std std-ref">Op::SEQ_UNIT</span></a>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The kind of this term. </p>

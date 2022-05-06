@@ -20,6 +20,7 @@
     <script src="../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
     <link rel="prev" title="Solver Manager" href="solver_manager.html" /> 
 </head>
 
@@ -40,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
@@ -54,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -84,6 +86,15 @@
              
   <section id="solver-options">
 <span id="id1"></span><h1>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h1>
+<p>Murxla supports <strong>option fuzzing</strong>, that is, randomly configuring solver
+options based on the options model of the solver.
+This options model is advertised to Murxla via configuring a
+<a class="reference internal" href="#_CPPv4N6murxla12SolverOptionE" title="murxla::SolverOption"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOption</span></code></a> for each option and adding it to the
+solver manager via <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>
+(for more details, see <a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#configure-solver-options"><span class="std std-ref">Solver Options</span></a>).</p>
+<p>Murxla supports Boolean options (<a class="reference internal" href="#_CPPv4N6murxla16SolverOptionBoolE" title="murxla::SolverOptionBool"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionBool</span></code></a>),
+numeric options (<a class="reference internal" href="#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionNum</span></code></a>) and
+options with multiple string values (<a class="reference internal" href="#_CPPv4N6murxla16SolverOptionListE" title="murxla::SolverOptionList"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionList</span></code></a>).</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla12SolverOptionE">
 <span id="_CPPv3N6murxla12SolverOptionE"></span><span id="_CPPv2N6murxla12SolverOptionE"></span><span id="murxla::SolverOption"></span><span class="target" id="classmurxla_1_1SolverOption"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SolverOption</span></span></span><a class="headerlink" href="#_CPPv4N6murxla12SolverOptionE" title="Permalink to this definition"></a><br /></dt>
@@ -227,6 +238,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="solver_manager.html" class="btn btn-neutral float-left" title="Solver Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exceptions.html" class="btn btn-neutral float-right" title="Exceptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

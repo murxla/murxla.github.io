@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../solver_integration.html">How to Integrate a Solver</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../solver_profile.html">Solver Profiles</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Solver Wrappers</a><ul>
@@ -159,7 +159,6 @@ there and prepend the seed to the trace line:</p>
 <span class="cp">  d_solver.get_rng().reseed(d_sng.seed()),                           \</span>
 <span class="cp">      OstreamVoider()                                                \</span>
 <span class="cp">          &amp; Action::TraceStream(d_smgr).stream()                     \</span>
-<span class="cp">                &lt;&lt; (d_smgr.d_trace_seeds ? d_smgr.trace_seed() : &quot;&quot;) \</span>
 <span class="cp">                &lt;&lt; std::setw(5) &lt;&lt; d_sng.seed() &lt;&lt; &quot; &quot;</span>
 </pre></div>
 </div>
@@ -261,7 +260,7 @@ Unsupported actions can be disabled via overriding
 </section>
 </section>
 <section id="solver-options">
-<h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
+<span id="configure-solver-options"></span><h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
 <p>To enable option fuzzing, a solver wrapper can advertise a set of options
 to Murxla by overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.
 Options can be added via the <a class="reference internal" href="../../advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption" title="murxla::SolverManager::add_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::SolverManager::add_option()</span></code></a>

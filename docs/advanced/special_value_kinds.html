@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
@@ -55,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="solver_option.html">Solver Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -90,7 +91,7 @@
 <a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.</p>
 <p>Special values are created via <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver16mk_special_valueE4SortRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::mk_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_special_value()</span></code></a>.
 The set of special value kinds can be extended with solver-specific special
-value kinds via overriding <a href="#id1"><span class="problematic" id="id2">:cpp:fun:`murxla::Solver::add_special_value()`</span></a>.</p>
+value kinds via overriding <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver17add_special_valueE8SortKindRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::add_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::add_special_value()</span></code></a>.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv418SPECIAL_VALUE_NONE">
 <span id="_CPPv318SPECIAL_VALUE_NONE"></span><span id="_CPPv218SPECIAL_VALUE_NONE"></span><span id="SPECIAL_VALUE_NONE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaab7128d0e871d22c7e59439ff61e77f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_NONE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;not-a-special-value&quot;</span></span><a class="headerlink" href="#_CPPv418SPECIAL_VALUE_NONE" title="Permalink to this definition"></a><br /></dt>
