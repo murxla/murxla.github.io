@@ -91,7 +91,7 @@
              
   <section id="operators">
 <h1>Operators<a class="headerlink" href="#operators" title="Permalink to this headline"></a></h1>
-<p>Murxla <strong>globally</strong> defines a <a class="reference internal" href="operator_kinds.html#operator-kinds"><span class="std std-ref">base set of operator kinds</span></a> as static const members of type <a class="reference internal" href="#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>
+<p>Murxla <strong>globally</strong> defines a <a class="reference internal" href="operator_kinds.html"><span class="doc">base set of operator kinds</span></a> as static const members of type <a class="reference internal" href="#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>
 of class <a class="reference internal" href="#_CPPv4N6murxla2OpE" title="murxla::Op"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Op</span></code></a>.
 Operator kinds are maintained by an operator kind manager
 (<a class="reference internal" href="#_CPPv4N6murxla13OpKindManagerE" title="murxla::OpKindManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::OpKindManager</span></code></a>),
@@ -110,8 +110,8 @@ operator as member of <code class="xref cpp cpp-class docutils literal notransla
 </pre></div>
 </div>
 <p>Solver-specific operator kinds are added to the
-<a class="reference internal" href="#opmgr"><span class="std std-ref">operator kind manager</span></a> via overriding
-<a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
+<a class="reference internal" href="#operator-management"><span class="std std-ref">operator kind manager</span></a> via
+overriding <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">opmgr</span><span class="o">-&gt;</span><span class="n">add_op_kind</span><span class="p">(</span><span class="n">BzlaTerm</span><span class="o">::</span><span class="n">OP_BV_DEC</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">SORT_BV</span><span class="p">},</span><span class="w"> </span><span class="n">THEORY_BV</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
@@ -3787,7 +3787,7 @@ SMT-LIB:</p>
 
 </section>
 <section id="operator-management">
-<span id="opmgr"></span><h2>Operator Management<a class="headerlink" href="#operator-management" title="Permalink to this headline"></a></h2>
+<h2>Operator Management<a class="headerlink" href="#operator-management" title="Permalink to this headline"></a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla13OpKindManagerE">
 <span id="_CPPv3N6murxla13OpKindManagerE"></span><span id="_CPPv2N6murxla13OpKindManagerE"></span><span id="murxla::OpKindManager"></span><span class="target" id="classmurxla_1_1OpKindManager"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">OpKindManager</span></span></span><a class="headerlink" href="#_CPPv4N6murxla13OpKindManagerE" title="Permalink to this definition"></a><br /></dt>

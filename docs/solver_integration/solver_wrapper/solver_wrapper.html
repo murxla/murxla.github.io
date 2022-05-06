@@ -101,7 +101,7 @@
            <div itemprop="articleBody">
              
   <section id="solver-wrappers">
-<span id="id1"></span><h1>Solver Wrappers<a class="headerlink" href="#solver-wrappers" title="Permalink to this headline"></a></h1>
+<h1>Solver Wrappers<a class="headerlink" href="#solver-wrappers" title="Permalink to this headline"></a></h1>
 <p>A solver wrapper provides the glue code between the core components of Murxla
 and the solver under test.
 The <strong>interface</strong> for solver wrappers is defined at
@@ -123,7 +123,7 @@ classes of the interface and must <strong>at least</strong> override the member 
 required to be overriden.
 Additionally, for each class, there exists a set of member functions with
 default implementations that <strong>should</strong> be overriden (if supported) to test the
-solver (see <a class="reference internal" href="overrides.html#wrapper-overrides"><span class="std std-ref">the list of required and optional overrides</span></a> below).</p>
+solver (see <a class="reference internal" href="overrides.html"><span class="doc">the list of required and optional overrides</span></a> below).</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overrides.html">Overrides for Solver Wrapper Implementation</a><ul>
@@ -192,8 +192,8 @@ and at the interface between Murxla and the solver wrapper.</p>
 i.e., features that cannot be plugged in via the generic solver wrapper API.</p>
 <section id="operator-kinds">
 <h3>Operator Kinds<a class="headerlink" href="#operator-kinds" title="Permalink to this headline"></a></h3>
-<p>Murxla defines a <a class="reference internal" href="../../advanced/operator_kinds.html#operator-kinds"><span class="std std-ref">base set of operator kinds</span></a> as static const members of type <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a>
-of class <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Op</span></code></a>.
+<p>Murxla defines a <a class="reference internal" href="../../advanced/operator_kinds.html"><span class="doc">base set of operator kinds</span></a> as static const members of type
+<a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a> of class <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Op</span></code></a>.
 Solver-specific operator kinds are (by convention) defined as members of the
 solver wrapper implementation of <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.
 By convention, we prefix solver-specific operator kinds with the solver’s
@@ -204,8 +204,8 @@ operator as member of <code class="xref cpp cpp-class docutils literal notransla
 </pre></div>
 </div>
 <p>Solver-specific operator kinds are added to the
-<a class="reference internal" href="../../advanced/operator.html#opmgr"><span class="std std-ref">operator kind manager</span></a> via overriding
-<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
+<a class="reference internal" href="../../advanced/operator.html#operator-management"><span class="std std-ref">operator kind manager</span></a> via
+overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">opmgr</span><span class="o">-&gt;</span><span class="n">add_op_kind</span><span class="p">(</span><span class="n">BzlaTerm</span><span class="o">::</span><span class="n">OP_BV_DEC</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">SORT_BV</span><span class="p">},</span><span class="w"> </span><span class="n">THEORY_BV</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
@@ -238,13 +238,13 @@ solver-specific kinds via
 <h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline"></a></h3>
 <p>Murxla defines a base API model implementing SMT-LIB semantics
 (as a finite state machine, see <a class="reference internal" href="../../advanced/fsm/fsm.html"><span class="doc">FSM</span></a>) with a
-<a class="reference internal" href="../../advanced/fsm/action.html#base-actions"><span class="std std-ref">base set of actions</span></a>.
+<a class="reference internal" href="../../advanced/fsm/action.html#the-base-set-of-actions"><span class="std std-ref">base set of actions</span></a>.
 This base API model can be extended with solver-specific features that cannot
 be immediately plugged into the base API Model by adding transitions with
 associated solver-specific actions to the FSM via overriding
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver13configure_fsmEP3FSM" title="murxla::Solver::configure_fsm"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_fsm()</span></code></a>.</p>
 <p>Solver-specific actions directly interact with the API of the solver under test
-(see <a class="reference internal" href="../../advanced/fsm/action.html#actions"><span class="std std-ref">FSM: Actions</span></a>).
+(see <a class="reference internal" href="../../advanced/fsm/action.html"><span class="doc">FSM: Actions</span></a>).
 They are added to an existing (or new, solver-specific)
 state while defining its priority and (optionally) a next state via
 <a class="reference internal" href="../../advanced/fsm/state.html#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a>
@@ -252,7 +252,7 @@ state while defining its priority and (optionally) a next state via
 </section>
 <section id="features-unsupported-by-the-solver-under-test">
 <h3>Features Unsupported By The Solver Under Test<a class="headerlink" href="#features-unsupported-by-the-solver-under-test" title="Permalink to this headline"></a></h3>
-<p>Murxla requires to define a solver profile (see <a class="reference internal" href="../solver_profile.html#solver-profiles"><span class="std std-ref">Solver Profiles</span></a>) to
+<p>Murxla requires to define a solver profile (see <a class="reference internal" href="../solver_profile.html"><span class="doc">Solver Profiles</span></a>) to
 define the solver test configuration. The solver profile allows to define
 which theories to consider and to disable unsupported sort and operator kinds.
 Unsupported actions can be disabled via overriding
@@ -260,14 +260,14 @@ Unsupported actions can be disabled via overriding
 </section>
 </section>
 <section id="solver-options">
-<span id="configure-solver-options"></span><h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
+<h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
 <p>To enable option fuzzing, a solver wrapper can advertise a set of options
 to Murxla by overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.
 Options can be added via the <a class="reference internal" href="../../advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption" title="murxla::SolverManager::add_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::SolverManager::add_option()</span></code></a>
 of the solver manager object passed to
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.</p>
 <p>Murxla distinguishes three different
-<a class="reference internal" href="../../advanced/solver_option.html#solver-options"><span class="std std-ref">option types</span></a>:</p>
+<a class="reference internal" href="../../advanced/solver_option.html"><span class="doc">option types</span></a>:</p>
 <ul class="simple">
 <li><p>Boolean options (<a class="reference internal" href="../../advanced/solver_option.html#_CPPv4N6murxla16SolverOptionBoolE" title="murxla::SolverOptionBool"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionBool</span></code></a>)</p></li>
 <li><p>Numeric options (<a class="reference internal" href="../../advanced/solver_option.html#_CPPv4I0EN6murxla15SolverOptionNumE" title="murxla::SolverOptionNum"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::SolverOptionNum</span></code></a>)</p></li>

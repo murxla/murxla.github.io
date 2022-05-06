@@ -108,11 +108,11 @@
            <div itemprop="articleBody">
              
   <section id="fsm-actions">
-<span id="actions"></span><h1>FSM: Actions<a class="headerlink" href="#fsm-actions" title="Permalink to this headline"></a></h1>
+<h1>FSM: Actions<a class="headerlink" href="#fsm-actions" title="Permalink to this headline"></a></h1>
 <p>An action defines a <strong>specific interaction</strong> with the solver under test.
-The actual interaction of the <a class="reference internal" href="#base-actions"><span class="std std-ref">the base set of actions</span></a>
+The actual interaction of the <a class="reference internal" href="#the-base-set-of-actions"><span class="std std-ref">the base set of actions</span></a>
 with the solver happens via one or more calls to the
-API of the <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html#solver-wrappers"><span class="std std-ref">solver wrapper</span></a>.
+API of the <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html"><span class="doc">solver wrapper</span></a>.
 Solver-specific actions directly interact with the API of the solver under
 test.</p>
 <p>Actions perform <strong>three tasks</strong>:</p>
@@ -144,7 +144,7 @@ For this, it queries the solver manager
 which provides a rich interface to pick and manage sorts, terms and manage
 a solver’s current state.</p>
 <p>For example, action <a class="reference internal" href="#_CPPv4N6murxla19ActionAssertFormulaE" title="murxla::ActionAssertFormula"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionAssertFormula</span></code></a>
-(from the <a class="reference internal" href="#base-actions"><span class="std std-ref">base set of actions</span></a>)
+(from the <a class="reference internal" href="#the-base-set-of-actions"><span class="std std-ref">the base set of actions</span></a>)
 is responsible for asserting a random formula (SMT-LIB: <code class="docutils literal notranslate"><span class="pre">assert</span></code>).
 It asserts that the solver is initialized for Murxla-level debugging purposes,
 and checks the required precondition that Boolean terms already exist in the
@@ -221,7 +221,8 @@ create such patterns on demand as follows:</p>
 function <code class="docutils literal notranslate"><span class="pre">murxla::Action&lt;Name&gt;::run(&lt;args&gt;)</span></code>, which allows to use the same
 action execution code for both <a class="reference internal" href="#_CPPv4N6murxla6Action8generateEv" title="murxla::Action::generate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::generate()</span></code></a> and
 <a class="reference internal" href="#_CPPv4N6murxla6Action7untraceERKNSt6vectorINSt6stringEEE" title="murxla::Action::untrace"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Action::untrace()</span></code></a>.
-This function is responsible for <a class="reference internal" href="#tracing"><span class="std std-ref">tracing</span></a>, and is usually the
+This function is responsible for <a class="reference internal" href="#tracing"><span class="std std-ref">tracing</span></a>,
+and is usually the
 only one to interact with the solver via the generic solver wrapper API (or
 directly via the solver API for solver-specific actions).
 It is further responsible for registering created sorts and terms with the
@@ -242,7 +243,8 @@ then reset the solver state from <em>sat</em> to <em>assert</em> (see Fig. 4.1 o
 <a class="reference external" href="https://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.6-r2021-05-12.pdf">SMT-LIB Standard 2.6</a>),
 and then assert the formula via <a class="reference internal" href="../solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver14assert_formulaERK4Term" title="murxla::Solver::assert_formula"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::assert_formula()</span></code></a>.</p>
 <p>Actions that create new sorts and terms must trace these return values via
-macro <a class="reference internal" href="#c.MURXLA_TRACE_RETURN" title="MURXLA_TRACE_RETURN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE_RETURN</span></code></a> (see <a class="reference internal" href="#tracing"><span class="std std-ref">Tracing</span></a>).
+macro <a class="reference internal" href="#c.MURXLA_TRACE_RETURN" title="MURXLA_TRACE_RETURN"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TRACE_RETURN</span></code></a>
+(see <a class="reference internal" href="#tracing"><span class="std std-ref">tracing</span></a>).
 Further, for testing assertions about the solver under test, we use macro
 <a class="reference internal" href="#c.MURXLA_TEST" title="MURXLA_TEST"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_TEST</span></code></a>.
 For example, the action execution of action <a class="reference internal" href="#_CPPv4N6murxla12ActionMkSortE" title="murxla::ActionMkSort"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::ActionMkSort</span></code></a>
@@ -306,7 +308,7 @@ sort and term objects where necessary, and executes the action via
 </pre></div>
 </div>
 <p>Murxla provides a set of
-<a class="reference internal" href="#check-trace-macros"><span class="std std-ref">macros for checking expected properties</span></a> of given
+<a class="reference internal" href="#macros-for-checking-trace-tokens"><span class="std std-ref">macros for checking expected properties</span></a> of given
 action line trace tokens.
 In the example above, we use macro <a class="reference internal" href="#c.MURXLA_CHECK_TRACE_NTOKENS" title="MURXLA_CHECK_TRACE_NTOKENS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_NTOKENS</span></code></a> to
 check if <code class="docutils literal notranslate"><span class="pre">tokens</span></code> holds exactly one trace token (the id of the asserted term).
@@ -318,7 +320,7 @@ and check if we were able to match the term (or if the given id is unknown)
 via <a class="reference internal" href="#c.MURXLA_CHECK_TRACE_TERM" title="MURXLA_CHECK_TRACE_TERM"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_TERM</span></code></a> (similarly, for sorts, via
 <a class="reference internal" href="#c.MURXLA_CHECK_TRACE_SORT" title="MURXLA_CHECK_TRACE_SORT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">MURXLA_CHECK_TRACE_SORT</span></code></a>).</p>
 <section id="macros-for-checking-trace-tokens">
-<span id="check-trace-macros"></span><h3>Macros for Checking Trace Tokens<a class="headerlink" href="#macros-for-checking-trace-tokens" title="Permalink to this headline"></a></h3>
+<h3>Macros for Checking Trace Tokens<a class="headerlink" href="#macros-for-checking-trace-tokens" title="Permalink to this headline"></a></h3>
 <p>Murxla defines the following macros for checking trace line properties.
 These macros are only used for error checking traces when untracing.</p>
 <dl class="cpp macro">
@@ -457,7 +459,7 @@ follows:</p>
 </div>
 </section>
 <section id="tracing">
-<span id="id1"></span><h2>Tracing<a class="headerlink" href="#tracing" title="Permalink to this headline"></a></h2>
+<h2>Tracing<a class="headerlink" href="#tracing" title="Permalink to this headline"></a></h2>
 <p>In order to be able to replay a sequence of actions that triggered an issue
 in the solver under test, we trace each action execution in a simple,
 easy-to-parse output format.</p>
@@ -573,7 +575,7 @@ some operator kinds create terms of possibly yet unseen sorts (e.g.,
 
 </section>
 <section id="fsm-configuration">
-<span id="id2"></span><h2>FSM Configuration<a class="headerlink" href="#fsm-configuration" title="Permalink to this headline"></a></h2>
+<h2>FSM Configuration<a class="headerlink" href="#fsm-configuration" title="Permalink to this headline"></a></h2>
 <p>Actions are added to states of the FSM via
 <a class="reference internal" href="state.html#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a> while optionally defining a next
 state to transition into (or remaining in the state it’s been added to).
@@ -582,14 +584,14 @@ We further derive a class <a class="reference internal" href="#_CPPv4N6murxla10T
 the next without executing any solver API calls (an <em>empty</em> action).</p>
 <p>Existing states are retrieved via <a class="reference internal" href="fsm.html#_CPPv4NK6murxla3FSM9get_stateERKN5State4KindE" title="murxla::FSM::get_state"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::FSM::get_state()</span></code></a>,
 new states are created and added via <a class="reference internal" href="fsm.html#_CPPv4N6murxla3FSM9new_stateERKN5State4KindENSt8functionIFbvEEEbbN5State10ConfigKindE" title="murxla::FSM::new_state"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::FSM::new_state()</span></code></a>
-(see <a class="reference internal" href="state.html#states"><span class="std std-ref">FSM: States</span></a>).</p>
+(see <a class="reference internal" href="state.html"><span class="doc">FSM: States</span></a>).</p>
 <p>Each action added to a state via <a class="reference internal" href="state.html#_CPPv4N6murxla5State10add_actionEP6Action8uint32_tP5State" title="murxla::State::add_action"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::State::add_action()</span></code></a> has a
 weight, which is defined via its <code class="docutils literal notranslate"><span class="pre">priority</span></code>, with <code class="docutils literal notranslate"><span class="pre">1</span></code> as the highest
 priority, <code class="docutils literal notranslate"><span class="pre">UINT32_MAX</span></code> the lowest priority, and <code class="docutils literal notranslate"><span class="pre">0</span></code> corresponding to
 disabling the action.</p>
 </section>
 <section id="the-base-class-for-actions">
-<span id="base-actions"></span><h2>The Base Class for Actions<a class="headerlink" href="#the-base-class-for-actions" title="Permalink to this headline"></a></h2>
+<h2>The Base Class for Actions<a class="headerlink" href="#the-base-class-for-actions" title="Permalink to this headline"></a></h2>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla6ActionE">
 <span id="_CPPv3N6murxla6ActionE"></span><span id="_CPPv2N6murxla6ActionE"></span><span id="murxla::Action"></span><span class="target" id="classmurxla_1_1Action"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Action</span></span></span><a class="headerlink" href="#_CPPv4N6murxla6ActionE" title="Permalink to this definition"></a><br /></dt>

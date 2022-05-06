@@ -42,22 +42,30 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="advanced.html">Advanced Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="solver_wrapper_interface/solver_wrapper_interface.html">Solver Wrapper Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sort.html">Sort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="term.html">Term</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sort_kind.html">Sort Kind</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operator.html">Operators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="operator_kinds.html">Pre-Defined Operator Kinds</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Pre-Defined Special Value Kinds</a></li>
-<li class="toctree-l2"><a class="reference internal" href="theory.html">Theories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fsm/index.html">The Finite State Machine (FSM)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_manager.html">Solver Manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="solver_option.html">Solver Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../solver_integration/solver_integration.html">How to Integrate a Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../solver_integration/solver_profile.html">Solver Profiles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper_interface/abssort.html">Solver Wrapper Interface: AbsSort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper_interface/absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#solver-wrapper-implementation">Solver Wrapper Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#global-sort-and-term-handling">Global Sort and Term Handling</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#solver-specific-extensions">Solver-Specific Extensions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#operator-kinds">Operator Kinds</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#special-value-kinds">Special Value Kinds</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Pre-Defined Special Value Kinds</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#actions">Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#features-unsupported-by-the-solver-under-test">Features Unsupported By The Solver Under Test</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#solver-options">Solver Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Documentation</a></li>
 </ul>
 
         </div>
@@ -86,7 +94,7 @@
            <div itemprop="articleBody">
              
   <section id="pre-defined-special-value-kinds">
-<span id="special-value-kinds"></span><h1>Pre-Defined Special Value Kinds<a class="headerlink" href="#pre-defined-special-value-kinds" title="Permalink to this headline"></a></h1>
+<h1>Pre-Defined Special Value Kinds<a class="headerlink" href="#pre-defined-special-value-kinds" title="Permalink to this headline"></a></h1>
 <p>The list of special value kinds globally defined in
 <a class="reference internal" href="solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>.</p>
 <p>Special values are created via <a class="reference internal" href="solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver16mk_special_valueE4SortRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::mk_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::mk_special_value()</span></code></a>.

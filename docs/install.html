@@ -20,6 +20,7 @@
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Guide" href="user_guide.html" />
     <link rel="prev" title="Murxla Documentation" href="index.html" /> 
 </head>
 
@@ -45,6 +46,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#code-coverage-reports">Code Coverage Reports</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced/advanced.html">Advanced Documentation</a></li>
 </ul>
@@ -90,8 +92,12 @@ installation path <code class="docutils literal notranslate"><span class="pre">&
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. -DCMAKE_PREFIX_PATH<span class="o">=</span>&lt;path&gt;
 </pre></div>
 </div>
+<p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">scripts/setup-solvers.sh</span></code> script to setup
+solvers supported by Murxla.
+By default the script will download and build all supported solvers. Please
+refer to <code class="docutils literal notranslate"><span class="pre">setup-solver.sh</span> <span class="pre">-h</span></code> for further options.</p>
 <p>After successful compilation you can find the Murxla binary in <code class="docutils literal notranslate"><span class="pre">build/bin/</span></code>.
-Please refer to the <a class="reference internal" href="user_guide.html#user-guide"><span class="std std-ref">User Guide</span></a> for how to use Murxla.</p>
+Please refer to the <a class="reference internal" href="user_guide.html"><span class="doc">User Guide</span></a> for how to use Murxla.</p>
 </section>
 <section id="supported-solvers">
 <h2>Supported Solvers<a class="headerlink" href="#supported-solvers" title="Permalink to this headline"></a></h2>
@@ -125,6 +131,7 @@ solvers are configured and built to produce coverage information.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Murxla Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
