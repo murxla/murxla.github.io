@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sort &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-        <script src="../static/jquery.js"></script>
-        <script src="../static/underscore.js"></script>
-        <script src="../static/doctools.js"></script>
+        <script src="../static/jquery.js?v=5d32c60e"></script>
+        <script src="../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../static/doctools.js?v=9a2dae69"></script>
+        <script src="../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -50,7 +55,14 @@
 <li class="toctree-l3"><a class="reference internal" href="solver_wrapper_interface/solver.html">Solver Wrapper Interface: Solver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#solver-wrapper-implementation">Solver Wrapper Implementation</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../solver_integration/solver_wrapper/solver_wrapper.html#global-sort-and-term-handling">Global Sort and Term Handling</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Sort</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Sort</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla4SortE"><code class="docutils literal notranslate"><span class="pre">Sort</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxlaeqERK4SortRK4Sort"><code class="docutils literal notranslate"><span class="pre">operator==()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxlaneERK4SortRK4Sort"><code class="docutils literal notranslate"><span class="pre">operator!=()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Sort"><code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"><code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="term.html">Term</a></li>
 </ul>
 </li>
@@ -76,10 +88,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../solver_integration/solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
-          <li><a href="../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
-      <li>Sort</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+          <li class="breadcrumb-item"><a href="../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a></li>
+      <li class="breadcrumb-item active">Sort</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,7 +101,7 @@
            <div itemprop="articleBody">
              
   <section id="sort">
-<h1>Sort<a class="headerlink" href="#sort" title="Permalink to this headline"></a></h1>
+<h1>Sort<a class="headerlink" href="#sort" title="Link to this heading"></a></h1>
 <p>Murxla defines type
 <a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Sort</span></code></a>
 for sort representations
@@ -100,57 +112,57 @@ We only deal with <a class="reference internal" href="#_CPPv4N6murxla4SortE" tit
 components and at the interface between Murxla and the solver wrapper.</p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla4SortE">
-<span id="_CPPv3N6murxla4SortE"></span><span id="_CPPv2N6murxla4SortE"></span><span class="target" id="namespacemurxla_1a078a3484766b1ad8bfdd9d13242fd84c"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Sort</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><span class="n"><span class="pre">AbsSort</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla4SortE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla4SortE"></span><span id="_CPPv2N6murxla4SortE"></span><span class="target" id="namespacemurxla_1a0aca9fc4f5a73d1601ce427c249dec80"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Sort</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="solver_wrapper_interface/abssort.html#_CPPv4N6murxla7AbsSortE" title="murxla::AbsSort"><span class="n"><span class="pre">AbsSort</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N6murxla4SortE" title="Link to this definition"></a><br /></dt>
 <dd><p>The Murxla-internal representation of a sort. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxlaeqERK4SortRK4Sort">
-<span id="_CPPv3N6murxlaeqERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaeqERK4SortRK4Sort"></span><span id="murxla::eq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1aa3cf3c6146d6d1cd35a5df3eb1ab5c55"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaeqERK4SortRK4Sort" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxlaeqERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaeqERK4SortRK4Sort"></span><span id="murxla::eq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1aa3cf3c6146d6d1cd35a5df3eb1ab5c55"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaeqERK4SortRK4Sort" title="Link to this definition"></a><br /></dt>
 <dd><p>Operator overload for equality over Sorts.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> – The sort to be compared with the other sort. </p></li>
 <li><p><strong>b</strong> – The other sort. </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="../solver_integration/solver_wrapper/abssort_overrides.html#group__sort-must-override_1gad68f74bdfc8cdba4a7508b450bb82695"><span class="std std-ref">AbsSort::equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are equal. </p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if <a class="reference internal" href="solver_wrapper_interface/abssort.html#classmurxla_1_1AbsSort_1ad68f74bdfc8cdba4a7508b450bb82695"><span class="std std-ref">AbsSort::equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are equal. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxlaneERK4SortRK4Sort">
-<span id="_CPPv3N6murxlaneERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaneERK4SortRK4Sort"></span><span id="murxla::neq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1a557568dc32bc73ed737c4af981a6b19f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaneERK4SortRK4Sort" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxlaneERK4SortRK4Sort"></span><span id="_CPPv2N6murxlaneERK4SortRK4Sort"></span><span id="murxla::neq-operator__SortCR.SortCR"></span><span class="target" id="namespacemurxla_1a557568dc32bc73ed737c4af981a6b19f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlaneERK4SortRK4Sort" title="Link to this definition"></a><br /></dt>
 <dd><p>Operator overload for disequality over Sorts.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> – The sort to be compared with the other sort. </p></li>
 <li><p><strong>b</strong> – The other sort. </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if <a class="reference internal" href="../solver_integration/solver_wrapper/abssort_overrides.html#group__sort-may-override_1gaf4cbe64f9b25eb051ffeaf79af3d0c9f"><span class="std std-ref">AbsSort::not_equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are not equal. </p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if <a class="reference internal" href="solver_wrapper_interface/abssort.html#classmurxla_1_1AbsSort_1af4cbe64f9b25eb051ffeaf79af3d0c9f"><span class="std std-ref">AbsSort::not_equals()</span></a> (which queries the solver) is true and the kinds (<a class="reference internal" href="sort_kind.html#namespacemurxla_1a4fcf9c5ee8ec2e26f2c74eeefcc7d493"><span class="std std-ref">murxla::SortKind</span></a>) of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are not equal. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamEK4Sort">
-<span id="_CPPv3N6murxlalsERNSt7ostreamEK4Sort"></span><span id="_CPPv2N6murxlalsERNSt7ostreamEK4Sort"></span><span id="murxla::lshift-operator__osR.SortC"></span><span class="target" id="namespacemurxla_1a76022576b6756e916f0bdfe10f595b28"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Sort" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxlalsERNSt7ostreamEK4Sort"></span><span id="_CPPv2N6murxlalsERNSt7ostreamEK4Sort"></span><span id="murxla::lshift-operator__osR.SortC"></span><span class="target" id="namespacemurxla_1a76022576b6756e916f0bdfe10f595b28"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamEK4Sort" title="Link to this definition"></a><br /></dt>
 <dd><p>Serialize a Sort to given stream.</p>
-<p>This represents a sort as ‘s’ + its id and is mainly intended for tracing purposes. For a representation of a term as provided by the corresponding solver, user <a class="reference internal" href="../solver_integration/solver_wrapper/abssort_overrides.html#group__sort-must-override_1ga871f43b89514a455e1ce6e7f123ce39e"><span class="std std-ref">AbsSort::to_string()</span></a> insted.</p>
+<p>This represents a sort as ‘s’ + its id and is mainly intended for tracing purposes. For a representation of a term as provided by the corresponding solver, user <a class="reference internal" href="solver_wrapper_interface/abssort.html#classmurxla_1_1AbsSort_1a871f43b89514a455e1ce6e7f123ce39e"><span class="std std-ref">AbsSort::to_string()</span></a> insted.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>out</strong> – The output stream. </p></li>
 <li><p><strong>s</strong> – The sort to be serialized. </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output stream. </p>
 </dd>
 </dl>
@@ -158,17 +170,17 @@ components and at the interface between Murxla and the solver wrapper.</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE">
-<span id="_CPPv3N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="_CPPv2N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="murxla::lshift-operator__osR.std::vector:Sort:CR"></span><span class="target" id="namespacemurxla_1a8f745d7af5883f857fcc35f48df86afd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="_CPPv2N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE"></span><span id="murxla::lshift-operator__osR.std::vector:Sort:CR"></span><span class="target" id="namespacemurxla_1a8f745d7af5883f857fcc35f48df86afd"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">out</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">vector</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxlalsERNSt7ostreamERKNSt6vectorI4SortEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Serialize a vector of Sorts to given stream.</p>
 <p>As above, a sort is represented as <code class="docutils literal notranslate"><span class="pre">s</span></code> + its id, so this will yield a list of space separated <code class="docutils literal notranslate"><span class="pre">s&lt;id&gt;</span></code>s.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>out</strong> – The output stream. </p></li>
 <li><p><strong>vector</strong> – The vector of sorts to be serialized. </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output stream. </p>
 </dd>
 </dl>

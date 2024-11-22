@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Guide &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
-        <script src="static/jquery.js"></script>
-        <script src="static/underscore.js"></script>
-        <script src="static/doctools.js"></script>
+        <script src="static/jquery.js?v=5d32c60e"></script>
+        <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="static/documentation_options.js?v=5929fcd5"></script>
+        <script src="static/doctools.js?v=9a2dae69"></script>
+        <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -75,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User Guide</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Guide</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -86,10 +91,10 @@
            <div itemprop="articleBody">
              
   <section id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline"></a></h1>
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
 <p>This guide covers the most common usage scenarios of Murxla.</p>
 <section id="testing-an-smt-solver">
-<h2>Testing an SMT Solver<a class="headerlink" href="#testing-an-smt-solver" title="Permalink to this headline"></a></h2>
+<h2>Testing an SMT Solver<a class="headerlink" href="#testing-an-smt-solver" title="Link to this heading"></a></h2>
 <p>Murxla provides a <strong>continuous</strong> and <strong>one-shot</strong> mode for testing an SMT solver.
 In the continuous mode, Murxla will continuously fuzz test a solver until Murxla
 is interrupted or a specified maximum number of test runs were performed
@@ -101,11 +106,11 @@ for Murxla’s random number generator (option <code class="docutils literal not
 This mode is usually used to inspect a specific test run in more detail, .e.g,
 for debugging purposes.</p>
 <section id="testing-an-integrated-solver">
-<h3>Testing an Integrated Solver<a class="headerlink" href="#testing-an-integrated-solver" title="Permalink to this headline"></a></h3>
+<h3>Testing an Integrated Solver<a class="headerlink" href="#testing-an-integrated-solver" title="Link to this heading"></a></h3>
 <p>Fuzz testing a solver natively supported by Murxla only requires to enable
 the solver via the corresponding solver option.
 For example, testing Bitwuzla is done as follows.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ murxla --bzla
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>murxla<span class="w"> </span>--bitwuzla
 </pre></div>
 </div>
 <p>In continuous mode, Murxla prints overall <strong>fuzzing statistics</strong> while running.
@@ -128,7 +133,7 @@ It is recommended to use option <code class="docutils literal notranslate"><span
 store all these files and directories in <code class="docutils literal notranslate"><span class="pre">&lt;dir&gt;</span></code> in order to separate them
 from previous Murxla runs.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Example: Murxla continuous mode output</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">Example: Murxla continuous mode output</span><a class="headerlink" href="#id1" title="Link to this code"></a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>             seed  runs      r/s   sat unsat unknw    to   err
  b26a7cc83776f149    50    40.49    39    42     0     0     0 [timeout]
  98f13b87a5752b3b   136    35.10   129    88     0     1     0 [timeout]
@@ -158,7 +163,7 @@ behavior.</p>
 </div>
 </section>
 <section id="testing-via-the-smt-libv2-interface">
-<h3>Testing via the SMT-LIBv2 Interface<a class="headerlink" href="#testing-via-the-smt-libv2-interface" title="Permalink to this headline"></a></h3>
+<h3>Testing via the SMT-LIBv2 Interface<a class="headerlink" href="#testing-via-the-smt-libv2-interface" title="Link to this heading"></a></h3>
 <p>If an SMT solver is not natively integrated into Murxla, the solver binary can
 still be tested via Murxla’s interactive SMT-LIBv2 interface.
 In this mode, Murxla will randomly generate SMT-LIBv2 compliant problems with
@@ -169,14 +174,14 @@ default SMT-LIBv2 profile can be overridden with a custom
 which can be loaded via option <code class="docutils literal notranslate"><span class="pre">-p</span></code>.</p>
 <p>For example, testing z3 via the SMT-LIBv2 interface on QF_BV problems can be
 achieved as follows.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ murxla --smt2 z3.sh --bv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>murxla<span class="w"> </span>--smt2<span class="w"> </span>z3.sh<span class="w"> </span>--bv
 </pre></div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">z3 Wrapper Script z3.sh</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">z3 Wrapper Script z3.sh</span><a class="headerlink" href="#id2" title="Link to this code"></a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="nb">trap</span> <span class="s1">&#39;kill $(jobs -p)&#39;</span> SIGABRT
-z3 <span class="nv">smtlib2_compliant</span><span class="o">=</span><span class="nb">true</span> -in -smt2
+<span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;kill $(jobs -p)&#39;</span><span class="w"> </span>SIGABRT
+z3<span class="w"> </span><span class="nv">smtlib2_compliant</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>-in<span class="w"> </span>-smt2
 </pre></div>
 </div>
 </div>
@@ -191,20 +196,20 @@ wrapper script is terminated by Murxla.</p>
 </section>
 </section>
 <section id="replaying-and-minimizing-traces">
-<h2>Replaying and Minimizing Traces<a class="headerlink" href="#replaying-and-minimizing-traces" title="Permalink to this headline"></a></h2>
+<h2>Replaying and Minimizing Traces<a class="headerlink" href="#replaying-and-minimizing-traces" title="Link to this heading"></a></h2>
 <p>Murxla generates API trace files if an issue is encountered.
 Replaying a trace file with Murxla executes the exact same API call sequence
 that was executed when recording the trace and will trigger the same error
 behavior.</p>
-<p>In the above example,
-seed <code class="docutils literal notranslate"><span class="pre">2287b2bd77a3b84c</span></code> triggered an issue in Bitwuzla.
+<p>In the example below,
+seed <code class="docutils literal notranslate"><span class="pre">2287b2bd77a3b84c</span></code> triggered an issue in Bitwuzla (prior to version 0.1).
 Murxla stores the API trace
 in <code class="docutils literal notranslate"><span class="pre">1/murxla-2287b2bd77a3b84c.trace</span></code>, which can be replayed as follows.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">Example: Replaying API Traces</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">Example: Replaying API Traces</span><a class="headerlink" href="#id3" title="Link to this code"></a></div>
 <div class="highlight-trace notranslate"><div class="highlight"><pre><span></span><span class="n">$</span> <span class="n">murxla</span> <span class="n">-u</span> <span class="m">1</span><span class="n">/murxla-2287b2bd77a3b84c.trace</span>
 
-  <span class="k">set-murxla-options</span> <span class="n">--bzla</span>
+  <span class="k">set-murxla-options</span> <span class="n">--bitwuzla</span>
  <span class="m">1174</span> <span class="k">new</span>
 <span class="m">97715</span> <span class="k">set-logic</span> <span class="n">QF_UFBVFP</span>
 <span class="m">15569</span> <span class="k">set-option</span> <span class="n">produce-models</span> <span class="n">true</span>
@@ -230,7 +235,7 @@ in <code class="docutils literal notranslate"><span class="pre">1/murxla-2287b2b
 </div>
 </div>
 <section id="minimizing-traces">
-<h3>Minimizing Traces<a class="headerlink" href="#minimizing-traces" title="Permalink to this headline"></a></h3>
+<h3>Minimizing Traces<a class="headerlink" href="#minimizing-traces" title="Link to this heading"></a></h3>
 <p>Murxla provides a trace minimizer that takes an API trace and tries to minimize
 it while preserving the behavior of the original execution.</p>
 <p>The trace minimizer implements simple minimization techniques in the following
@@ -244,7 +249,7 @@ sort</p></li>
 <p>For example, API trace <code class="docutils literal notranslate"><span class="pre">1/murxla-2287b2bd77a3b84c.trace</span></code> has 602 lines and
 can be minimized with option <code class="docutils literal notranslate"><span class="pre">-d</span></code> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">Example: Minimizing API Traces</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">Example: Minimizing API Traces</span><a class="headerlink" href="#id4" title="Link to this code"></a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ murxla -u 1/murxla-2287b2bd77a3b84c.trace -d
 
 [murxla] dd: minimizing untraced file &#39;1/murxla-2287b2bd77a3b84c.trace&#39;
@@ -278,31 +283,31 @@ such as <a class="reference external" href="https://github.com/ddsmt/ddsmt">ddSM
 </section>
 </section>
 <section id="advanced-usage-scenarios">
-<h2>Advanced Usage Scenarios<a class="headerlink" href="#advanced-usage-scenarios" title="Permalink to this headline"></a></h2>
+<h2>Advanced Usage Scenarios<a class="headerlink" href="#advanced-usage-scenarios" title="Link to this heading"></a></h2>
 <section id="cross-checking-solvers">
-<h3>Cross-Checking Solvers<a class="headerlink" href="#cross-checking-solvers" title="Permalink to this headline"></a></h3>
+<h3>Cross-Checking Solvers<a class="headerlink" href="#cross-checking-solvers" title="Link to this heading"></a></h3>
 <p>Murxla’s cross-checking feature (option <code class="docutils literal notranslate"><span class="pre">-c</span></code>) can be used to find problems on
 which two solvers disagree.
 It compares the results of two solvers after each <code class="docutils literal notranslate"><span class="pre">(check-sat)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">(check-sat-assuming)</span></code> call and reports an error if the two solvers disagree.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">Cross-checking Bitwuzla against cvc5</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla --bzla -c cvc5
+<div class="code-block-caption"><span class="caption-text">Cross-checking Bitwuzla against cvc5</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla<span class="w"> </span>--bitwuzla<span class="w"> </span>-c<span class="w"> </span>cvc5
 </pre></div>
 </div>
 </div>
 <p>Murxla also allows to cross-check solver binaries used via the
 SMT-LIBv2 interface against the native solvers.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Cross-checking a z3 binary via the SMT-LIB interface against cvc5</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla --smt2 z3.sh -c cvc5
+<div class="code-block-caption"><span class="caption-text">Cross-checking a z3 binary via the SMT-LIB interface against cvc5</span><a class="headerlink" href="#id6" title="Link to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>murxla<span class="w"> </span>--smt2<span class="w"> </span>z3.sh<span class="w"> </span>-c<span class="w"> </span>cvc5
 </pre></div>
 </div>
 </div>
 </section>
 </section>
 <section id="command-line-options">
-<h2>Command Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline"></a></h2>
+<h2>Command Line Options<a class="headerlink" href="#command-line-options" title="Link to this heading"></a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Usage:  murxla [options]
 
   -h, --help                 print this message and exit
@@ -341,7 +346,7 @@ SMT-LIBv2 interface against the native solvers.</p>
 
  Solvers:
   --btor                     test Boolector
-  --bzla                     test Bitwuzla
+  --bitwuzla                 test Bitwuzla
   --cvc5                     test cvc5
   --yices                    test Yices
   --smt2 [&lt;binary&gt;]          print SMT-LIB 2 (optionally to solver binary

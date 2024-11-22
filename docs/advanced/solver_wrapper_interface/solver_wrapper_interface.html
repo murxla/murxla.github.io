@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solver Wrapper Interface &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
-        <script src="../../static/doctools.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../static/doctools.js?v=9a2dae69"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,9 +83,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../advanced.html">Advanced Documentation</a> &raquo;</li>
-      <li>Solver Wrapper Interface</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../advanced.html">Advanced Documentation</a></li>
+      <li class="breadcrumb-item active">Solver Wrapper Interface</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -90,15 +95,28 @@
            <div itemprop="articleBody">
              
   <section id="solver-wrapper-interface">
-<h1>Solver Wrapper Interface<a class="headerlink" href="#solver-wrapper-interface" title="Permalink to this headline"></a></h1>
+<h1>Solver Wrapper Interface<a class="headerlink" href="#solver-wrapper-interface" title="Link to this heading"></a></h1>
 <p>The interface to be implemented by solver wrappers
 (see <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html"><span class="doc">Solver Wrappers</span></a>), as defined
 at <a class="reference external" href="https://github.com/murxla/murxla/blob/main/src/solver/solver.hpp">src/solver/solver.hpp</a>.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="abssort.html">Solver Wrapper Interface: AbsSort</a></li>
-<li class="toctree-l1"><a class="reference internal" href="absterm.html">Solver Wrapper Interface: AbsTerm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solver.html">Solver Wrapper Interface: Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abssort.html">Solver Wrapper Interface: AbsSort</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="abssort.html#_CPPv4N6murxla7AbsSortE"><code class="docutils literal notranslate"><span class="pre">AbsSort</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="abssort.html#_CPPv4IENSt4hashIN6murxla4SortEEE"><code class="docutils literal notranslate"><span class="pre">hash</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="abssort.html#_CPPv4N6murxla9ParamSortE"><code class="docutils literal notranslate"><span class="pre">ParamSort</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="abssort.html#_CPPv4N6murxla14UnresolvedSortE"><code class="docutils literal notranslate"><span class="pre">UnresolvedSort</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="absterm.html">Solver Wrapper Interface: AbsTerm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="absterm.html#_CPPv4N6murxla7AbsTermE"><code class="docutils literal notranslate"><span class="pre">AbsTerm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="absterm.html#_CPPv4IENSt4hashIN6murxla4TermEEE"><code class="docutils literal notranslate"><span class="pre">hash</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solver.html">Solver Wrapper Interface: Solver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solver.html#_CPPv4N6murxla6SolverE"><code class="docutils literal notranslate"><span class="pre">Solver</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solver Wrapper Interface: AbsTerm &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
-        <script src="../../static/doctools.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../static/doctools.js?v=9a2dae69"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +51,78 @@
 <li class="toctree-l2"><a class="reference internal" href="../../solver_integration/solver_profile.html">Solver Profiles</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="abssort.html">Solver Wrapper Interface: AbsSort</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Solver Wrapper Interface: AbsTerm</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Solver Wrapper Interface: AbsTerm</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE"><code class="docutils literal notranslate"><span class="pre">AbsTerm</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8LeafKindE"><code class="docutils literal notranslate"><span class="pre">AbsTerm::LeafKind</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE"><code class="docutils literal notranslate"><span class="pre">AbsTerm::SpecialValueKind</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm7AbsTermEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::AbsTerm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTermD0Ev"><code class="docutils literal notranslate"><span class="pre">AbsTerm::~AbsTerm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm4hashEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::hash()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm9to_stringEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::to_string()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE"><code class="docutils literal notranslate"><span class="pre">AbsTerm::equals()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE"><code class="docutils literal notranslate"><span class="pre">AbsTerm::not_equals()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm8is_arrayEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_array()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_bagEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bag()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm7is_boolEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bool()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm5is_bvEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bv()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm5is_dtEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_dt()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm5is_ffEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_ff()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm5is_fpEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_fp()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_funEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_fun()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_intEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_int()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm7is_realEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_real()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm5is_rmEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_rm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm9is_reglanEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_reglan()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_seqEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_seq()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_setEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_set()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm9is_stringEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_string()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm16is_uninterpretedEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_uninterpreted()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm12is_bag_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bag_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm13is_bool_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bool_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11is_bv_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_bv_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11is_dt_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_dt_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11is_ff_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_ff_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11is_fp_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_fp_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm12is_int_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_int_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm13is_real_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_real_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm15is_reglan_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_reglan_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11is_rm_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_rm_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm12is_seq_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_seq_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm12is_set_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_set_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm15is_string_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_string_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_special_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm8is_constEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_const()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm8is_valueEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_value()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6is_varEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_var()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm8get_kindEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_kind()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm12get_childrenEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_children()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm10is_indexedEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::is_indexed()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm15get_num_indicesEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_num_indices()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11get_indicesEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_indices()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11get_bv_sizeEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_bv_size()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm11get_ff_sizeEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_ff_size()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm15get_fp_exp_sizeEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_fp_exp_size()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm15get_fp_sig_sizeEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_fp_sig_size()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm20get_array_index_sortEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_array_index_sort()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm22get_array_element_sortEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_array_element_sort()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm13get_fun_arityEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_fun_arity()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm21get_fun_codomain_sortEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_fun_codomain_sort()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm20get_fun_domain_sortsEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_fun_domain_sorts()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8set_sortE4Sort"><code class="docutils literal notranslate"><span class="pre">AbsTerm::set_sort()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm13set_leaf_kindE8LeafKind"><code class="docutils literal notranslate"><span class="pre">AbsTerm::set_leaf_kind()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind"><code class="docutils literal notranslate"><span class="pre">AbsTerm::set_special_value_kind()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm6set_idE8uint64_t"><code class="docutils literal notranslate"><span class="pre">AbsTerm::set_id()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm6get_idEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_id()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm8get_sortEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_sort()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NK6murxla7AbsTerm13get_leaf_kindEv"><code class="docutils literal notranslate"><span class="pre">AbsTerm::get_leaf_kind()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4IENSt4hashIN6murxla4TermEEE"><code class="docutils literal notranslate"><span class="pre">hash</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#_CPPv4NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE"><code class="docutils literal notranslate"><span class="pre">hash::operator()()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="solver.html">Solver Wrapper Interface: Solver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html#solver-wrapper-implementation">Solver Wrapper Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../solver_integration/solver_wrapper/solver_wrapper.html#global-sort-and-term-handling">Global Sort and Term Handling</a></li>
@@ -72,10 +148,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../solver_integration/solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
-          <li><a href="../../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
-      <li>Solver Wrapper Interface: AbsTerm</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../solver_integration/solver_integration.html">How to Integrate a Solver</a></li>
+          <li class="breadcrumb-item"><a href="../../solver_integration/solver_wrapper/solver_wrapper.html">Solver Wrappers</a></li>
+      <li class="breadcrumb-item active">Solver Wrapper Interface: AbsTerm</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -85,10 +161,10 @@
            <div itemprop="articleBody">
              
   <section id="solver-wrapper-interface-absterm">
-<h1>Solver Wrapper Interface: AbsTerm<a class="headerlink" href="#solver-wrapper-interface-absterm" title="Permalink to this headline"></a></h1>
+<h1>Solver Wrapper Interface: AbsTerm<a class="headerlink" href="#solver-wrapper-interface-absterm" title="Link to this heading"></a></h1>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTermE">
-<span id="_CPPv3N6murxla7AbsTermE"></span><span id="_CPPv2N6murxla7AbsTermE"></span><span id="murxla::AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">AbsTerm</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTermE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTermE"></span><span id="_CPPv2N6murxla7AbsTermE"></span><span id="murxla::AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AbsTerm</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTermE" title="Link to this definition"></a><br /></dt>
 <dd><p>The abstract base class for terms.</p>
 <p>A solver wrapper must implement a solver-specific term wrapper class derived from this class. </p>
 <p>Subclassed by murxla::shadow::ShadowTerm, murxla::smt2::Smt2Term</p>
@@ -96,35 +172,35 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
 <dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8LeafKindE">
-<span id="_CPPv3N6murxla7AbsTerm8LeafKindE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKindE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LeafKind</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8LeafKindE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKindE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LeafKind</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="Link to this definition"></a><br /></dt>
 <dd><p>The leaf kind of a term. </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8LeafKind4NONEE">
-<span id="_CPPv3N6murxla7AbsTerm8LeafKind4NONEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind4NONEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea73700ec12586183937c6433427587814"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NONE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind4NONEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8LeafKind4NONEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind4NONEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea73700ec12586183937c6433427587814"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NONE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind4NONEE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8LeafKind8CONSTANTE">
-<span id="_CPPv3N6murxla7AbsTerm8LeafKind8CONSTANTE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind8CONSTANTE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea555cbf1e4796f91b91807ee7fb4655f4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CONSTANT</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind8CONSTANTE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8LeafKind8CONSTANTE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind8CONSTANTE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea555cbf1e4796f91b91807ee7fb4655f4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CONSTANT</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind8CONSTANTE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8LeafKind5VALUEE">
-<span id="_CPPv3N6murxla7AbsTerm8LeafKind5VALUEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind5VALUEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea52a948caebbab8c87948b0afdca19109"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VALUE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind5VALUEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8LeafKind5VALUEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind5VALUEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea52a948caebbab8c87948b0afdca19109"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VALUE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind5VALUEE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8LeafKind8VARIABLEE">
-<span id="_CPPv3N6murxla7AbsTerm8LeafKind8VARIABLEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind8VARIABLEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea920b485791515cd3f42eab6b3e259a9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VARIABLE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind8VARIABLEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8LeafKind8VARIABLEE"></span><span id="_CPPv2N6murxla7AbsTerm8LeafKind8VARIABLEE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea920b485791515cd3f42eab6b3e259a9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VARIABLE</span></span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8LeafKind8VARIABLEE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm16SpecialValueKindE">
-<span id="_CPPv3N6murxla7AbsTerm16SpecialValueKindE"></span><span id="_CPPv2N6murxla7AbsTerm16SpecialValueKindE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a90414af93da6b5d4c84e3536da13f23e"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SpecialValueKind</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a special value (see <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_overrides.html#group__solver-may-override_1ga7ba29323ee157a47a81876af816f2b8c"><span class="std std-ref">Solver::mk_special_value()</span></a>).</p>
+<span id="_CPPv3N6murxla7AbsTerm16SpecialValueKindE"></span><span id="_CPPv2N6murxla7AbsTerm16SpecialValueKindE"></span><span class="target" id="classmurxla_1_1AbsTerm_1a90414af93da6b5d4c84e3536da13f23e"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SpecialValueKind</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="Link to this definition"></a><br /></dt>
+<dd><p>The kind of a special value (see <a class="reference internal" href="solver.html#classmurxla_1_1Solver_1a7ba29323ee157a47a81876af816f2b8c"><span class="std std-ref">Solver::mk_special_value()</span></a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is an std::string rather than an enum to allow for solvers to extend the set of special value kinds. </p>
@@ -136,22 +212,22 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm7AbsTermEv">
-<span id="_CPPv3N6murxla7AbsTerm7AbsTermEv"></span><span id="_CPPv2N6murxla7AbsTerm7AbsTermEv"></span><span id="murxla::AbsTerm::AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2732a5c02f07246dc42ae98b4ac598b8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AbsTerm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm7AbsTermEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm7AbsTermEv"></span><span id="_CPPv2N6murxla7AbsTerm7AbsTermEv"></span><span id="murxla::AbsTerm::AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2732a5c02f07246dc42ae98b4ac598b8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AbsTerm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm7AbsTermEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Constructor. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTermD0Ev">
-<span id="_CPPv3N6murxla7AbsTermD0Ev"></span><span id="_CPPv2N6murxla7AbsTermD0Ev"></span><span id="murxla::AbsTerm::~AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm_1a54906b6d689facf262272c5c6282c32c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~AbsTerm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTermD0Ev" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTermD0Ev"></span><span id="_CPPv2N6murxla7AbsTermD0Ev"></span><span id="murxla::AbsTerm::~AbsTerm"></span><span class="target" id="classmurxla_1_1AbsTerm_1a54906b6d689facf262272c5c6282c32c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~AbsTerm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTermD0Ev" title="Link to this definition"></a><br /></dt>
 <dd><p>Destructor. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm4hashEv">
-<span id="_CPPv3NK6murxla7AbsTerm4hashEv"></span><span id="_CPPv2NK6murxla7AbsTerm4hashEv"></span><span id="murxla::AbsTerm::hashC"></span><span class="target" id="group__term-must-override_1ga2d4de5e1eb3aa6785dd69d3ec520ceb9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm4hashEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm4hashEv"></span><span id="_CPPv2NK6murxla7AbsTerm4hashEv"></span><span id="murxla::AbsTerm::hashC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2d4de5e1eb3aa6785dd69d3ec520ceb9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm4hashEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the hash value of this term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The hash value of this term. </p>
 </dd>
 </dl>
@@ -159,10 +235,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm9to_stringEv">
-<span id="_CPPv3NK6murxla7AbsTerm9to_stringEv"></span><span id="_CPPv2NK6murxla7AbsTerm9to_stringEv"></span><span id="murxla::AbsTerm::to_stringC"></span><span class="target" id="group__term-must-override_1ga3d5af2ac7f5d4692c41cc3262053ff7b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9to_stringEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm9to_stringEv"></span><span id="_CPPv2NK6murxla7AbsTerm9to_stringEv"></span><span id="murxla::AbsTerm::to_stringC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a3d5af2ac7f5d4692c41cc3262053ff7b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9to_stringEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get a string representation of this term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A string representation of this term. </p>
 </dd>
 </dl>
@@ -170,13 +246,13 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE">
-<span id="_CPPv3NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="murxla::AbsTerm::equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="group__term-must-override_1ga54054beac1e679a2abea40d647714fd6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="murxla::AbsTerm::equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a54054beac1e679a2abea40d647714fd6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6equalsERKNSt10shared_ptrI7AbsTermEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is equal to the given term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> – The term to compare this term to. </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if this term is equal to the other term. </p>
 </dd>
 </dl>
@@ -184,13 +260,13 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE">
-<span id="_CPPv3NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="murxla::AbsTerm::not_equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="group__term-may-override_1ga1d409f27c83e2d01f9a717b085dc4726"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">not_equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="murxla::AbsTerm::not_equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a1d409f27c83e2d01f9a717b085dc4726"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">not_equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm10not_equalsERKNSt10shared_ptrI7AbsTermEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is not equal to the given term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> – The term to compare this term to. </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if this term is not equal to the other term. </p>
 </dd>
 </dl>
@@ -198,10 +274,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8is_arrayEv">
-<span id="_CPPv3NK6murxla7AbsTerm8is_arrayEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_arrayEv"></span><span id="murxla::AbsTerm::is_arrayC"></span><span class="target" id="group__term-may-override_1ga98bfc80c025a9448e03fd471082bc56a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_array</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_arrayEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm8is_arrayEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_arrayEv"></span><span id="murxla::AbsTerm::is_arrayC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a98bfc80c025a9448e03fd471082bc56a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_array</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_arrayEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is an Array term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is an Array term. </p>
 </dd>
 </dl>
@@ -209,10 +285,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_bagEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_bagEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_bagEv"></span><span id="murxla::AbsTerm::is_bagC"></span><span class="target" id="group__term-may-override_1ga55991e1662e1f95b13730b7048f7d104"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_bagEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_bagEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_bagEv"></span><span id="murxla::AbsTerm::is_bagC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a55991e1662e1f95b13730b7048f7d104"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_bagEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Bag term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Bag term. </p>
 </dd>
 </dl>
@@ -220,10 +296,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm7is_boolEv">
-<span id="_CPPv3NK6murxla7AbsTerm7is_boolEv"></span><span id="_CPPv2NK6murxla7AbsTerm7is_boolEv"></span><span id="murxla::AbsTerm::is_boolC"></span><span class="target" id="group__term-may-override_1ga972a54ff7800d551d2e944af02662924"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm7is_boolEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm7is_boolEv"></span><span id="_CPPv2NK6murxla7AbsTerm7is_boolEv"></span><span id="murxla::AbsTerm::is_boolC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a972a54ff7800d551d2e944af02662924"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm7is_boolEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Boolean term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Boolean term. </p>
 </dd>
 </dl>
@@ -231,10 +307,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm5is_bvEv">
-<span id="_CPPv3NK6murxla7AbsTerm5is_bvEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_bvEv"></span><span id="murxla::AbsTerm::is_bvC"></span><span class="target" id="group__term-may-override_1gaa588d6d3d39f8bb2978b0ef58f842060"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_bvEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm5is_bvEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_bvEv"></span><span id="murxla::AbsTerm::is_bvC"></span><span class="target" id="classmurxla_1_1AbsTerm_1aa588d6d3d39f8bb2978b0ef58f842060"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_bvEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a bit-vector term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a bit-vector term. </p>
 </dd>
 </dl>
@@ -242,21 +318,32 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm5is_dtEv">
-<span id="_CPPv3NK6murxla7AbsTerm5is_dtEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_dtEv"></span><span id="murxla::AbsTerm::is_dtC"></span><span class="target" id="group__term-may-override_1ga91a170dad13d514354f229457d08461c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_dtEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm5is_dtEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_dtEv"></span><span id="murxla::AbsTerm::is_dtC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a91a170dad13d514354f229457d08461c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_dtEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a datatype term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a datatype term. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm5is_ffEv">
+<span id="_CPPv3NK6murxla7AbsTerm5is_ffEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_ffEv"></span><span id="murxla::AbsTerm::is_ffC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ad6db7ea4290914137986e40cc2947c5f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_ff</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_ffEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Determine if this term is a finite-field term. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if this term is a finite-field term. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm5is_fpEv">
-<span id="_CPPv3NK6murxla7AbsTerm5is_fpEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_fpEv"></span><span id="murxla::AbsTerm::is_fpC"></span><span class="target" id="group__term-may-override_1ga39ca38d696dbc855a628a7ea4083f77b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_fpEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm5is_fpEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_fpEv"></span><span id="murxla::AbsTerm::is_fpC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a39ca38d696dbc855a628a7ea4083f77b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_fpEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a floating-point term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a floating-point term. </p>
 </dd>
 </dl>
@@ -264,10 +351,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_funEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_funEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_funEv"></span><span id="murxla::AbsTerm::is_funC"></span><span class="target" id="group__term-may-override_1ga8e0b0496752de31414b2518a6a5916d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fun</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_funEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_funEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_funEv"></span><span id="murxla::AbsTerm::is_funC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a8e0b0496752de31414b2518a6a5916d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fun</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_funEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a function term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a function term. </p>
 </dd>
 </dl>
@@ -275,10 +362,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_intEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_intEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_intEv"></span><span id="murxla::AbsTerm::is_intC"></span><span class="target" id="group__term-may-override_1ga8b052cf7fc724d9232517bd2f6e876df"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_intEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_intEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_intEv"></span><span id="murxla::AbsTerm::is_intC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a8b052cf7fc724d9232517bd2f6e876df"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_intEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is an Int term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is an Int term. </p>
 </dd>
 </dl>
@@ -286,10 +373,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm7is_realEv">
-<span id="_CPPv3NK6murxla7AbsTerm7is_realEv"></span><span id="_CPPv2NK6murxla7AbsTerm7is_realEv"></span><span id="murxla::AbsTerm::is_realC"></span><span class="target" id="group__term-may-override_1gacaa2dd7e6881d64d9652bc78aff5e84d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm7is_realEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm7is_realEv"></span><span id="_CPPv2NK6murxla7AbsTerm7is_realEv"></span><span id="murxla::AbsTerm::is_realC"></span><span class="target" id="classmurxla_1_1AbsTerm_1acaa2dd7e6881d64d9652bc78aff5e84d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm7is_realEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Real term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Real term. </p>
 </dd>
 </dl>
@@ -297,10 +384,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm5is_rmEv">
-<span id="_CPPv3NK6murxla7AbsTerm5is_rmEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_rmEv"></span><span id="murxla::AbsTerm::is_rmC"></span><span class="target" id="group__term-may-override_1ga70e0b6545bafec525ef488016d360e21"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_rmEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm5is_rmEv"></span><span id="_CPPv2NK6murxla7AbsTerm5is_rmEv"></span><span id="murxla::AbsTerm::is_rmC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a70e0b6545bafec525ef488016d360e21"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm5is_rmEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a RoundingMode term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a RoundingMode term. </p>
 </dd>
 </dl>
@@ -308,10 +395,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm9is_reglanEv">
-<span id="_CPPv3NK6murxla7AbsTerm9is_reglanEv"></span><span id="_CPPv2NK6murxla7AbsTerm9is_reglanEv"></span><span id="murxla::AbsTerm::is_reglanC"></span><span class="target" id="group__term-may-override_1gae5f8efe794edff2a278a3f95cf45b95a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9is_reglanEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm9is_reglanEv"></span><span id="_CPPv2NK6murxla7AbsTerm9is_reglanEv"></span><span id="murxla::AbsTerm::is_reglanC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ae5f8efe794edff2a278a3f95cf45b95a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9is_reglanEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a RegLan term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a RegLan term. </p>
 </dd>
 </dl>
@@ -319,10 +406,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_seqEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_seqEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_seqEv"></span><span id="murxla::AbsTerm::is_seqC"></span><span class="target" id="group__term-may-override_1ga03160cc761ea60afeb56e6bdc2b90e61"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_seqEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_seqEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_seqEv"></span><span id="murxla::AbsTerm::is_seqC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a03160cc761ea60afeb56e6bdc2b90e61"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_seqEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Sequence term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Sequence term. </p>
 </dd>
 </dl>
@@ -330,10 +417,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_setEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_setEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_setEv"></span><span id="murxla::AbsTerm::is_setC"></span><span class="target" id="group__term-may-override_1gacbfb981614519cff7d10703fd474424d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_setEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_setEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_setEv"></span><span id="murxla::AbsTerm::is_setC"></span><span class="target" id="classmurxla_1_1AbsTerm_1acbfb981614519cff7d10703fd474424d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_setEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Set term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Set term. </p>
 </dd>
 </dl>
@@ -341,10 +428,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm9is_stringEv">
-<span id="_CPPv3NK6murxla7AbsTerm9is_stringEv"></span><span id="_CPPv2NK6murxla7AbsTerm9is_stringEv"></span><span id="murxla::AbsTerm::is_stringC"></span><span class="target" id="group__term-may-override_1ga46515375b6b95aedbf3dc315cf80d70b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9is_stringEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm9is_stringEv"></span><span id="_CPPv2NK6murxla7AbsTerm9is_stringEv"></span><span id="murxla::AbsTerm::is_stringC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a46515375b6b95aedbf3dc315cf80d70b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm9is_stringEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a String term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a String term. </p>
 </dd>
 </dl>
@@ -352,10 +439,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm16is_uninterpretedEv">
-<span id="_CPPv3NK6murxla7AbsTerm16is_uninterpretedEv"></span><span id="_CPPv2NK6murxla7AbsTerm16is_uninterpretedEv"></span><span id="murxla::AbsTerm::is_uninterpretedC"></span><span class="target" id="group__term-may-override_1gac9fd23c4661fff332d22419b3ede1841"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_uninterpreted</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm16is_uninterpretedEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm16is_uninterpretedEv"></span><span id="_CPPv2NK6murxla7AbsTerm16is_uninterpretedEv"></span><span id="murxla::AbsTerm::is_uninterpretedC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ac9fd23c4661fff332d22419b3ede1841"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_uninterpreted</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm16is_uninterpretedEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is an uninterpreted term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is an uninterpreted term. </p>
 </dd>
 </dl>
@@ -363,10 +450,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm12is_bag_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm12is_bag_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_bag_valueEv"></span><span id="murxla::AbsTerm::is_bag_valueC"></span><span class="target" id="group__term-may-override_1ga791d5d5f8791a5f2da8c1f6cf08d70d0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_bag_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm12is_bag_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_bag_valueEv"></span><span id="murxla::AbsTerm::is_bag_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a791d5d5f8791a5f2da8c1f6cf08d70d0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_bag_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Bag value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Bag value. </p>
 </dd>
 </dl>
@@ -374,10 +461,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm13is_bool_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm13is_bool_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm13is_bool_valueEv"></span><span id="murxla::AbsTerm::is_bool_valueC"></span><span class="target" id="group__term-may-override_1ga6a3c3edf516fa328493a594ba54d1b6f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13is_bool_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm13is_bool_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm13is_bool_valueEv"></span><span id="murxla::AbsTerm::is_bool_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a6a3c3edf516fa328493a594ba54d1b6f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13is_bool_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Boolean value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Boolean value. </p>
 </dd>
 </dl>
@@ -385,10 +472,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11is_bv_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm11is_bv_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_bv_valueEv"></span><span id="murxla::AbsTerm::is_bv_valueC"></span><span class="target" id="group__term-may-override_1ga68568d9ff97d39a5fe2da7f4e4041d04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_bv_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11is_bv_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_bv_valueEv"></span><span id="murxla::AbsTerm::is_bv_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a68568d9ff97d39a5fe2da7f4e4041d04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_bv_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a bit-vector value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a bit-vector value. </p>
 </dd>
 </dl>
@@ -396,21 +483,32 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11is_dt_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm11is_dt_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_dt_valueEv"></span><span id="murxla::AbsTerm::is_dt_valueC"></span><span class="target" id="group__term-may-override_1gae19c5b0319508f8f86dee5d04132646c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_dt_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11is_dt_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_dt_valueEv"></span><span id="murxla::AbsTerm::is_dt_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ae19c5b0319508f8f86dee5d04132646c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_dt_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a datatype value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a datatype value. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11is_ff_valueEv">
+<span id="_CPPv3NK6murxla7AbsTerm11is_ff_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_ff_valueEv"></span><span id="murxla::AbsTerm::is_ff_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a7610d04e5c1ea9320a3cb1b724a27ca7"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_ff_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_ff_valueEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Determine if this term is a finite-field value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if this term is a finite-field value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11is_fp_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm11is_fp_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_fp_valueEv"></span><span id="murxla::AbsTerm::is_fp_valueC"></span><span class="target" id="group__term-may-override_1gac2e6dae96ed7e39bfe044e08767cfa34"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_fp_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11is_fp_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_fp_valueEv"></span><span id="murxla::AbsTerm::is_fp_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ac2e6dae96ed7e39bfe044e08767cfa34"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_fp_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a floating-point value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a floating-point value. </p>
 </dd>
 </dl>
@@ -418,10 +516,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm12is_int_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm12is_int_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_int_valueEv"></span><span id="murxla::AbsTerm::is_int_valueC"></span><span class="target" id="group__term-may-override_1gab1d95e6ddf7b05bb58435ffc938072b4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_int_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm12is_int_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_int_valueEv"></span><span id="murxla::AbsTerm::is_int_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ab1d95e6ddf7b05bb58435ffc938072b4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_int_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is an integer value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is an integer value. </p>
 </dd>
 </dl>
@@ -429,10 +527,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm13is_real_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm13is_real_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm13is_real_valueEv"></span><span id="murxla::AbsTerm::is_real_valueC"></span><span class="target" id="group__term-may-override_1ga3f94d794938496d1db63a56c762d56fd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13is_real_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm13is_real_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm13is_real_valueEv"></span><span id="murxla::AbsTerm::is_real_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a3f94d794938496d1db63a56c762d56fd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13is_real_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a real value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a real value. </p>
 </dd>
 </dl>
@@ -440,10 +538,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm15is_reglan_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm15is_reglan_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm15is_reglan_valueEv"></span><span id="murxla::AbsTerm::is_reglan_valueC"></span><span class="target" id="group__term-may-override_1ga6f61e2d5d5f274c2a5476ecd4d583be1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15is_reglan_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm15is_reglan_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm15is_reglan_valueEv"></span><span id="murxla::AbsTerm::is_reglan_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a6f61e2d5d5f274c2a5476ecd4d583be1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15is_reglan_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a RegLan value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a RegLan value. </p>
 </dd>
 </dl>
@@ -451,10 +549,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11is_rm_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm11is_rm_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_rm_valueEv"></span><span id="murxla::AbsTerm::is_rm_valueC"></span><span class="target" id="group__term-may-override_1ga96e28fde1eff8e2e8f1f0cd94c618f6a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_rm_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11is_rm_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm11is_rm_valueEv"></span><span id="murxla::AbsTerm::is_rm_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a96e28fde1eff8e2e8f1f0cd94c618f6a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11is_rm_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a rounding mode value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a rounding mode value. </p>
 </dd>
 </dl>
@@ -462,10 +560,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm12is_seq_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm12is_seq_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_seq_valueEv"></span><span id="murxla::AbsTerm::is_seq_valueC"></span><span class="target" id="group__term-may-override_1gae1976e8209f2e7d7a3468321b14108a4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_seq_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm12is_seq_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_seq_valueEv"></span><span id="murxla::AbsTerm::is_seq_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ae1976e8209f2e7d7a3468321b14108a4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_seq_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Sequence value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Sequence value. </p>
 </dd>
 </dl>
@@ -473,10 +571,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm12is_set_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm12is_set_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_set_valueEv"></span><span id="murxla::AbsTerm::is_set_valueC"></span><span class="target" id="group__term-may-override_1ga20ff4ed941018764923e4c036f4dd094"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_set_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm12is_set_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm12is_set_valueEv"></span><span id="murxla::AbsTerm::is_set_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a20ff4ed941018764923e4c036f4dd094"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12is_set_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a Sequence value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a Sequence value. </p>
 </dd>
 </dl>
@@ -484,10 +582,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm15is_string_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm15is_string_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm15is_string_valueEv"></span><span id="murxla::AbsTerm::is_string_valueC"></span><span class="target" id="group__term-may-override_1ga0e53c011ed2d7ad94fba7a4cd6800049"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15is_string_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm15is_string_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm15is_string_valueEv"></span><span id="murxla::AbsTerm::is_string_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a0e53c011ed2d7ad94fba7a4cd6800049"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15is_string_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a string value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a string value. </p>
 </dd>
 </dl>
@@ -495,10 +593,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind">
-<span id="_CPPv3NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind"></span><span id="_CPPv2NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind"></span><span id="murxla::AbsTerm::is_special_value__SpecialValueKindCRC"></span><span class="target" id="group__term-may-override_1gab70cc31b0b3add52d37674e93b1bd988"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_special_value</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind"></span><span id="_CPPv2NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind"></span><span id="murxla::AbsTerm::is_special_value__SpecialValueKindCRC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ab70cc31b0b3add52d37674e93b1bd988"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_special_value</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm16is_special_valueERK16SpecialValueKind" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a special value of given kind. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a special value of given kind. </p>
 </dd>
 </dl>
@@ -506,10 +604,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8is_constEv">
-<span id="_CPPv3NK6murxla7AbsTerm8is_constEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_constEv"></span><span id="murxla::AbsTerm::is_constC"></span><span class="target" id="group__term-may-override_1ga04ea51e3f4a067461d7e080d480a3da8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_const</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_constEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm8is_constEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_constEv"></span><span id="murxla::AbsTerm::is_constC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a04ea51e3f4a067461d7e080d480a3da8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_const</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_constEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a first-order constant. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a first-order constant. </p>
 </dd>
 </dl>
@@ -517,10 +615,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8is_valueEv">
-<span id="_CPPv3NK6murxla7AbsTerm8is_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_valueEv"></span><span id="murxla::AbsTerm::is_valueC"></span><span class="target" id="group__term-may-override_1gacf56b82713d59de5b0ffcda947544f16"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_valueEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm8is_valueEv"></span><span id="_CPPv2NK6murxla7AbsTerm8is_valueEv"></span><span id="murxla::AbsTerm::is_valueC"></span><span class="target" id="classmurxla_1_1AbsTerm_1acf56b82713d59de5b0ffcda947544f16"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8is_valueEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a value. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a value. </p>
 </dd>
 </dl>
@@ -528,10 +626,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6is_varEv">
-<span id="_CPPv3NK6murxla7AbsTerm6is_varEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_varEv"></span><span id="murxla::AbsTerm::is_varC"></span><span class="target" id="group__term-may-override_1gadc194e1799339dcc140f4de88c0f453c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_varEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6is_varEv"></span><span id="_CPPv2NK6murxla7AbsTerm6is_varEv"></span><span id="murxla::AbsTerm::is_varC"></span><span class="target" id="classmurxla_1_1AbsTerm_1adc194e1799339dcc140f4de88c0f453c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6is_varEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is a variable. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is a variable. </p>
 </dd>
 </dl>
@@ -539,12 +637,12 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8get_kindEv">
-<span id="_CPPv3NK6murxla7AbsTerm8get_kindEv"></span><span id="_CPPv2NK6murxla7AbsTerm8get_kindEv"></span><span id="murxla::AbsTerm::get_kindC"></span><span class="target" id="group__term-may-override_1gaf2738f68294059d31ef8405e13afc821"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8get_kindEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm8get_kindEv"></span><span id="_CPPv2NK6murxla7AbsTerm8get_kindEv"></span><span id="murxla::AbsTerm::get_kindC"></span><span class="target" id="classmurxla_1_1AbsTerm_1af2738f68294059d31ef8405e13afc821"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><span class="n"><span class="pre">Op</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><span class="n"><span class="pre">Kind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8get_kindEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the kind of this term.</p>
-<p>This kind is not a kind we cache on creation, but the kind that the solver reports. May be <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a>.</p>
-<p>Must be overriden and may not return <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a> if the solver supports the theory of bags, sets and sequences (required for properly initializing sorts that are implicitly created, e.g., sequence sorts for <a class="reference internal" href="../operator_kinds.html#group__operator-kinds_1ga6175d2ef35ef214db9982df68a4c31d4"><span class="std std-ref">Op::SEQ_UNIT</span></a>).</p>
+<p>This kind is not a kind we cache on creation, but the kind that the solver reports. May be <a class="reference internal" href="../operator_kinds.html#group__op-kinds-internal_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a>.</p>
+<p>Must be overriden and may not return <a class="reference internal" href="../operator_kinds.html#group__op-kinds-internal_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a> if the solver supports the theory of bags, sets and sequences (required for properly initializing sorts that are implicitly created, e.g., sequence sorts for <a class="reference internal" href="../operator_kinds.html#group__op-kinds-seq_1ga6175d2ef35ef214db9982df68a4c31d4"><span class="std std-ref">Op::SEQ_UNIT</span></a>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The kind of this term. </p>
 </dd>
 </dl>
@@ -552,14 +650,14 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm12get_childrenEv">
-<span id="_CPPv3NK6murxla7AbsTerm12get_childrenEv"></span><span id="_CPPv2NK6murxla7AbsTerm12get_childrenEv"></span><span id="murxla::AbsTerm::get_childrenC"></span><span class="target" id="group__term-may-override_1ga63aa70df391368a2779ebbcea02968b0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_children</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12get_childrenEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm12get_childrenEv"></span><span id="_CPPv2NK6murxla7AbsTerm12get_childrenEv"></span><span id="murxla::AbsTerm::get_childrenC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a63aa70df391368a2779ebbcea02968b0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><span class="n"><span class="pre">AbsTerm</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_children</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm12get_childrenEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the children of this term.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As with <a class="reference internal" href="../../solver_integration/solver_wrapper/solver_overrides.html#group__solver-must-override_1ga75e342e1585abc792e5e1471f37b8172"><span class="std std-ref">Solver::mk_term</span></a>, the returned terms are “raw” Terms, in the sense that they are only wrapped into a Term, with no additional book keeping information (all data members have default values).</p>
+<p>As with <a class="reference internal" href="solver.html#classmurxla_1_1Solver_1a75e342e1585abc792e5e1471f37b8172"><span class="std std-ref">Solver::mk_term</span></a>, the returned terms are “raw” Terms, in the sense that they are only wrapped into a Term, with no additional book keeping information (all data members have default values).</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The children of this term. </p>
 </dd>
 </dl>
@@ -567,10 +665,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm10is_indexedEv">
-<span id="_CPPv3NK6murxla7AbsTerm10is_indexedEv"></span><span id="_CPPv2NK6murxla7AbsTerm10is_indexedEv"></span><span id="murxla::AbsTerm::is_indexedC"></span><span class="target" id="group__term-may-override_1ga2cac753554f09e8c7f869f9501bc15af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_indexed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm10is_indexedEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm10is_indexedEv"></span><span id="_CPPv2NK6murxla7AbsTerm10is_indexedEv"></span><span id="murxla::AbsTerm::is_indexedC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2cac753554f09e8c7f869f9501bc15af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_indexed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm10is_indexedEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Determine if this term is of an indexed operator kind. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if this term is of an indexed operator kind. </p>
 </dd>
 </dl>
@@ -578,10 +676,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm15get_num_indicesEv">
-<span id="_CPPv3NK6murxla7AbsTerm15get_num_indicesEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_num_indicesEv"></span><span id="murxla::AbsTerm::get_num_indicesC"></span><span class="target" id="group__term-may-override_1ga8d6c06f584eca6f26338ffba71983b1a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_num_indicesEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm15get_num_indicesEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_num_indicesEv"></span><span id="murxla::AbsTerm::get_num_indicesC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a8d6c06f584eca6f26338ffba71983b1a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_num_indicesEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the number of indices of a term with an indexed operator kind. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The number of indices. </p>
 </dd>
 </dl>
@@ -589,10 +687,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11get_indicesEv">
-<span id="_CPPv3NK6murxla7AbsTerm11get_indicesEv"></span><span id="_CPPv2NK6murxla7AbsTerm11get_indicesEv"></span><span id="murxla::AbsTerm::get_indicesC"></span><span class="target" id="group__term-may-override_1ga9b26b3a630934a49e6618df341f02acb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11get_indicesEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11get_indicesEv"></span><span id="_CPPv2NK6murxla7AbsTerm11get_indicesEv"></span><span id="murxla::AbsTerm::get_indicesC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a9b26b3a630934a49e6618df341f02acb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11get_indicesEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the indices of a term with an indexed operator kind. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The indinces of a term with an indexed operator kind. </p>
 </dd>
 </dl>
@@ -600,21 +698,32 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11get_bv_sizeEv">
-<span id="_CPPv3NK6murxla7AbsTerm11get_bv_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm11get_bv_sizeEv"></span><span id="murxla::AbsTerm::get_bv_sizeC"></span><span class="target" id="group__term-may-override_1ga06998dd3899c37a38c9610e16e84d636"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_bv_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11get_bv_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm11get_bv_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm11get_bv_sizeEv"></span><span id="murxla::AbsTerm::get_bv_sizeC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a06998dd3899c37a38c9610e16e84d636"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_bv_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11get_bv_sizeEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the bit width of this term. Asserts that it is a bit-vector term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The size of this bit-vector term. </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm11get_ff_sizeEv">
+<span id="_CPPv3NK6murxla7AbsTerm11get_ff_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm11get_ff_sizeEv"></span><span id="murxla::AbsTerm::get_ff_sizeC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ac8e393680f16b31e56ed1cdfa7f19870"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_ff_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm11get_ff_sizeEv" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the size of this finite-field term’s field. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The finite-field size of this finite-field term, or 0 by default. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm15get_fp_exp_sizeEv">
-<span id="_CPPv3NK6murxla7AbsTerm15get_fp_exp_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_fp_exp_sizeEv"></span><span id="murxla::AbsTerm::get_fp_exp_sizeC"></span><span class="target" id="group__term-may-override_1gabf5f74a81d00f073bd7abaf7a3bad17c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_exp_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_fp_exp_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm15get_fp_exp_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_fp_exp_sizeEv"></span><span id="murxla::AbsTerm::get_fp_exp_sizeC"></span><span class="target" id="classmurxla_1_1AbsTerm_1abf5f74a81d00f073bd7abaf7a3bad17c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_exp_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_fp_exp_sizeEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the exponent bit width of this term. Asserts that it is a floating-point term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The size of the exponent of this floating-point term. </p>
 </dd>
 </dl>
@@ -622,10 +731,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm15get_fp_sig_sizeEv">
-<span id="_CPPv3NK6murxla7AbsTerm15get_fp_sig_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_fp_sig_sizeEv"></span><span id="murxla::AbsTerm::get_fp_sig_sizeC"></span><span class="target" id="group__term-may-override_1ga68ef4dd54eef8ededcf81af009c5a038"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_sig_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_fp_sig_sizeEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm15get_fp_sig_sizeEv"></span><span id="_CPPv2NK6murxla7AbsTerm15get_fp_sig_sizeEv"></span><span id="murxla::AbsTerm::get_fp_sig_sizeC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a68ef4dd54eef8ededcf81af009c5a038"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_sig_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm15get_fp_sig_sizeEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the significand bit width of this term. Asserts that it is a floating-point term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The size of the signifcand of this floating-point term. </p>
 </dd>
 </dl>
@@ -633,10 +742,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm20get_array_index_sortEv">
-<span id="_CPPv3NK6murxla7AbsTerm20get_array_index_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm20get_array_index_sortEv"></span><span id="murxla::AbsTerm::get_array_index_sortC"></span><span class="target" id="group__term-may-override_1gaba03715b85c333e7db339ec8f77ce1dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_index_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm20get_array_index_sortEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm20get_array_index_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm20get_array_index_sortEv"></span><span id="murxla::AbsTerm::get_array_index_sortC"></span><span class="target" id="classmurxla_1_1AbsTerm_1aba03715b85c333e7db339ec8f77ce1dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_index_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm20get_array_index_sortEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the array index sort of this term. Asserts that it is an array term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The index sort of this array term. </p>
 </dd>
 </dl>
@@ -644,10 +753,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm22get_array_element_sortEv">
-<span id="_CPPv3NK6murxla7AbsTerm22get_array_element_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm22get_array_element_sortEv"></span><span id="murxla::AbsTerm::get_array_element_sortC"></span><span class="target" id="group__term-may-override_1gaf18dfe4a1c7ce6e92b3fffda43d54a32"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm22get_array_element_sortEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm22get_array_element_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm22get_array_element_sortEv"></span><span id="murxla::AbsTerm::get_array_element_sortC"></span><span class="target" id="classmurxla_1_1AbsTerm_1af18dfe4a1c7ce6e92b3fffda43d54a32"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm22get_array_element_sortEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the array element sort of this term. Asserts that it is an array term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The element sort of this array term. </p>
 </dd>
 </dl>
@@ -655,10 +764,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm13get_fun_arityEv">
-<span id="_CPPv3NK6murxla7AbsTerm13get_fun_arityEv"></span><span id="_CPPv2NK6murxla7AbsTerm13get_fun_arityEv"></span><span id="murxla::AbsTerm::get_fun_arityC"></span><span class="target" id="group__term-may-override_1ga8a67adb625b7a80c7c64e4f142da35dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_arity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13get_fun_arityEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm13get_fun_arityEv"></span><span id="_CPPv2NK6murxla7AbsTerm13get_fun_arityEv"></span><span id="murxla::AbsTerm::get_fun_arityC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a8a67adb625b7a80c7c64e4f142da35dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_arity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13get_fun_arityEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the function arity of this term. Asserts that it is an function term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The arity of this function term. </p>
 </dd>
 </dl>
@@ -666,10 +775,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm21get_fun_codomain_sortEv">
-<span id="_CPPv3NK6murxla7AbsTerm21get_fun_codomain_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm21get_fun_codomain_sortEv"></span><span id="murxla::AbsTerm::get_fun_codomain_sortC"></span><span class="target" id="group__term-may-override_1ga8c98e4dd1448d80e76da1a0ce752ee54"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_codomain_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm21get_fun_codomain_sortEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm21get_fun_codomain_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm21get_fun_codomain_sortEv"></span><span id="murxla::AbsTerm::get_fun_codomain_sortC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a8c98e4dd1448d80e76da1a0ce752ee54"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_codomain_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm21get_fun_codomain_sortEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the function codomain sort of this term. Asserts that it is an function term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The codomain sort of this function term. </p>
 </dd>
 </dl>
@@ -677,10 +786,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm20get_fun_domain_sortsEv">
-<span id="_CPPv3NK6murxla7AbsTerm20get_fun_domain_sortsEv"></span><span id="_CPPv2NK6murxla7AbsTerm20get_fun_domain_sortsEv"></span><span id="murxla::AbsTerm::get_fun_domain_sortsC"></span><span class="target" id="group__term-may-override_1gab9cdf7f93b09d6b68d82a0129eced5ec"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_domain_sorts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm20get_fun_domain_sortsEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm20get_fun_domain_sortsEv"></span><span id="_CPPv2NK6murxla7AbsTerm20get_fun_domain_sortsEv"></span><span id="murxla::AbsTerm::get_fun_domain_sortsC"></span><span class="target" id="classmurxla_1_1AbsTerm_1ab9cdf7f93b09d6b68d82a0129eced5ec"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_domain_sorts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm20get_fun_domain_sortsEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the function domain sorts of this term. Asserts that it is an function term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The domain sorts of this function term. </p>
 </dd>
 </dl>
@@ -688,11 +797,11 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm8set_sortE4Sort">
-<span id="_CPPv3N6murxla7AbsTerm8set_sortE4Sort"></span><span id="_CPPv2N6murxla7AbsTerm8set_sortE4Sort"></span><span id="murxla::AbsTerm::set_sort__Sort"></span><span class="target" id="classmurxla_1_1AbsTerm_1a02f02e56ad211dbca421e744b577e133"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8set_sortE4Sort" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm8set_sortE4Sort"></span><span id="_CPPv2N6murxla7AbsTerm8set_sortE4Sort"></span><span id="murxla::AbsTerm::set_sort__Sort"></span><span class="target" id="classmurxla_1_1AbsTerm_1a02f02e56ad211dbca421e744b577e133"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_sort</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">sort</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm8set_sortE4Sort" title="Link to this definition"></a><br /></dt>
 <dd><p>Set the sort of this term.</p>
 <p>This is not to be overriden by any solver implementations except the shadow solver.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>sort</strong> – The sort to be set. </p>
 </dd>
 </dl>
@@ -700,15 +809,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm13set_leaf_kindE8LeafKind">
-<span id="_CPPv3N6murxla7AbsTerm13set_leaf_kindE8LeafKind"></span><span id="_CPPv2N6murxla7AbsTerm13set_leaf_kindE8LeafKind"></span><span id="murxla::AbsTerm::set_leaf_kind__LeafKind"></span><span class="target" id="classmurxla_1_1AbsTerm_1a3bae3dccd93a2a6029fe8f0cf0a333e0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_leaf_kind</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="murxla::AbsTerm::LeafKind"><span class="n"><span class="pre">LeafKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm13set_leaf_kindE8LeafKind" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm13set_leaf_kindE8LeafKind"></span><span id="_CPPv2N6murxla7AbsTerm13set_leaf_kindE8LeafKind"></span><span id="murxla::AbsTerm::set_leaf_kind__LeafKind"></span><span class="target" id="classmurxla_1_1AbsTerm_1a3bae3dccd93a2a6029fe8f0cf0a333e0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_leaf_kind</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="murxla::AbsTerm::LeafKind"><span class="n"><span class="pre">LeafKind</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm13set_leaf_kindE8LeafKind" title="Link to this definition"></a><br /></dt>
 <dd><p>Set leaf kind.</p>
-<p>Set to LeafKind::NONE if this term is not a leaf.</p>
+<p>Set to <a class="reference internal" href="#classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea73700ec12586183937c6433427587814"><span class="std std-ref">LeafKind::NONE</span></a> if this term is not a leaf.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is not to be overriden by any solver implementations except the shadow solver.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>kind</strong> – The leaf kind. </p>
 </dd>
 </dl>
@@ -716,7 +825,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind">
-<span id="_CPPv3N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind"></span><span id="_CPPv2N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind"></span><span id="murxla::AbsTerm::set_special_value_kind__SpecialValueKindCR"></span><span class="target" id="classmurxla_1_1AbsTerm_1a4a3d18afd366b6d0536af60d538c6c75"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_special_value_kind</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind"></span><span id="_CPPv2N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind"></span><span id="murxla::AbsTerm::set_special_value_kind__SpecialValueKindCR"></span><span class="target" id="classmurxla_1_1AbsTerm_1a4a3d18afd366b6d0536af60d538c6c75"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_special_value_kind</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">value_kind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm22set_special_value_kindERK16SpecialValueKind" title="Link to this definition"></a><br /></dt>
 <dd><p>Set special value kind.</p>
 <p>Set to SPECIAL_VALUE_NONE if not a value or no special value.</p>
 <div class="admonition note">
@@ -724,7 +833,7 @@
 <p>This is not to be overriden by any solver implementations except the shadow solver.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value_kind</strong> – The kind of the special value. </p>
 </dd>
 </dl>
@@ -732,10 +841,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm6set_idE8uint64_t">
-<span id="_CPPv3N6murxla7AbsTerm6set_idE8uint64_t"></span><span id="_CPPv2N6murxla7AbsTerm6set_idE8uint64_t"></span><span id="murxla::AbsTerm::set_id__uint64_t"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2bcd4f6b464bad6a6babcaae2f12c6c2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_id</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm6set_idE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3N6murxla7AbsTerm6set_idE8uint64_t"></span><span id="_CPPv2N6murxla7AbsTerm6set_idE8uint64_t"></span><span id="murxla::AbsTerm::set_id__uint64_t"></span><span class="target" id="classmurxla_1_1AbsTerm_1a2bcd4f6b464bad6a6babcaae2f12c6c2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_id</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm6set_idE8uint64_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Set the id of this term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> – The id to be set. </p>
 </dd>
 </dl>
@@ -743,10 +852,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm6get_idEv">
-<span id="_CPPv3NK6murxla7AbsTerm6get_idEv"></span><span id="_CPPv2NK6murxla7AbsTerm6get_idEv"></span><span id="murxla::AbsTerm::get_idC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a9738abe0bb0ffdd67921ce11f007ea90"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_id</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6get_idEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm6get_idEv"></span><span id="_CPPv2NK6murxla7AbsTerm6get_idEv"></span><span id="murxla::AbsTerm::get_idC"></span><span class="target" id="classmurxla_1_1AbsTerm_1a9738abe0bb0ffdd67921ce11f007ea90"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_id</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm6get_idEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the id of this term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The id of this term. </p>
 </dd>
 </dl>
@@ -754,10 +863,10 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm8get_sortEv">
-<span id="_CPPv3NK6murxla7AbsTerm8get_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm8get_sortEv"></span><span id="murxla::AbsTerm::get_sortC"></span><span class="target" id="classmurxla_1_1AbsTerm_1aea657adf17db4b1a73a20c9d26f21971"></span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8get_sortEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm8get_sortEv"></span><span id="_CPPv2NK6murxla7AbsTerm8get_sortEv"></span><span id="murxla::AbsTerm::get_sortC"></span><span class="target" id="classmurxla_1_1AbsTerm_1aea657adf17db4b1a73a20c9d26f21971"></span><a class="reference internal" href="../sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><span class="n"><span class="pre">Sort</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm8get_sortEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the sort of this term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The sort of this term. </p>
 </dd>
 </dl>
@@ -765,141 +874,18 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK6murxla7AbsTerm13get_leaf_kindEv">
-<span id="_CPPv3NK6murxla7AbsTerm13get_leaf_kindEv"></span><span id="_CPPv2NK6murxla7AbsTerm13get_leaf_kindEv"></span><span id="murxla::AbsTerm::get_leaf_kindC"></span><span class="target" id="classmurxla_1_1AbsTerm_1afa3c29fd7d8027b8e95c08a94db16321"></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="murxla::AbsTerm::LeafKind"><span class="n"><span class="pre">LeafKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_leaf_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13get_leaf_kindEv" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NK6murxla7AbsTerm13get_leaf_kindEv"></span><span id="_CPPv2NK6murxla7AbsTerm13get_leaf_kindEv"></span><span id="murxla::AbsTerm::get_leaf_kindC"></span><span class="target" id="classmurxla_1_1AbsTerm_1afa3c29fd7d8027b8e95c08a94db16321"></span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm8LeafKindE" title="murxla::AbsTerm::LeafKind"><span class="n"><span class="pre">LeafKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_leaf_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6murxla7AbsTerm13get_leaf_kindEv" title="Link to this definition"></a><br /></dt>
 <dd><p>Get the leaf kind of this term.</p>
-<p>Kind is LeafKind::NONE if this term is not a leaf.</p>
+<p>Kind is <a class="reference internal" href="#classmurxla_1_1AbsTerm_1a856b4eee1f1da6c4d2fdd3a39c70296ea73700ec12586183937c6433427587814"><span class="std std-ref">LeafKind::NONE</span></a> if this term is not a leaf.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is for Murxla level maintenance and not to be overriden with solver-specific implementations.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The leaf kind of this term. </p>
 </dd>
 </dl>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm18SPECIAL_VALUE_NONEE">
-<span id="_CPPv3N6murxla7AbsTerm18SPECIAL_VALUE_NONEE"></span><span id="_CPPv2N6murxla7AbsTerm18SPECIAL_VALUE_NONEE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_NONE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaab7128d0e871d22c7e59439ff61e77f9"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_NONE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;not-a-special-value&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm18SPECIAL_VALUE_NONEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term that is not a special value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_BAG_EMPTYE">
-<span id="_CPPv3N6murxla7AbsTerm23SPECIAL_VALUE_BAG_EMPTYE"></span><span id="_CPPv2N6murxla7AbsTerm23SPECIAL_VALUE_BAG_EMPTYE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BAG_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga9d2815c68c1adee1e01a0645ffbc8ac3"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BAG_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bag.empty&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_BAG_EMPTYE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing the empty bag. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm21SPECIAL_VALUE_BV_ZEROE">
-<span id="_CPPv3N6murxla7AbsTerm21SPECIAL_VALUE_BV_ZEROE"></span><span id="_CPPv2N6murxla7AbsTerm21SPECIAL_VALUE_BV_ZEROE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BV_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga3567bcde6473bff8c5c724d853825d68"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.zero&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm21SPECIAL_VALUE_BV_ZEROE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a bit-vector zero value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_BV_ONEE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_BV_ONEE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_BV_ONEE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BV_ONE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga31c1e8b32ac888b2e456d628a1955515"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ONE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.one&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_BV_ONEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a bit-vector one value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm21SPECIAL_VALUE_BV_ONESE">
-<span id="_CPPv3N6murxla7AbsTerm21SPECIAL_VALUE_BV_ONESE"></span><span id="_CPPv2N6murxla7AbsTerm21SPECIAL_VALUE_BV_ONESE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BV_ONES__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gabb8ab1f120764a139cbe441b93fe78c5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_ONES</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv.ones&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm21SPECIAL_VALUE_BV_ONESE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a bit-vector ones value (all bits 1). </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm27SPECIAL_VALUE_BV_MIN_SIGNEDE">
-<span id="_CPPv3N6murxla7AbsTerm27SPECIAL_VALUE_BV_MIN_SIGNEDE"></span><span id="_CPPv2N6murxla7AbsTerm27SPECIAL_VALUE_BV_MIN_SIGNEDE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BV_MIN_SIGNED__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga333e465b51113eb7956955d794784ebb"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_MIN_SIGNED</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv-min-signed&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm27SPECIAL_VALUE_BV_MIN_SIGNEDE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a bit-vector minimum signed value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm27SPECIAL_VALUE_BV_MAX_SIGNEDE">
-<span id="_CPPv3N6murxla7AbsTerm27SPECIAL_VALUE_BV_MAX_SIGNEDE"></span><span id="_CPPv2N6murxla7AbsTerm27SPECIAL_VALUE_BV_MAX_SIGNEDE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_BV_MAX_SIGNED__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga0b1ad03885d02852fbc678ec40e51750"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_BV_MAX_SIGNED</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;bv-max-signed&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm27SPECIAL_VALUE_BV_MAX_SIGNEDE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a bit-vector maximum signed value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_FP_NANE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_FP_NANE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_FP_NANE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_FP_NAN__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga0d8425b4fe70cbffa7eda484fdf0b71a"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NAN</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;nan&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_FP_NANE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a floating-point not a number value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm24SPECIAL_VALUE_FP_POS_INFE">
-<span id="_CPPv3N6murxla7AbsTerm24SPECIAL_VALUE_FP_POS_INFE"></span><span id="_CPPv2N6murxla7AbsTerm24SPECIAL_VALUE_FP_POS_INFE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_FP_POS_INF__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gac3fdeda344b67a2b4ee5c24c741ad614"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_POS_INF</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;+oo&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm24SPECIAL_VALUE_FP_POS_INFE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a floating-point positive infinity value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm24SPECIAL_VALUE_FP_NEG_INFE">
-<span id="_CPPv3N6murxla7AbsTerm24SPECIAL_VALUE_FP_NEG_INFE"></span><span id="_CPPv2N6murxla7AbsTerm24SPECIAL_VALUE_FP_NEG_INFE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_FP_NEG_INF__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gabfae4d02ff1a18b32e47bc0dc026aeff"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NEG_INF</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;-oo&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm24SPECIAL_VALUE_FP_NEG_INFE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a floating-point negative infinity value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm25SPECIAL_VALUE_FP_POS_ZEROE">
-<span id="_CPPv3N6murxla7AbsTerm25SPECIAL_VALUE_FP_POS_ZEROE"></span><span id="_CPPv2N6murxla7AbsTerm25SPECIAL_VALUE_FP_POS_ZEROE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_FP_POS_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga692e4312a6705149803eb9eff8ae1791"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_POS_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;+zero&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm25SPECIAL_VALUE_FP_POS_ZEROE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a floating-point positive zero value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm25SPECIAL_VALUE_FP_NEG_ZEROE">
-<span id="_CPPv3N6murxla7AbsTerm25SPECIAL_VALUE_FP_NEG_ZEROE"></span><span id="_CPPv2N6murxla7AbsTerm25SPECIAL_VALUE_FP_NEG_ZEROE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_FP_NEG_ZERO__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga2b3ba9f2849c71fa9d21e60771a2c833"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_FP_NEG_ZERO</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;-zero&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm25SPECIAL_VALUE_FP_NEG_ZEROE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a floating-point negative zero value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNAE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNAE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNAE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_RM_RNA__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga401088ffc53133db754da66ab2ea2b3e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RNA</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rna&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNAE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a rounding mode round nearest ties to away value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNEE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNEE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNEE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_RM_RNE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga04150fb6b45b02ec6d318c52a152e59f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RNE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rne&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RNEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a rounding mode round nearest ties to even value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTNE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTNE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTNE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_RM_RTN__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga4f40b1c39188712aab9b7b04de9a266c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTN</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtn&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTNE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a rounding mode round toward negative value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTPE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTPE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTPE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_RM_RTP__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gab5681ec28d04273d90fb541a7efc2f3c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTP</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtp&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTPE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a rounding mode round toward positive value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTZE">
-<span id="_CPPv3N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTZE"></span><span id="_CPPv2N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTZE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_RM_RTZ__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga023787b0ec6ed90492cf310e724b2826"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_RM_RTZ</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rtz&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm20SPECIAL_VALUE_RM_RTZE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing a rounding mode round toward zero value. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_SEQ_EMPTYE">
-<span id="_CPPv3N6murxla7AbsTerm23SPECIAL_VALUE_SEQ_EMPTYE"></span><span id="_CPPv2N6murxla7AbsTerm23SPECIAL_VALUE_SEQ_EMPTYE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_SEQ_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaf15ddce1b19bd66715996a7d34571e25"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SEQ_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;seq.empty&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_SEQ_EMPTYE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing the empty sequence. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_SET_EMPTYE">
-<span id="_CPPv3N6murxla7AbsTerm23SPECIAL_VALUE_SET_EMPTYE"></span><span id="_CPPv2N6murxla7AbsTerm23SPECIAL_VALUE_SET_EMPTYE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_SET_EMPTY__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1gaa74d9fc629689bbc1cdaa92549f67e3c"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SET_EMPTY</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;set.empty&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm23SPECIAL_VALUE_SET_EMPTYE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing the empty set. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6murxla7AbsTerm26SPECIAL_VALUE_SET_UNIVERSEE">
-<span id="_CPPv3N6murxla7AbsTerm26SPECIAL_VALUE_SET_UNIVERSEE"></span><span id="_CPPv2N6murxla7AbsTerm26SPECIAL_VALUE_SET_UNIVERSEE"></span><span id="murxla::AbsTerm::SPECIAL_VALUE_SET_UNIVERSE__SpecialValueKindC"></span><span class="target" id="group__special-value-kinds_1ga2ea12515a7530ac84898bf2ad31870b6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><span class="n"><span class="pre">SpecialValueKind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPECIAL_VALUE_SET_UNIVERSE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;set.universe&quot;</span></span><a class="headerlink" href="#_CPPv4N6murxla7AbsTerm26SPECIAL_VALUE_SET_UNIVERSEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>The kind of a term representing the universe set. </p>
 </dd></dl>
 
 </div>
@@ -907,19 +893,19 @@
 
 <dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv4IENSt4hashIN6murxla4TermEEE">
-<span id="_CPPv3IENSt4hashIN6murxla4TermEEE"></span><span id="_CPPv2IENSt4hashIN6murxla4TermEEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structstd_1_1hash_3_01murxla_1_1Term_01_4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4IENSt4hashIN6murxla4TermEEE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3IENSt4hashIN6murxla4TermEEE"></span><span id="_CPPv2IENSt4hashIN6murxla4TermEEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structstd_1_1hash_3_01murxla_1_1Term_01_4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4IENSt4hashIN6murxla4TermEEE" title="Link to this definition"></a><br /></dt>
 <dd><p>Specialization of std::hash for Term. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE">
-<span id="_CPPv3NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE"></span><span id="_CPPv2NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE"></span><span id="std::hash:murxla::Term:::call-operator__murxla::TermCRC"></span><span class="target" id="structstd_1_1hash_3_01murxla_1_1Term_01_4_1af63162b719ec86d17ee4a8ef8a32968f"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE" title="Permalink to this definition"></a><br /></dt>
+<span id="_CPPv3NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE"></span><span id="_CPPv2NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE"></span><span id="std::hash:murxla::Term:::call-operator__murxla::TermCRC"></span><span class="target" id="structstd_1_1hash_3_01murxla_1_1Term_01_4_1af63162b719ec86d17ee4a8ef8a32968f"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">murxla</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><span class="n"><span class="pre">Term</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NKSt4hashIN6murxla4TermEEclERKN6murxla4TermE" title="Link to this definition"></a><br /></dt>
 <dd><p>Operator overload to get the hash value of a term. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>t</strong> – The term to compute the hash value for. </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The hash value of a term. </p>
 </dd>
 </dl>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solver Wrapper Implementation for Terms &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
-        <script src="../../static/doctools.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../static/doctools.js?v=9a2dae69"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,11 +86,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
-          <li><a href="solver_wrapper.html">Solver Wrappers</a> &raquo;</li>
-          <li><a href="overrides.html">Overrides for Solver Wrapper Implementation</a> &raquo;</li>
-      <li>Solver Wrapper Implementation for Terms</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../solver_integration.html">How to Integrate a Solver</a></li>
+          <li class="breadcrumb-item"><a href="solver_wrapper.html">Solver Wrappers</a></li>
+          <li class="breadcrumb-item"><a href="overrides.html">Overrides for Solver Wrapper Implementation</a></li>
+      <li class="breadcrumb-item active">Solver Wrapper Implementation for Terms</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -95,608 +100,57 @@
            <div itemprop="articleBody">
              
   <section id="solver-wrapper-implementation-for-terms">
-<h1>Solver Wrapper Implementation for Terms<a class="headerlink" href="#solver-wrapper-implementation-for-terms" title="Permalink to this headline"></a></h1>
+<h1>Solver Wrapper Implementation for Terms<a class="headerlink" href="#solver-wrapper-implementation-for-terms" title="Link to this heading"></a></h1>
 <p>Solver wrappers derive a term class from <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a>, which
 manages construction and destruction of solver term objects and implements
 required and optional member function overrides.</p>
 <p>Murxla uses naming convention <code class="docutils literal notranslate"><span class="pre">&lt;solver</span> <span class="pre">name</span> <span class="pre">(short)&gt;Term</span></code> for solver wrapper
 term implementations, e.g., the cvc5 implementation is called <code class="docutils literal notranslate"><span class="pre">Cvc5Term</span></code> and
-the Bitwuzla implementation is called <code class="docutils literal notranslate"><span class="pre">BzlaTerm</span></code>.</p>
+the Bitwuzla implementation is called <code class="docutils literal notranslate"><span class="pre">BitwuzlaTerm</span></code>.</p>
 <p>An example for a <strong>required</strong> override is member function
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4NK6murxla7AbsTerm4hashEv" title="murxla::AbsTerm::hash"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::AbsTerm::hash()</span></code></a>, which returns a hash value for
 a given term. It is implemented in the solver wrapper for <strong>cvc5</strong> (using
 its C++ API) as follows:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"></span>
-<span class="nf">Cvc5Term::hash</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;::</span><span class="n">cvc5</span><span class="o">::</span><span class="n">Term</span><span class="o">&gt;</span><span class="p">{}(</span><span class="n">d_term</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span>
+<span class="nf">Cvc5Term::hash</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;::</span><span class="n">cvc5</span><span class="o">::</span><span class="n">Term</span><span class="o">&gt;</span><span class="p">{}(</span><span class="n">d_term</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>An example for an <strong>optional</strong> override is member function
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4NK6murxla7AbsTerm12get_childrenEv" title="murxla::AbsTerm::get_children"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::AbsTerm::get_children()</span></code></a>, which returns the children
 of a given term. It is implemented in the solver wrapper for <strong>Bitwuzla</strong>
 (using its C API) as follows:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">BzlaTerm</span><span class="o">::</span><span class="n">get_children</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w">                   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">BitwuzlaTerm</span><span class="o">**</span><span class="w"> </span><span class="n">bzla_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitwuzla_term_get_children</span><span class="p">(</span><span class="n">d_term</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">bzla_terms_to_terms</span><span class="p">(</span><span class="n">bzla_res</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span>
+<span class="n">BitwuzlaTerm</span><span class="o">::</span><span class="n">get_children</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">bitwuzla_terms_to_terms</span><span class="p">(</span><span class="n">d_tm</span><span class="p">,</span><span class="w"> </span><span class="n">d_term</span><span class="p">.</span><span class="n">children</span><span class="p">());</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>We use a helper function
-<code class="docutils literal notranslate"><span class="pre">std::vector&lt;Term&gt;</span> <span class="pre">BzlaTerm::bzla_terms_to_terms(const</span> <span class="pre">BitwuzlaTerm**,</span> <span class="pre">size_t)</span></code>
+<code class="docutils literal notranslate"><span class="pre">std::vector&lt;Term&gt;</span> <span class="pre">BitwuzlaTerm::bitwuzla_terms_to_terms(const</span> <span class="pre">BitwuzlaTerm**,</span> <span class="pre">size_t)</span></code>
 to convert Bitwuzla term objects to Bitwuzla solver wrapper term objects,
 which is defined as follows:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">BzlaTerm</span><span class="o">::</span><span class="n">bzla_terms_to_terms</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">BitwuzlaTerm</span><span class="o">**</span><span class="w"> </span><span class="n">terms</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">BzlaTerm</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BzlaTerm</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])));</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span>
+<span class="n">BitwuzlaTerm</span><span class="o">::</span><span class="n">bitwuzla_terms_to_terms</span><span class="p">(</span>
+<span class="w">    </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">TermManager</span><span class="o">*</span><span class="w"> </span><span class="n">tm</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">Term</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">terms</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Term</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">terms</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">BitwuzlaTerm</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BitwuzlaTerm</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>The following list provides all the member functions of class
-<a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTermE" title="murxla::AbsTerm"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::AbsTerm</span></code></a> that are required or optional to be
-overriden by a solver wrapper.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Optional overrides have default implementations, but should be overriden
 if supported by the solver.</p>
 </div>
-<section id="absterm-functions-required-to-be-overriden">
-<h2>AbsTerm: Functions Required to be Overriden<a class="headerlink" href="#absterm-functions-required-to-be-overriden" title="Permalink to this headline"></a></h2>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK4hashEv">
-<span id="_CPPv3NK4hashEv"></span><span id="_CPPv2NK4hashEv"></span><span id="hashC"></span><span class="target" id="group__term-must-override_1ga2d4de5e1eb3aa6785dd69d3ec520ceb9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hash</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Get the hash value of this term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The hash value of this term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK9to_stringEv">
-<span id="_CPPv3NK9to_stringEv"></span><span id="_CPPv2NK9to_stringEv"></span><span id="to_stringC"></span><span class="target" id="group__term-must-override_1ga3d5af2ac7f5d4692c41cc3262053ff7b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><br /></dt>
-<dd><p>Get a string representation of this term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A string representation of this term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6equalsERKNSt10shared_ptrI7AbsTermEE">
-<span id="_CPPv3NK6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK6equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="group__term-must-override_1ga54054beac1e679a2abea40d647714fd6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsTerm</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv4NK6equalsERKNSt10shared_ptrI7AbsTermEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is equal to the given term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> – The term to compare this term to. </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if this term is equal to the other term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="absterm-functions-to-be-overriden-optionally">
-<h2>AbsTerm: Functions to be Overriden Optionally<a class="headerlink" href="#absterm-functions-to-be-overriden-optionally" title="Permalink to this headline"></a></h2>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK10not_equalsERKNSt10shared_ptrI7AbsTermEE">
-<span id="_CPPv3NK10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="_CPPv2NK10not_equalsERKNSt10shared_ptrI7AbsTermEE"></span><span id="not_equals__std::shared_ptr:AbsTerm:CRC"></span><span class="target" id="group__term-may-override_1ga1d409f27c83e2d01f9a717b085dc4726"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">not_equals</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsTerm</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK10not_equalsERKNSt10shared_ptrI7AbsTermEE" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is not equal to the given term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> – The term to compare this term to. </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True if this term is not equal to the other term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK8is_arrayEv">
-<span id="_CPPv3NK8is_arrayEv"></span><span id="_CPPv2NK8is_arrayEv"></span><span id="is_arrayC"></span><span class="target" id="group__term-may-override_1ga98bfc80c025a9448e03fd471082bc56a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_array</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is an Array term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is an Array term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_bagEv">
-<span id="_CPPv3NK6is_bagEv"></span><span id="_CPPv2NK6is_bagEv"></span><span id="is_bagC"></span><span class="target" id="group__term-may-override_1ga55991e1662e1f95b13730b7048f7d104"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a Bag term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Bag term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7is_boolEv">
-<span id="_CPPv3NK7is_boolEv"></span><span id="_CPPv2NK7is_boolEv"></span><span id="is_boolC"></span><span class="target" id="group__term-may-override_1ga972a54ff7800d551d2e944af02662924"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a Boolean term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Boolean term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5is_bvEv">
-<span id="_CPPv3NK5is_bvEv"></span><span id="_CPPv2NK5is_bvEv"></span><span id="is_bvC"></span><span class="target" id="group__term-may-override_1gaa588d6d3d39f8bb2978b0ef58f842060"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a bit-vector term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a bit-vector term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5is_dtEv">
-<span id="_CPPv3NK5is_dtEv"></span><span id="_CPPv2NK5is_dtEv"></span><span id="is_dtC"></span><span class="target" id="group__term-may-override_1ga91a170dad13d514354f229457d08461c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a datatype term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a datatype term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5is_fpEv">
-<span id="_CPPv3NK5is_fpEv"></span><span id="_CPPv2NK5is_fpEv"></span><span id="is_fpC"></span><span class="target" id="group__term-may-override_1ga39ca38d696dbc855a628a7ea4083f77b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a floating-point term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a floating-point term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_funEv">
-<span id="_CPPv3NK6is_funEv"></span><span id="_CPPv2NK6is_funEv"></span><span id="is_funC"></span><span class="target" id="group__term-may-override_1ga8e0b0496752de31414b2518a6a5916d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fun</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a function term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a function term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_intEv">
-<span id="_CPPv3NK6is_intEv"></span><span id="_CPPv2NK6is_intEv"></span><span id="is_intC"></span><span class="target" id="group__term-may-override_1ga8b052cf7fc724d9232517bd2f6e876df"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is an Int term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is an Int term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK7is_realEv">
-<span id="_CPPv3NK7is_realEv"></span><span id="_CPPv2NK7is_realEv"></span><span id="is_realC"></span><span class="target" id="group__term-may-override_1gacaa2dd7e6881d64d9652bc78aff5e84d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a Real term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Real term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK5is_rmEv">
-<span id="_CPPv3NK5is_rmEv"></span><span id="_CPPv2NK5is_rmEv"></span><span id="is_rmC"></span><span class="target" id="group__term-may-override_1ga70e0b6545bafec525ef488016d360e21"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a RoundingMode term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a RoundingMode term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK9is_reglanEv">
-<span id="_CPPv3NK9is_reglanEv"></span><span id="_CPPv2NK9is_reglanEv"></span><span id="is_reglanC"></span><span class="target" id="group__term-may-override_1gae5f8efe794edff2a278a3f95cf45b95a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a RegLan term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a RegLan term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_seqEv">
-<span id="_CPPv3NK6is_seqEv"></span><span id="_CPPv2NK6is_seqEv"></span><span id="is_seqC"></span><span class="target" id="group__term-may-override_1ga03160cc761ea60afeb56e6bdc2b90e61"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a Sequence term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Sequence term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_setEv">
-<span id="_CPPv3NK6is_setEv"></span><span id="_CPPv2NK6is_setEv"></span><span id="is_setC"></span><span class="target" id="group__term-may-override_1gacbfb981614519cff7d10703fd474424d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a Set term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Set term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK9is_stringEv">
-<span id="_CPPv3NK9is_stringEv"></span><span id="_CPPv2NK9is_stringEv"></span><span id="is_stringC"></span><span class="target" id="group__term-may-override_1ga46515375b6b95aedbf3dc315cf80d70b"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is a String term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a String term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK16is_uninterpretedEv">
-<span id="_CPPv3NK16is_uninterpretedEv"></span><span id="_CPPv2NK16is_uninterpretedEv"></span><span id="is_uninterpretedC"></span><span class="target" id="group__term-may-override_1gac9fd23c4661fff332d22419b3ede1841"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_uninterpreted</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Determine if this term is an uninterpreted term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is an uninterpreted term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK12is_bag_valueEv">
-<span id="_CPPv3NK12is_bag_valueEv"></span><span id="_CPPv2NK12is_bag_valueEv"></span><span id="is_bag_valueC"></span><span class="target" id="group__term-may-override_1ga791d5d5f8791a5f2da8c1f6cf08d70d0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bag_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12is_bag_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a Bag value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Bag value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK13is_bool_valueEv">
-<span id="_CPPv3NK13is_bool_valueEv"></span><span id="_CPPv2NK13is_bool_valueEv"></span><span id="is_bool_valueC"></span><span class="target" id="group__term-may-override_1ga6a3c3edf516fa328493a594ba54d1b6f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bool_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK13is_bool_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a Boolean value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Boolean value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11is_bv_valueEv">
-<span id="_CPPv3NK11is_bv_valueEv"></span><span id="_CPPv2NK11is_bv_valueEv"></span><span id="is_bv_valueC"></span><span class="target" id="group__term-may-override_1ga68568d9ff97d39a5fe2da7f4e4041d04"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_bv_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11is_bv_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a bit-vector value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a bit-vector value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11is_dt_valueEv">
-<span id="_CPPv3NK11is_dt_valueEv"></span><span id="_CPPv2NK11is_dt_valueEv"></span><span id="is_dt_valueC"></span><span class="target" id="group__term-may-override_1gae19c5b0319508f8f86dee5d04132646c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_dt_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11is_dt_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a datatype value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a datatype value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11is_fp_valueEv">
-<span id="_CPPv3NK11is_fp_valueEv"></span><span id="_CPPv2NK11is_fp_valueEv"></span><span id="is_fp_valueC"></span><span class="target" id="group__term-may-override_1gac2e6dae96ed7e39bfe044e08767cfa34"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_fp_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11is_fp_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a floating-point value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a floating-point value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK12is_int_valueEv">
-<span id="_CPPv3NK12is_int_valueEv"></span><span id="_CPPv2NK12is_int_valueEv"></span><span id="is_int_valueC"></span><span class="target" id="group__term-may-override_1gab1d95e6ddf7b05bb58435ffc938072b4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_int_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12is_int_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is an integer value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is an integer value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK13is_real_valueEv">
-<span id="_CPPv3NK13is_real_valueEv"></span><span id="_CPPv2NK13is_real_valueEv"></span><span id="is_real_valueC"></span><span class="target" id="group__term-may-override_1ga3f94d794938496d1db63a56c762d56fd"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_real_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK13is_real_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a real value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a real value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15is_reglan_valueEv">
-<span id="_CPPv3NK15is_reglan_valueEv"></span><span id="_CPPv2NK15is_reglan_valueEv"></span><span id="is_reglan_valueC"></span><span class="target" id="group__term-may-override_1ga6f61e2d5d5f274c2a5476ecd4d583be1"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reglan_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15is_reglan_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a RegLan value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a RegLan value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11is_rm_valueEv">
-<span id="_CPPv3NK11is_rm_valueEv"></span><span id="_CPPv2NK11is_rm_valueEv"></span><span id="is_rm_valueC"></span><span class="target" id="group__term-may-override_1ga96e28fde1eff8e2e8f1f0cd94c618f6a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_rm_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11is_rm_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a rounding mode value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a rounding mode value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK12is_seq_valueEv">
-<span id="_CPPv3NK12is_seq_valueEv"></span><span id="_CPPv2NK12is_seq_valueEv"></span><span id="is_seq_valueC"></span><span class="target" id="group__term-may-override_1gae1976e8209f2e7d7a3468321b14108a4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_seq_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12is_seq_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a Sequence value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Sequence value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK12is_set_valueEv">
-<span id="_CPPv3NK12is_set_valueEv"></span><span id="_CPPv2NK12is_set_valueEv"></span><span id="is_set_valueC"></span><span class="target" id="group__term-may-override_1ga20ff4ed941018764923e4c036f4dd094"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_set_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12is_set_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a Sequence value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a Sequence value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15is_string_valueEv">
-<span id="_CPPv3NK15is_string_valueEv"></span><span id="_CPPv2NK15is_string_valueEv"></span><span id="is_string_valueC"></span><span class="target" id="group__term-may-override_1ga0e53c011ed2d7ad94fba7a4cd6800049"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_string_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15is_string_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a string value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a string value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK16is_special_valueERK16SpecialValueKind">
-<span id="_CPPv3NK16is_special_valueERK16SpecialValueKind"></span><span id="_CPPv2NK16is_special_valueERK16SpecialValueKind"></span><span id="is_special_value__SpecialValueKindCRC"></span><span class="target" id="group__term-may-override_1gab70cc31b0b3add52d37674e93b1bd988"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_special_value</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">SpecialValueKind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">kind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK16is_special_valueERK16SpecialValueKind" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a special value of given kind. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a special value of given kind. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK8is_constEv">
-<span id="_CPPv3NK8is_constEv"></span><span id="_CPPv2NK8is_constEv"></span><span id="is_constC"></span><span class="target" id="group__term-may-override_1ga04ea51e3f4a067461d7e080d480a3da8"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_const</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8is_constEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a first-order constant. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a first-order constant. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK8is_valueEv">
-<span id="_CPPv3NK8is_valueEv"></span><span id="_CPPv2NK8is_valueEv"></span><span id="is_valueC"></span><span class="target" id="group__term-may-override_1gacf56b82713d59de5b0ffcda947544f16"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_value</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8is_valueEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a value. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a value. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK6is_varEv">
-<span id="_CPPv3NK6is_varEv"></span><span id="_CPPv2NK6is_varEv"></span><span id="is_varC"></span><span class="target" id="group__term-may-override_1gadc194e1799339dcc140f4de88c0f453c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_var</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK6is_varEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is a variable. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is a variable. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK8get_kindEv">
-<span id="_CPPv3NK8get_kindEv"></span><span id="_CPPv2NK8get_kindEv"></span><span id="get_kindC"></span><span class="target" id="group__term-may-override_1gaf2738f68294059d31ef8405e13afc821"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">Op</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Kind</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_kind</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8get_kindEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Get the kind of this term.</p>
-<p>This kind is not a kind we cache on creation, but the kind that the solver reports. May be <a class="reference internal" href="../../advanced/operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a>.</p>
-<p>Must be overriden and may not return <a class="reference internal" href="../../advanced/operator_kinds.html#group__operator-kinds_1ga094f1e759d1ca10a31f6eeb94146056d"><span class="std std-ref">Op::UNDEFINED</span></a> if the solver supports the theory of bags, sets and sequences (required for properly initializing sorts that are implicitly created, e.g., sequence sorts for <a class="reference internal" href="../../advanced/operator_kinds.html#group__operator-kinds_1ga6175d2ef35ef214db9982df68a4c31d4"><span class="std std-ref">Op::SEQ_UNIT</span></a>).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The kind of this term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK12get_childrenEv">
-<span id="_CPPv3NK12get_childrenEv"></span><span id="_CPPv2NK12get_childrenEv"></span><span id="get_childrenC"></span><span class="target" id="group__term-may-override_1ga63aa70df391368a2779ebbcea02968b0"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AbsTerm</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_children</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12get_childrenEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Get the children of this term.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As with <a class="reference internal" href="solver_overrides.html#group__solver-must-override_1ga75e342e1585abc792e5e1471f37b8172"><span class="std std-ref">Solver::mk_term</span></a>, the returned terms are “raw” Terms, in the sense that they are only wrapped into a Term, with no additional book keeping information (all data members have default values).</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The children of this term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK10is_indexedEv">
-<span id="_CPPv3NK10is_indexedEv"></span><span id="_CPPv2NK10is_indexedEv"></span><span id="is_indexedC"></span><span class="target" id="group__term-may-override_1ga2cac753554f09e8c7f869f9501bc15af"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_indexed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK10is_indexedEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Determine if this term is of an indexed operator kind. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True if this term is of an indexed operator kind. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15get_num_indicesEv">
-<span id="_CPPv3NK15get_num_indicesEv"></span><span id="_CPPv2NK15get_num_indicesEv"></span><span id="get_num_indicesC"></span><span class="target" id="group__term-may-override_1ga8d6c06f584eca6f26338ffba71983b1a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_num_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK15get_num_indicesEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Get the number of indices of a term with an indexed operator kind. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The number of indices. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11get_indicesEv">
-<span id="_CPPv3NK11get_indicesEv"></span><span id="_CPPv2NK11get_indicesEv"></span><span id="get_indicesC"></span><span class="target" id="group__term-may-override_1ga9b26b3a630934a49e6618df341f02acb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_indices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK11get_indicesEv" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Get the indices of a term with an indexed operator kind. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The indinces of a term with an indexed operator kind. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK11get_bv_sizeEv">
-<span id="_CPPv3NK11get_bv_sizeEv"></span><span id="_CPPv2NK11get_bv_sizeEv"></span><span id="get_bv_sizeC"></span><span class="target" id="group__term-may-override_1ga06998dd3899c37a38c9610e16e84d636"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_bv_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the bit width of this term. Asserts that it is a bit-vector term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The size of this bit-vector term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15get_fp_exp_sizeEv">
-<span id="_CPPv3NK15get_fp_exp_sizeEv"></span><span id="_CPPv2NK15get_fp_exp_sizeEv"></span><span id="get_fp_exp_sizeC"></span><span class="target" id="group__term-may-override_1gabf5f74a81d00f073bd7abaf7a3bad17c"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_exp_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the exponent bit width of this term. Asserts that it is a floating-point term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The size of the exponent of this floating-point term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK15get_fp_sig_sizeEv">
-<span id="_CPPv3NK15get_fp_sig_sizeEv"></span><span id="_CPPv2NK15get_fp_sig_sizeEv"></span><span id="get_fp_sig_sizeC"></span><span class="target" id="group__term-may-override_1ga68ef4dd54eef8ededcf81af009c5a038"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fp_sig_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the significand bit width of this term. Asserts that it is a floating-point term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The size of the signifcand of this floating-point term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK20get_array_index_sortEv">
-<span id="_CPPv3NK20get_array_index_sortEv"></span><span id="_CPPv2NK20get_array_index_sortEv"></span><span id="get_array_index_sortC"></span><span class="target" id="group__term-may-override_1gaba03715b85c333e7db339ec8f77ce1dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_index_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the array index sort of this term. Asserts that it is an array term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The index sort of this array term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK22get_array_element_sortEv">
-<span id="_CPPv3NK22get_array_element_sortEv"></span><span id="_CPPv2NK22get_array_element_sortEv"></span><span id="get_array_element_sortC"></span><span class="target" id="group__term-may-override_1gaf18dfe4a1c7ce6e92b3fffda43d54a32"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_array_element_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the array element sort of this term. Asserts that it is an array term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The element sort of this array term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK13get_fun_arityEv">
-<span id="_CPPv3NK13get_fun_arityEv"></span><span id="_CPPv2NK13get_fun_arityEv"></span><span id="get_fun_arityC"></span><span class="target" id="group__term-may-override_1ga8a67adb625b7a80c7c64e4f142da35dc"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_arity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the function arity of this term. Asserts that it is an function term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The arity of this function term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK21get_fun_codomain_sortEv">
-<span id="_CPPv3NK21get_fun_codomain_sortEv"></span><span id="_CPPv2NK21get_fun_codomain_sortEv"></span><span id="get_fun_codomain_sortC"></span><span class="target" id="group__term-may-override_1ga8c98e4dd1448d80e76da1a0ce752ee54"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">Sort</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_codomain_sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the function codomain sort of this term. Asserts that it is an function term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The codomain sort of this function term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK20get_fun_domain_sortsEv">
-<span id="_CPPv3NK20get_fun_domain_sortsEv"></span><span id="_CPPv2NK20get_fun_domain_sortsEv"></span><span id="get_fun_domain_sortsC"></span><span class="target" id="group__term-may-override_1gab9cdf7f93b09d6b68d82a0129eced5ec"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Sort</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_fun_domain_sorts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><br /></dt>
-<dd><p>Get the function domain sorts of this term. Asserts that it is an function term. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The domain sorts of this function term. </p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 </section>
 
 

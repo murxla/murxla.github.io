@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="static/documentation_options.js"></script>
-        <script src="static/jquery.js"></script>
-        <script src="static/underscore.js"></script>
-        <script src="static/doctools.js"></script>
+        <script src="static/jquery.js?v=5d32c60e"></script>
+        <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="static/documentation_options.js?v=5929fcd5"></script>
+        <script src="static/doctools.js?v=9a2dae69"></script>
+        <script src="static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,8 +69,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Installation</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,21 +80,22 @@
            <div itemprop="articleBody">
              
   <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
 <p>Murxla is available on <a class="reference external" href="https://github.com/murxla/murxla">GitHub</a>.</p>
 <section id="building-murxla">
-<h2>Building Murxla<a class="headerlink" href="#building-murxla" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/murxla/murxla.git
-<span class="nb">cd</span> murxla
-mkdir build
-cmake ..
+<h2>Building Murxla<a class="headerlink" href="#building-murxla" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/murxla/murxla.git
+<span class="nb">cd</span><span class="w"> </span>murxla
+mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..
 make
 </pre></div>
 </div>
 <p>During the configuration phase (<code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code>), the build system checks whether
 any of the supported solvers are installed. Configure a custom solver
 installation path <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> via</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. -DCMAKE_PREFIX_PATH<span class="o">=</span>&lt;path&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>&lt;path&gt;
 </pre></div>
 </div>
 <p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">scripts/setup-solvers.sh</span></code> script to setup
@@ -100,7 +106,7 @@ refer to <code class="docutils literal notranslate"><span class="pre">setup-solv
 Please refer to the <a class="reference internal" href="user_guide.html"><span class="doc">User Guide</span></a> for how to use Murxla.</p>
 </section>
 <section id="supported-solvers">
-<h2>Supported Solvers<a class="headerlink" href="#supported-solvers" title="Permalink to this headline"></a></h2>
+<h2>Supported Solvers<a class="headerlink" href="#supported-solvers" title="Link to this heading"></a></h2>
 <p>Murxla currently has native integration for the following solvers:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://bitwuzla.github.io">Bitwuzla</a></p></li>
@@ -112,7 +118,7 @@ Please refer to the <a class="reference internal" href="user_guide.html"><span c
 interface (option <code class="docutils literal notranslate"><span class="pre">--smt2</span> <span class="pre">&lt;solver-binary&gt;</span></code>).</p>
 </section>
 <section id="code-coverage-reports">
-<h2>Code Coverage Reports<a class="headerlink" href="#code-coverage-reports" title="Permalink to this headline"></a></h2>
+<h2>Code Coverage Reports<a class="headerlink" href="#code-coverage-reports" title="Link to this heading"></a></h2>
 <p>Generating coverage reports requires <cite>lcov</cite> and <cite>fastcov</cite>.
 Make sure to install <cite>fastcov</cite> via <cite>pip</cite>.</p>
 <ol class="arabic simple">

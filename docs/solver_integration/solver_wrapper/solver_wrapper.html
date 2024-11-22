@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solver Wrappers &mdash; Murxla  documentation</title>
@@ -13,10 +13,11 @@
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
-        <script src="../../static/doctools.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../static/doctools.js?v=9a2dae69"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Murxla
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Murxla
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -89,9 +94,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../solver_integration.html">How to Integrate a Solver</a> &raquo;</li>
-      <li>Solver Wrappers</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../solver_integration.html">How to Integrate a Solver</a></li>
+      <li class="breadcrumb-item active">Solver Wrappers</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -101,7 +106,7 @@
            <div itemprop="articleBody">
              
   <section id="solver-wrappers">
-<h1>Solver Wrappers<a class="headerlink" href="#solver-wrappers" title="Permalink to this headline"></a></h1>
+<h1>Solver Wrappers<a class="headerlink" href="#solver-wrappers" title="Link to this heading"></a></h1>
 <p>A solver wrapper provides the glue code between the core components of Murxla
 and the solver under test.
 The <strong>interface</strong> for solver wrappers is defined at
@@ -117,7 +122,7 @@ solver itself (<a class="reference internal" href="../../advanced/solver_wrapper
 </ul>
 </div>
 <section id="solver-wrapper-implementation">
-<h2>Solver Wrapper Implementation<a class="headerlink" href="#solver-wrapper-implementation" title="Permalink to this headline"></a></h2>
+<h2>Solver Wrapper Implementation<a class="headerlink" href="#solver-wrapper-implementation" title="Link to this heading"></a></h2>
 <p>A solver wrapper <strong>derives</strong> solver-specific classes from the three abstract
 classes of the interface and must <strong>at least</strong> override the member functions
 required to be overriden.
@@ -135,7 +140,7 @@ solver (see <a class="reference internal" href="overrides.html"><span class="doc
 </ul>
 </div>
 <section id="random-number-generator-rng">
-<h3>Random Number Generator (RNG)<a class="headerlink" href="#random-number-generator-rng" title="Permalink to this headline"></a></h3>
+<h3>Random Number Generator (RNG)<a class="headerlink" href="#random-number-generator-rng" title="Link to this heading"></a></h3>
 <p>Murxla’s generic solver API as implemented in the solver wrapper interface
 aims at providing an interface for the solver under test that allows to plug
 in any variants of API functions for specific SMT-LIB features.
@@ -163,12 +168,12 @@ there and prepend the seed to the trace line:</p>
 </pre></div>
 </div>
 <p>The solver wrapper’s RNG can be directly accessed as the protected member
-<code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Solver::d_rng</span></code>, or via
+<a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver5d_rngE" title="murxla::Solver::d_rng"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">murxla::Solver::d_rng</span></code></a>, or via
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver7get_rngEv" title="murxla::Solver::get_rng"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::get_rng()</span></code></a>.</p>
 </section>
 </section>
 <section id="global-sort-and-term-handling">
-<h2>Global Sort and Term Handling<a class="headerlink" href="#global-sort-and-term-handling" title="Permalink to this headline"></a></h2>
+<h2>Global Sort and Term Handling<a class="headerlink" href="#global-sort-and-term-handling" title="Link to this heading"></a></h2>
 <p>Murxla defines types
 <a class="reference internal" href="../../advanced/sort.html#_CPPv4N6murxla4SortE" title="murxla::Sort"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Sort</span></code></a> and <a class="reference internal" href="../../advanced/term.html#_CPPv4N6murxla4TermE" title="murxla::Term"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">Term</span></code></a>
 for sort and term representations
@@ -187,11 +192,11 @@ and at the interface between Murxla and the solver wrapper.</p>
 </div>
 </section>
 <section id="solver-specific-extensions">
-<h2>Solver-Specific Extensions<a class="headerlink" href="#solver-specific-extensions" title="Permalink to this headline"></a></h2>
+<h2>Solver-Specific Extensions<a class="headerlink" href="#solver-specific-extensions" title="Link to this heading"></a></h2>
 <p>Murxla supports various extensions with <strong>solver-specific features</strong>,
 i.e., features that cannot be plugged in via the generic solver wrapper API.</p>
 <section id="operator-kinds">
-<h3>Operator Kinds<a class="headerlink" href="#operator-kinds" title="Permalink to this headline"></a></h3>
+<h3>Operator Kinds<a class="headerlink" href="#operator-kinds" title="Link to this heading"></a></h3>
 <p>Murxla defines a <a class="reference internal" href="../../advanced/operator_kinds.html"><span class="doc">base set of operator kinds</span></a> as static const members of type
 <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2Op4KindE" title="murxla::Op::Kind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::Op::Kind</span></code></a> of class <a class="reference internal" href="../../advanced/operator.html#_CPPv4N6murxla2OpE" title="murxla::Op"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::Op</span></code></a>.
 Solver-specific operator kinds are (by convention) defined as members of the
@@ -199,19 +204,20 @@ solver wrapper implementation of <a class="reference internal" href="../../advan
 By convention, we prefix solver-specific operator kinds with the solver’s
 (short) name.
 For example, the solver wrapper for Bitwuzla defines a bit-vector decrement
-operator as member of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::BzlaTerm</span></code> as</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">Kind</span><span class="w"> </span><span class="n">OP_BV_DEC</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bzla-OP_BV_DEC&quot;</span><span class="p">;</span><span class="w"></span>
+operator as member of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">murxla::BitwuzlaTerm</span></code> as</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kr">inline</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Op</span><span class="o">::</span><span class="n">Kind</span><span class="w"> </span><span class="n">OP_BV_DEC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bitwuzla-OP_BV_DEC&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Solver-specific operator kinds are added to the
 <a class="reference internal" href="../../advanced/operator.html#operator-management"><span class="std std-ref">operator kind manager</span></a> via
 overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver15configure_opmgrEP13OpKindManager" title="murxla::Solver::configure_opmgr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_opmgr()</span></code></a>, e.g.,</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">opmgr</span><span class="o">-&gt;</span><span class="n">add_op_kind</span><span class="p">(</span><span class="n">BzlaTerm</span><span class="o">::</span><span class="n">OP_BV_DEC</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">SORT_BV</span><span class="p">},</span><span class="w"> </span><span class="n">THEORY_BV</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">opmgr</span><span class="o">-&gt;</span><span class="n">add_op_kind</span><span class="p">(</span>
+<span class="w">      </span><span class="n">BitwuzlaTerm</span><span class="o">::</span><span class="n">OP_BV_DEC</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SORT_BV</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">SORT_BV</span><span class="p">},</span><span class="w"> </span><span class="n">THEORY_BV</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="special-value-kinds">
-<h3>Special Value Kinds<a class="headerlink" href="#special-value-kinds" title="Permalink to this headline"></a></h3>
+<h3>Special Value Kinds<a class="headerlink" href="#special-value-kinds" title="Link to this heading"></a></h3>
 <p>Murxla introduces the notion of <a class="reference internal" href="../../advanced/solver_wrapper_interface/absterm.html#_CPPv4N6murxla7AbsTerm16SpecialValueKindE" title="murxla::AbsTerm::SpecialValueKind"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">murxla::AbsTerm::SpecialValueKind</span></code></a>
 for values that can be considered a special value in a theory, e.g.,
 floating-point NaN (of a given floating-point format), or the minimum signed
@@ -235,7 +241,7 @@ solver-specific kinds via
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4N6murxla6Solver17add_special_valueE8SortKindRKN7AbsTerm16SpecialValueKindE" title="murxla::Solver::add_special_value"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::add_special_value()</span></code></a>.</p>
 </section>
 <section id="actions">
-<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline"></a></h3>
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading"></a></h3>
 <p>Murxla defines a base API model implementing SMT-LIB semantics
 (as a finite state machine, see <a class="reference internal" href="../../advanced/fsm/fsm.html"><span class="doc">FSM</span></a>) with a
 <a class="reference internal" href="../../advanced/fsm/action.html#the-base-set-of-actions"><span class="std std-ref">base set of actions</span></a>.
@@ -251,7 +257,7 @@ state while defining its priority and (optionally) a next state via
 (see <a class="reference internal" href="../../advanced/fsm/action.html#fsm-configuration"><span class="std std-ref">FSM Configuration</span></a>).</p>
 </section>
 <section id="features-unsupported-by-the-solver-under-test">
-<h3>Features Unsupported By The Solver Under Test<a class="headerlink" href="#features-unsupported-by-the-solver-under-test" title="Permalink to this headline"></a></h3>
+<h3>Features Unsupported By The Solver Under Test<a class="headerlink" href="#features-unsupported-by-the-solver-under-test" title="Link to this heading"></a></h3>
 <p>Murxla requires to define a solver profile (see <a class="reference internal" href="../solver_profile.html"><span class="doc">Solver Profiles</span></a>) to
 define the solver test configuration. The solver profile allows to define
 which theories to consider and to disable unsupported sort and operator kinds.
@@ -260,7 +266,7 @@ Unsupported actions can be disabled via overriding
 </section>
 </section>
 <section id="solver-options">
-<h2>Solver Options<a class="headerlink" href="#solver-options" title="Permalink to this headline"></a></h2>
+<h2>Solver Options<a class="headerlink" href="#solver-options" title="Link to this heading"></a></h2>
 <p>To enable option fuzzing, a solver wrapper can advertise a set of options
 to Murxla by overriding <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>.
 Options can be added via the <a class="reference internal" href="../../advanced/solver_manager.html#_CPPv4N6murxla13SolverManager10add_optionEP12SolverOption" title="murxla::SolverManager::add_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::SolverManager::add_option()</span></code></a>
@@ -277,35 +283,39 @@ of the solver manager object passed to
 This makes adding options via overriding
 <a class="reference internal" href="../../advanced/solver_wrapper_interface/solver.html#_CPPv4NK6murxla6Solver17configure_optionsEP13SolverManager" title="murxla::Solver::configure_options"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">murxla::Solver::configure_options()</span></code></a>
 very easy since it allows to add options in an automated way:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"></span>
-<span class="nf">BzlaSolver::configure_options</span><span class="p">(</span><span class="n">SolverManager</span><span class="o">*</span><span class="w"> </span><span class="n">smgr</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Bitwuzla</span><span class="o">*</span><span class="w"> </span><span class="n">bzla</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bitwuzla_new</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="n">BitwuzlaOptionInfo</span><span class="w"> </span><span class="n">info</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">BITWUZLA_OPT_NUM_OPTS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">BitwuzlaOption</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">BitwuzlaOption</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">bitwuzla_get_option_info</span><span class="p">(</span><span class="n">bzla</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">is_numeric</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionNum</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">min_val</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">max_val</span><span class="p">,</span><span class="w"></span>
-<span class="w">                                                     </span><span class="n">info</span><span class="p">.</span><span class="n">numeric</span><span class="p">.</span><span class="n">def_val</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">num_values</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">values</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionList</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">def_val</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="n">bitwuzla_delete</span><span class="p">(</span><span class="n">bzla</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span>
+<span class="nf">BitwuzlaSolver::configure_options</span><span class="p">(</span><span class="n">SolverManager</span><span class="o">*</span><span class="w"> </span><span class="n">smgr</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">Options</span><span class="w"> </span><span class="n">options</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">Option</span><span class="o">::</span><span class="n">NUM_OPTS</span><span class="p">);</span>
+<span class="w">       </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">       </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">Option</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">Option</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="w"> </span><span class="n">info</span><span class="p">(</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Kind</span><span class="o">::</span><span class="n">BOOL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">values</span><span class="p">);</span>
+<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionBool</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">dflt</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Kind</span><span class="o">::</span><span class="n">NUMERIC</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Numeric</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">values</span><span class="p">);</span>
+<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span>
+<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionNum</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span>
+<span class="w">                                        </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">min</span><span class="p">),</span>
+<span class="w">                                        </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">max</span><span class="p">),</span>
+<span class="w">                                        </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">dflt</span><span class="p">)));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">assert</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">kind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Kind</span><span class="o">::</span><span class="n">MODE</span><span class="p">);</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="o">::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Mode</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span>
+<span class="w">          </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;::</span><span class="n">bitwuzla</span><span class="o">::</span><span class="n">OptionInfo</span><span class="o">::</span><span class="n">Mode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">values</span><span class="p">);</span>
+<span class="w">      </span><span class="n">smgr</span><span class="o">-&gt;</span><span class="n">add_option</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SolverOptionList</span><span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">lng</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span><span class="n">modes</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span><span class="n">dflt</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
